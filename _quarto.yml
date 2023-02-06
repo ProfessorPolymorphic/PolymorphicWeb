@@ -1,0 +1,32 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Polymorphic Games"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - about.qmd
+      - text: "GAMES"
+        file: Games/Games.qmd
+      - text: "EDUCATION"
+        file: Education/Education.qmd
+      - text: "PEOPLE"
+        file: People/People.qmd
+      - text: "BLOG"
+        file: DevBlog/DevBlog.qmd
+
+  sidebar:
+   contents: auto
+
+format:
+  html:
+    theme: spacelab
+    css: styles.css
+    toc: true
+
+
+
+

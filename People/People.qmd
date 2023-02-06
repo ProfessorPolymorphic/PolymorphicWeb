@@ -1,0 +1,52 @@
+---
+title: "People"
+---
+
+# FACULTY
+
+:::: {.columns}
+::: {.column width="40%"}
+## Barrie D. Robison
+
+![](Barrie.jpeg)
+I am a Professor of Biological Sciences at the University of Idaho, where I study evolution and adaptation using an unusual mixture of model systems. Over the course of my career, I have conducted research on the genetic basis of quantitative traits in Salmonids, behavioral genomics and adaptation to captivity in zebrafish, and the implementation of evolutionary models in video games. I taught Genomics and General Genetics for 15 years, and I now teach various courses in Data Science as part of our new Graduate Certificate in Professional Applications of Data Science.
+
+[Barrie's Website](https://professorpolymorphic.github.io/RobisonWebSite/)
+:::
+
+:::{.column width="10%"}
+
+:::
+
+::: {.column width="40%"}
+# Terry Soule
+
+![](terry.jpg)
+
+Department Chair, Professor, Eldritch Sorceror
+
+
+
+
+[Terry's Website](https://webpages.uidaho.edu/tsoule/index.html)
+:::
+:::
+
+# STAFF
+
+Landon Wright
+
+# STUDENTS
+
+Carson Rueber
+
+Jonna Waage
+
+Ava Rummler
+
+Justin Riggs
+
+Kristin Martinet
+
+
+# ALUMNI
