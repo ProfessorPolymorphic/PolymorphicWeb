@@ -1,6 +1,6 @@
 ---
 title: "About"
-image: Barrie.jpeg
+image: Polymorphic.png
 about:
   template: broadside
   links:

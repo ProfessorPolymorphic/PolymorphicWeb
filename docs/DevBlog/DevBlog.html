@@ -70,9 +70,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-date','listing-title','listing-author','listing-subtitle','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
+      searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -204,7 +204,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../DevBlog/posts/post-with-code/index.html" class="sidebar-item-text sidebar-link">Post With Code</a>
+  <a href="../DevBlog/posts/post-with-code/index.html" class="sidebar-item-text sidebar-link">OUTBREAK SIMULATOR</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -267,7 +267,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(2)</span></div><div class="category" data-category="analysis">analysis <span class="quarto-category-count">(1)</span></div><div class="category" data-category="code">code <span class="quarto-category-count">(1)</span></div><div class="category" data-category="news">news <span class="quarto-category-count">(2)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Development">Development <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Modeling">Modeling <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Tickbase">Tickbase <span class="quarto-category-count">(1)</span></div><div class="category" data-category="code">code <span class="quarto-category-count">(1)</span></div><div class="category" data-category="news">news <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-body" id="quarto-document-content">
 
@@ -301,33 +301,36 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </div>
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="news,code,analysis" data-listing-date-sort="1675670400000" data-listing-file-modified-sort="1675710647477" data-listing-reading-time-sort="0.045">
+<div class="quarto-post image-right" data-index="0" data-categories="Development,Tickbase,Modeling,code" data-listing-date-sort="1675670400000" data-listing-file-modified-sort="1675802576034" data-listing-reading-time-sort="0.02">
 <div class="thumbnail">
-<p><a href="../DevBlog/posts/post-with-code/index.html"> <img src="../DevBlog/posts/post-with-code/image.jpg" class="thumnail-image"> </a></p>
+<p><a href="../DevBlog/posts/post-with-code/index.html"> <img src="../DevBlog/posts/post-with-code/virus.png" class="thumnail-image"> </a></p>
 </div>
 <div class="body">
 <a href="../DevBlog/posts/post-with-code/index.html">
 <h3 class="no-anchor listing-title">
-Post With Code
+OUTBREAK SIMULATOR
 </h3>
 <div class="listing-subtitle">
-
+Preliminary Overview
 </div>
 </a>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('news'); return false;">
-news
+<div class="listing-category" onclick="window.quartoListingCategory('Development'); return false;">
+Development
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Tickbase'); return false;">
+Tickbase
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Modeling'); return false;">
+Modeling
 </div>
 <div class="listing-category" onclick="window.quartoListingCategory('code'); return false;">
 code
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('analysis'); return false;">
-analysis
-</div>
 </div>
 <a href="../DevBlog/posts/post-with-code/index.html">
 <div class="listing-description">
-This is a post with executable code.
+OH GOD… THE ZOMBIES
 </div>
 </a>
 </div>
@@ -337,7 +340,7 @@ This is a post with executable code.
 Feb 6, 2023
 </div>
 <div class="listing-author">
-Harlow Malloc
+Carson Rueber
 </div>
 </a>
 </div>

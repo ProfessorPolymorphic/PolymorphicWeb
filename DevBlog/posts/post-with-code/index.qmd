@@ -1,13 +1,12 @@
 ---
-title: "Post With Code"
-author: "Harlow Malloc"
+title: "OUTBREAK SIMULATOR"
+subtitle: "Preliminary Overview"
+author: "Carson Rueber"
 date: "2023-02-06"
-categories: [news, code, analysis]
-image: "image.jpg"
+categories: [Development, Tickbase, Modeling, code,]
+image: "virus.png"
 ---
 
-This is a post with executable code.
+OH GOD... THE ZOMBIES
 
-```{r}
-1 + 1
-```
+![](SEPA.mp4)
