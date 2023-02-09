@@ -5,7 +5,7 @@ title: "OUTBREAK SIMULATOR"
 ## Summary
 Outbreak Simulator is a tool that allows users to simulate the spread of an infectious disease and explore the impact of different interventions. The simulation can be used to promote systems thinking and data science literacy, as users can see how different factors interact to influence the spread of the disease and how data can be used to track, visualize, and understand the outbreak. Outbreak Simulator can be used in educational, research, and public health settings to help people gain a better understanding of infectious disease dynamics and the role of data in outbreak response.
 
-![](/DevBlog/posts/post-with-code/SEPA.mp4)
+![](SEPA.mp4)
 
 ## Infectious Disease, Systems Thinking, and Public Education
 The SARS-CoV-2 pandemic highlighted that many people were not sufficiently equipped to understand the complex nature of infectious diseases and the uncertainties involved in managing them. This lack of public understanding made people more vulnerable to misinformation and disinformation, resulting in the formation of misconceptions about infectious diseases and public health. Pandemic mitigation strategies and compliance with public health guidance suffered as a result. Equipping the public to better understand infectious diseases requires integration of multiple complex systems, including pathogen biology, the human immune system, and systems of human behavior that are influenced by economic, social, and environmental factors. Tools that improve domain knowledge, systems thinking skills, scientific reasoning, and data literacy (e.g., simulation, data visualization) could help better prepare the public to grapple with the complexity of infectious disease dynamics.
