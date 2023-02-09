@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.203">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Polymorphic Games - OUTBREAK SIMULATOR</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Polymorphic Games</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../../about.html" aria-current="page">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../Games/Games.html">
+ <span class="menu-text">Games</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../Education/Education.html">
+ <span class="menu-text">EDUCATION</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../People/People.html">
+ <span class="menu-text">PEOPLE</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../DevBlog/DevBlog.html">
+ <span class="menu-text">BLOG</span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">OUTBREAK SIMULATOR</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../about.html" class="sidebar-item-text sidebar-link">About</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">DevBlog</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../DevBlog/about.html" class="sidebar-item-text sidebar-link">About</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../DevBlog/DevBlog.html" class="sidebar-item-text sidebar-link">DevBlog</a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">Posts</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../DevBlog/posts/post-with-code/index.html" class="sidebar-item-text sidebar-link">OUTBREAK SIMULATOR</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../DevBlog/posts/welcome/index.html" class="sidebar-item-text sidebar-link">Welcome To My Blog</a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Education</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Education/Education.html" class="sidebar-item-text sidebar-link">Education</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Games</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Games/Games.html" class="sidebar-item-text sidebar-link">Games</a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">OutbreakSimulator</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Games/OutbreakSimulator/OutbreakSimulator.html" class="sidebar-item-text sidebar-link active">OUTBREAK SIMULATOR</a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">People</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../People/People.html" class="sidebar-item-text sidebar-link">People</a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#summary" id="toc-summary" class="nav-link active" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#infectious-disease-systems-thinking-and-public-education" id="toc-infectious-disease-systems-thinking-and-public-education" class="nav-link" data-scroll-target="#infectious-disease-systems-thinking-and-public-education">Infectious Disease, Systems Thinking, and Public Education</a></li>
+  <li><a href="#simulation-description" id="toc-simulation-description" class="nav-link" data-scroll-target="#simulation-description">Simulation Description</a>
+  <ul class="collapse">
+  <li><a href="#mathematical-model-of-infectious-disease" id="toc-mathematical-model-of-infectious-disease" class="nav-link" data-scroll-target="#mathematical-model-of-infectious-disease">Mathematical Model of Infectious Disease</a></li>
+  <li><a href="#geospatial-representation" id="toc-geospatial-representation" class="nav-link" data-scroll-target="#geospatial-representation">Geospatial Representation:</a></li>
+  <li><a href="#embedded-data-visualizations" id="toc-embedded-data-visualizations" class="nav-link" data-scroll-target="#embedded-data-visualizations">Embedded Data Visualizations</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">OUTBREAK SIMULATOR</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>Outbreak Simulator is a tool that allows users to simulate the spread of an infectious disease and explore the impact of different interventions. The simulation can be used to promote systems thinking and data science literacy, as users can see how different factors interact to influence the spread of the disease and how data can be used to track, visualize, and understand the outbreak. Outbreak Simulator can be used in educational, research, and public health settings to help people gain a better understanding of infectious disease dynamics and the role of data in outbreak response.</p>
+<p><video src="../../DevBlog/posts/post-with-code/SEPA.mp4" class="img-fluid" controls=""><a href="../../DevBlog/posts/post-with-code/SEPA.mp4">Video</a></video></p>
+</section>
+<section id="infectious-disease-systems-thinking-and-public-education" class="level2">
+<h2 class="anchored" data-anchor-id="infectious-disease-systems-thinking-and-public-education">Infectious Disease, Systems Thinking, and Public Education</h2>
+<p>The SARS-CoV-2 pandemic highlighted that many people were not sufficiently equipped to understand the complex nature of infectious diseases and the uncertainties involved in managing them. This lack of public understanding made people more vulnerable to misinformation and disinformation, resulting in the formation of misconceptions about infectious diseases and public health. Pandemic mitigation strategies and compliance with public health guidance suffered as a result. Equipping the public to better understand infectious diseases requires integration of multiple complex systems, including pathogen biology, the human immune system, and systems of human behavior that are influenced by economic, social, and environmental factors. Tools that improve domain knowledge, systems thinking skills, scientific reasoning, and data literacy (e.g., simulation, data visualization) could help better prepare the public to grapple with the complexity of infectious disease dynamics.</p>
+<p>Computer simulations with interactive visualizations of dynamic phenomenon are a potentially useful vehicle for presenting infectious diseases as a complex system. This promotes systems thinking, which is the ability to see connections and relationships between different factors and can help people understand how small changes in one area can have large effects on the overall system. Adopting a systems thinking framework can demonstrate dynamic relationships between components of a larger whole (Von Bertalanffy &amp; Sutherland, 1974), multi-level heterogeneity of agents, nonlinear dynamics, stochasticity, and emergence of new patterns (Eckhardt et al., 2020; J. H. Miller &amp; Page, 2009; Pearce &amp; Merletti, 2006; Roux, 2011). Systems thinking is essential in understanding the complex dynamics of infectious disease and can help to promote better decision-making and problem-solving. To meet this need, we created Outbreak Simulator (Table 1), a game-like interactive simulation that uses engaging grade-appropriate scenarios of infectious disease to improve domain knowledge (viruses and infectious diseases), systems thinking (complexity, component relationships, emergent behaviors), and data literacy (interpretation of visualizations and argumentation from evidence).</p>
+</section>
+<section id="simulation-description" class="level2">
+<h2 class="anchored" data-anchor-id="simulation-description">Simulation Description</h2>
+<section id="mathematical-model-of-infectious-disease" class="level3">
+<h3 class="anchored" data-anchor-id="mathematical-model-of-infectious-disease">Mathematical Model of Infectious Disease</h3>
+<p>Outbreak Simulator uses a compartment model of disease (Weissman et al., 2020) in which the population is divided into categories (Figure 1): Susceptible (S), Exposed (E), Infected (I), Vaccinated (V), Recovered (R), or Deceased (D). The model estimates the rates of exchange between categories over a given time interval (t) using differential equations. When the model parameters are known and key assumptions are met, the differential equations can estimate the epidemic curve of an outbreak. The two most critical assumptions are that the population is homogeneous and well mixed and is fixed in size. Deterministic and stochastic discrete time (Gillespie, 1976) versions of the models offer simpler but computationally performant (deterministic model) and mathematically rigorous but computationally slower (stochastic model) options to use in different educational contexts. We have pre-parameterized scenarios for influenza (multiple strains) and SARS-CoV-2 (multiple variants) and are creating more for additional diseases including Ebola, Measles, Mumps, Rubella, and the common cold. Outbreak Simulator can also be used to model fictional disease systems. For example, many science fiction and horror fiction treatments of zombies are based on fictional viruses (e.g.&nbsp;World War Z, Resident Evil, Walking Dead), and these scenarios could prove to be engaging learning environments for some users(E. T. Lofgren et al., 2016; Smith, 2009).</p>
+<p><img src="OSFig1.jpg" class="img-fluid"></p>
+</section>
+<section id="geospatial-representation" class="level3">
+<h3 class="anchored" data-anchor-id="geospatial-representation">Geospatial Representation:</h3>
+<p>The compartment model described above assumes a homogeneous and well mixed population - an assumption that is clearly violated when we consider the geographic scope of many infectious diseases. For example, consider the population of the continental United States. There are many factors within the US population that affect the mixing of individuals, including transportation patterns at the local and national scale. While modern transportation increases the mixing of the US population compared to previous pandemics (such as the 1918 influenza outbreak), we have seen that social distancing and travel restrictions can profoundly affect transmission dynamics at the national scale. There can also be considerable geospatial variation in the parameters of the model itself. For example, contact rate (number of individuals that an infectious individual contacts per time interval t) is likely to vary between urban and rural environments. Even seasonal outbreaks of influenza and the common cold can vary depending on spatial and temporal variation of temperature and host health (E. Lofgren et al., 2007). These spatial effects on the modeling of disease can be important in showing learners how outbreaks might affect their region, and how spatial heterogeneity adds complexity to model predictions. To represent the spatial effects of infectious disease dynamics, our simulation models the population as a gridded set of subpopulations. Outbreak Simulator incorporates also uses spatial data layers (Table 1) to modify the parameters of the disease and movement models for each grid cell. We have installed two movement models – a diffusion model and a gravitation model (Simini et al., 2021). We use these models for commuting scale movements between adjacent grid cells. For longer (national) movement, we use a data layer of the travel rates between the 150 largest airports in the continental US.</p>
+</section>
+<section id="embedded-data-visualizations" class="level3">
+<h3 class="anchored" data-anchor-id="embedded-data-visualizations">Embedded Data Visualizations</h3>
+<p>Outbreak Simulator uses interactive visualizations intended to help users understand the dynamics of disease ecology, practice scientific inquiry skills, and build data literacy. Figure 2 is a screen shot of Outbreak Simulator, annotated with letters which indicate system components and different visualizations. INFECTED, EXPOSED, and DECEASED individuals are indicated in area (I) on the map by color. The interactive map (A) can be panned, zoomed, and displayed with different data (satellite with population data overlay shown). Elapsed time, speed controls, help, and settings are accessed with a collapsible panel (B). Display settings such as color and visibility for each model compartment on the map can also be customized (C). Other features include a population health bar (D), buttons for initiating an outbreak, an Interventions menu (E), and an Event Log that describes simulation milestones such as initial outbreak location and timestamps of infection events (F). The intervention option allows the user to test how choices related to public health guidance (such as air travel restrictions, local lockdowns, masking, and vaccination) might impact outbreak dynamics.</p>
+<p><img src="OSFig2.jpg" class="img-fluid"></p>
+<p>Data visualizations in Outbreak Simulator are interactive, dynamic, and inter-related. For example, the spatial dynamics of the outbreak can be observed by watching the expansion of red (infected) color across the map (Fig 1 I), by scrolling through the event log (Fig 1 F), or by viewing the epidemic curve of a selected state (Fig 1 G). The dynamic graphs (Fig 1 G and H) are interactive in that each model compartment can be toggled and the scale dynamically adjusted. Hovering over the graph shows the exact values for all model component at the hovered time point (Fig 1 G).</p>
+<p>Outbreak Simulator parameterizes infectious disease dynamics with an interactive mental model. The beginning of each scenario provides grade appropriate information about the disease. The user is then guided through model parameterization using a drag and drop interface and plain language narrative-based scaffolding (Figure 3). Figure 3 shows a scenario in which the model parameters represent the 1918 influenza strain (Chowell et al., 2007). The interface allows the user to change model parameters using sliders or direct numerical input.</p>
+<p><img src="OSFig3.png" class="img-fluid"></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

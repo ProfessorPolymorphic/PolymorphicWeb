@@ -11,3 +11,11 @@ title: "Games"
 ![](hastur.jpg)
 
 [Project Hastur](https://store.steampowered.com/app/800700/Project_Hastur/) is an evolutionary tower defense game. Defend humanity against the ever changing threat of the alien Proteans. Project Hastur combines elements of 3D tower defense and real-time strategy with models of biological evolution to create a uniquely challenging experience.
+
+# PROJECTS IN DEVELOPMENT
+
+## [OUTBREAK SIMULATOR](/OutbreakSimulator/OutbreakSimulator.qmd)
+
+Outbreak Simulator is a tool that allows users to simulate the spread of an infectious disease and explore the impact of different interventions. The simulation can be used to promote systems thinking and data science literacy, as users can see how different factors interact to influence the spread of the disease and how data can be used to track, visualize, and understand the outbreak. Outbreak Simulator can be used in educational, research, and public health settings to help people gain a better understanding of infectious disease dynamics and the role of data in outbreak response.
+
+## PROJECT DRIDER

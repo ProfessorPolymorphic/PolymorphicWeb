@@ -9,8 +9,7 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
-      - text: "GAMES"
-        file: Games/Games.qmd
+      - file: Games/Games.qmd
       - text: "EDUCATION"
         file: Education/Education.qmd
       - text: "PEOPLE"
