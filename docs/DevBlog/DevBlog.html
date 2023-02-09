@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Polymorphic Games - Games</title>
+<title>Polymorphic Games - DevBlog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,6 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-listing/list.min.js"></script>
+<script src="../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -58,12 +60,42 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit"
   }
 }</script>
+<script>
 
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-date','listing-title','listing-author','listing-subtitle','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description","listing-categories"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -88,15 +120,15 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../Games/Games.html">
+    <a class="nav-link" href="../Games/index.html">
  <span class="menu-text">Games</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../Education/Education.html">
+    <a class="nav-link" href="../Education/index.html">
  <span class="menu-text">EDUCATION</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../People/People.html">
+    <a class="nav-link" href="../People/index.html">
  <span class="menu-text">PEOPLE</span></a>
   </li>  
   <li class="nav-item">
@@ -110,7 +142,7 @@ ul.task-list li input[type="checkbox"] {
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Games</h1>
+      <h1 class="quarto-secondary-nav-title">DevBlog</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -118,14 +150,40 @@ ul.task-list li input[type="checkbox"] {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title d-none d-lg-block">DevBlog</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../about.html" class="sidebar-item-text sidebar-link">About</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../People/index.html" class="sidebar-item-text sidebar-link">People</a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -143,7 +201,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../DevBlog/DevBlog.html" class="sidebar-item-text sidebar-link">DevBlog</a>
+  <a href="../DevBlog/DevBlog.html" class="sidebar-item-text sidebar-link active">DevBlog</a>
   </div>
 </li>
           <li class="sidebar-item sidebar-item-section">
@@ -170,7 +228,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Education</a>
+            <a href="../Education/index.html" class="sidebar-item-text sidebar-link">Education</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -178,14 +236,14 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Education/Education.html" class="sidebar-item-text sidebar-link">Education</a>
+  <a href="../Education/DataScienceqmd.html" class="sidebar-item-text sidebar-link">Data Science</a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Games</a>
+            <a href="../Games/index.html" class="sidebar-item-text sidebar-link">Games</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -193,37 +251,17 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Games/Games.html" class="sidebar-item-text sidebar-link active">Games</a>
+  <a href="../Games/DarwinsDemons/index.html" class="sidebar-item-text sidebar-link">DARWIN’S DEMONS</a>
   </div>
 </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">OutbreakSimulator</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Games/OutbreakSimulator/OutbreakSimulator.html" class="sidebar-item-text sidebar-link">OUTBREAK SIMULATOR</a>
+  <a href="../Games/OutbreakSimulator/index.html" class="sidebar-item-text sidebar-link">OUTBREAK SIMULATOR</a>
   </div>
 </li>
-      </ul>
-  </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">People</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../People/People.html" class="sidebar-item-text sidebar-link">People</a>
+  <a href="../Games/ProjectHastur/index.html" class="sidebar-item-text sidebar-link">PROJECT HASTUR</a>
   </div>
 </li>
       </ul>
@@ -233,60 +271,125 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#commercial-releases" id="toc-commercial-releases" class="nav-link active" data-scroll-target="#commercial-releases">COMMERCIAL RELEASES</a></li>
-  <li><a href="#projects-in-development" id="toc-projects-in-development" class="nav-link" data-scroll-target="#projects-in-development">PROJECTS IN DEVELOPMENT</a>
-  <ul class="collapse">
-  <li><a href="#outbreak-simulator" id="toc-outbreak-simulator" class="nav-link" data-scroll-target="#outbreak-simulator">OUTBREAK SIMULATOR</a></li>
-  <li><a href="#project-drider" id="toc-project-drider" class="nav-link" data-scroll-target="#project-drider">PROJECT DRIDER</a></li>
-  </ul></li>
-  </ul>
-</nav>
-    </div>
+        
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Development">Development <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Modeling">Modeling <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Tickbase">Tickbase <span class="quarto-category-count">(1)</span></div><div class="category" data-category="code">code <span class="quarto-category-count">(1)</span></div><div class="category" data-category="news">news <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title d-none d-lg-block">Games</h1>
-</div>
+<main class="content quarto-banner-title-block column-body" id="quarto-document-content">
 
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
+
+
+
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="listing-actions-group">
+   <div class="input-group input-group-sm quarto-listing-sort">
+     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
+     <select id="listing-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
+       <option value="" disabled="" selected="" hidden="">Order By</option>
+       <option value="index" data-direction="asc">Default</option>
+         <option value="listing-title" data-direction="asc">
+          Title
+        </option>
+         <option value="listing-date-sort" data-direction="asc">
+          Date - Oldest
+        </option>
+         <option value="listing-date-sort" data-direction="desc">
+          Date - Newest
+        </option>
+         <option value="listing-author" data-direction="asc">
+          Author
+        </option>
+     </select>
   </div>
-  
+</div>
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="Development,Tickbase,Modeling,code" data-listing-date-sort="1675670400000" data-listing-file-modified-sort="1675802576034" data-listing-reading-time-sort="0.02">
+<div class="thumbnail">
+<p><a href="../DevBlog/posts/post-with-code/index.html"> <img src="../DevBlog/posts/post-with-code/virus.png" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="../DevBlog/posts/post-with-code/index.html">
+<h3 class="no-anchor listing-title">
+OUTBREAK SIMULATOR
+</h3>
+<div class="listing-subtitle">
+Preliminary Overview
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Development'); return false;">
+Development
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Tickbase'); return false;">
+Tickbase
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Modeling'); return false;">
+Modeling
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('code'); return false;">
+code
+</div>
+</div>
+<a href="../DevBlog/posts/post-with-code/index.html">
+<div class="listing-description">
+OH GOD… THE ZOMBIES
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="../DevBlog/posts/post-with-code/index.html">
+<div class="listing-date">
+Feb 6, 2023
+</div>
+<div class="listing-author">
+Carson Rueber
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="news" data-listing-date-sort="1675411200000" data-listing-file-modified-sort="1675710647475" data-listing-reading-time-sort="0.16">
+<div class="thumbnail">
+<p><a href="../DevBlog/posts/welcome/index.html"> <img src="../DevBlog/posts/welcome/thumbnail.jpg" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="../DevBlog/posts/welcome/index.html">
+<h3 class="no-anchor listing-title">
+Welcome To My Blog
+</h3>
+<div class="listing-subtitle">
 
-</header>
-
-<section id="commercial-releases" class="level1">
-<h1>COMMERCIAL RELEASES</h1>
-<p><img src="Darwins.jpg" class="img-fluid"></p>
-<p><a href="https://store.steampowered.com/app/572020/Darwins_Demons/">Darwin’s Demons</a> is an arcade style space shooter in which you battle a population of evolving aliens. The alien’s morphology, fire type, and behaviors are all encoded by a digital genome. The aliens that are best able to shoot or evade you reproduce to make the next generation.</p>
-<p><img src="hastur.jpg" class="img-fluid"></p>
-<p><a href="https://store.steampowered.com/app/800700/Project_Hastur/">Project Hastur</a> is an evolutionary tower defense game. Defend humanity against the ever changing threat of the alien Proteans. Project Hastur combines elements of 3D tower defense and real-time strategy with models of biological evolution to create a uniquely challenging experience.</p>
-</section>
-<section id="projects-in-development" class="level1">
-<h1>PROJECTS IN DEVELOPMENT</h1>
-<section id="outbreak-simulator" class="level2">
-<h2 class="anchored" data-anchor-id="outbreak-simulator"><a href="../OutbreakSimulator/OutbreakSimulator.qmd">OUTBREAK SIMULATOR</a></h2>
-<p>Outbreak Simulator is a tool that allows users to simulate the spread of an infectious disease and explore the impact of different interventions. The simulation can be used to promote systems thinking and data science literacy, as users can see how different factors interact to influence the spread of the disease and how data can be used to track, visualize, and understand the outbreak. Outbreak Simulator can be used in educational, research, and public health settings to help people gain a better understanding of infectious disease dynamics and the role of data in outbreak response.</p>
-</section>
-<section id="project-drider" class="level2">
-<h2 class="anchored" data-anchor-id="project-drider">PROJECT DRIDER</h2>
-
-
-</section>
-</section>
-
-</main> <!-- /main -->
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('news'); return false;">
+news
+</div>
+</div>
+<a href="../DevBlog/posts/welcome/index.html">
+<div class="listing-description">
+This is the first post in a Quarto blog. Welcome!
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="../DevBlog/posts/welcome/index.html">
+<div class="listing-date">
+Feb 3, 2023
+</div>
+<div class="listing-author">
+Tristan O’Malley
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

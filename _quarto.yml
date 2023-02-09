@@ -9,16 +9,21 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
-      - file: Games/Games.qmd
+      - file: Games/index.qmd
       - text: "EDUCATION"
-        file: Education/Education.qmd
+        file: Education/index.qmd
       - text: "PEOPLE"
-        file: People/People.qmd
+        file: People/index.qmd
       - text: "BLOG"
         file: DevBlog/DevBlog.qmd
 
   sidebar:
-   contents: auto
+    style: "docked"
+    search: true
+    contents: auto
+          
+        
+
 
 format:
   html:
