@@ -221,7 +221,17 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../Games/OutbreakSimulator/DevTeam.html" class="sidebar-item-text sidebar-link">Dev Team</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../Games/OutbreakSimulator/DiseaseModel.html" class="sidebar-item-text sidebar-link">Disease Model</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Games/OutbreakSimulator/Education.html" class="sidebar-item-text sidebar-link">Education and Outreach</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -264,6 +274,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title d-none d-lg-block">OUTBREAK SIMULATOR</h1>
+<p class="subtitle lead">An interactive and spatially explicit epidemiological visualization.</p>
 </div>
 
 
@@ -278,6 +289,7 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<p>This project is based upon work supported by the National Science Foundation under Grant No.&nbsp;2019609.</p>
 <section id="summary" class="level2">
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>
 <p>Outbreak Simulator is a tool that allows users to simulate the spread of an infectious disease and explore the impact of different interventions. The simulation can be used to promote systems thinking and data science literacy, as users can see how different factors interact to influence the spread of the disease and how data can be used to track, visualize, and understand the outbreak. Outbreak Simulator can be used in educational, research, and public health settings to help people gain a better understanding of infectious disease dynamics and the role of data in outbreak response.</p>
@@ -293,7 +305,16 @@ ul.task-list li input[type="checkbox"] {
 <section id="mathematical-model-of-infectious-disease" class="level3">
 <h3 class="anchored" data-anchor-id="mathematical-model-of-infectious-disease">Mathematical Model of Infectious Disease</h3>
 <p>Outbreak Simulator uses a compartment model of disease (Weissman et al., 2020) in which the population is divided into categories (Figure 1): Susceptible (S), Exposed (E), Infected (I), Vaccinated (V), Recovered (R), or Deceased (D). The model estimates the rates of exchange between categories over a given time interval (t) using differential equations. When the model parameters are known and key assumptions are met, the differential equations can estimate the epidemic curve of an outbreak. The two most critical assumptions are that the population is homogeneous and well mixed and is fixed in size. Deterministic and stochastic discrete time (Gillespie, 1976) versions of the models offer simpler but computationally performant (deterministic model) and mathematically rigorous but computationally slower (stochastic model) options to use in different educational contexts. We have pre-parameterized scenarios for influenza (multiple strains) and SARS-CoV-2 (multiple variants) and are creating more for additional diseases including Ebola, Measles, Mumps, Rubella, and the common cold. Outbreak Simulator can also be used to model fictional disease systems. For example, many science fiction and horror fiction treatments of zombies are based on fictional viruses (e.g.&nbsp;World War Z, Resident Evil, Walking Dead), and these scenarios could prove to be engaging learning environments for some users(E. T. Lofgren et al., 2016; Smith, 2009).</p>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 66.7%;justify-content: center;">
 <p><img src="OSFig1.jpg" class="img-fluid"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="OSFig1b.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
 </section>
 <section id="geospatial-representation" class="level3">
 <h3 class="anchored" data-anchor-id="geospatial-representation">Geospatial Representation:</h3>

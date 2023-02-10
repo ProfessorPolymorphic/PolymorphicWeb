@@ -1,0 +1,21 @@
+---
+title: "Education and Outreach"
+---
+
+## Overview
+
+## K-12
+
+When we consider Outbreak Simulator in a K-12 learning context, we usually frame our activities in the context of the [Next Generation Science Standards](https://www.nextgenscience.org) (NGSS). The NGSS consider three distinct dimensions of learning science - DISCIPLINARY CORE IDEAS (what students know), CROSSCUTTING CONCEPTS (how students think), and SCIENCE AND ENGINEERING PRACTICES (what students do).  The figure below is a visualization of how Outbreak Simulator aligns with some of the NGSS components in each of these dimensions.
+
+![](NGSS.jpg)
+
+We are particularly interested in developing scenarios, lab modules, and activities that help middle and high school students build systems thinking, scientific reasoning, and data literacy skills.  We welcome suggestions and collaboration inquiries from any interested researchers and educators.  
+
+[Email Barrie Robison](brobison@uidaho.edu)
+
+## Undergraduate
+
+## Public Health
+
+## Other Outreach Contexts
