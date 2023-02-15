@@ -1,1 +1,33 @@
 /* css styles */
+
+ /* Hastur */
+@font-face {
+  font-family: 'Hastur';
+  font-style: normal;
+  font-weight: normal;
+  src: url('font/HasturFont_lt.otf') format('opentype');
+}
+/* Hastur Bold */
+@font-face {
+  font-family: 'Hastur';
+  font-style: normal;
+  font-weight: bold;
+  src: url('font/HasturFont_bd.otf') format('opentype');
+ }
+/* Round */
+@font-face {
+  font-family: 'Round';
+  font-style: normal;
+  font-weight: normal;
+  src: url('font/ArconRound.otf') format('opentype');
+}
+
+
+
+	html, body {
+		font-family: Hastur, Arial, Helvetica, sans-serif;
+		text-align: justify;
+	}
+	h1 {
+		font-family: Hastur, Arial, Helvetica, sans-serif;
+	}
