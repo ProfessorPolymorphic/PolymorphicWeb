@@ -1,1 +1,21 @@
 /* css styles */
+
+ /* Hastur */
+@font-face {
+  font-family: 'Hastur';
+  font-style: normal;
+  font-weight: normal;
+  src: url('fonts/HasturFont_lt.otf') format('opentype');
+}
+/* Hastur Bold */
+@font-face {
+  font-family: 'Hastur';
+  font-style: normal;
+  font-weight: bold;
+  src: url('fonts/HasturFont_bd.otf') format('opentype');
+ }
+
+
+	h1 {
+		font-family: Hastur, Arial, Helvetica, sans-serif;
+	}
