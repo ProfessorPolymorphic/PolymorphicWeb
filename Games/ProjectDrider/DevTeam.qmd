@@ -1,0 +1,23 @@
+---
+title: "Dev Team"
+---
+
+## Funding
+
+Outbreak Simulator is a component of the education and outreach efforts of the [TickBase](https://tickbase.net) project.  Tickbase is an NSF funded project that seeks to identify critical factors for natural and human driven tick migration and tick-borne disease spread in the western US.  The central hypothesis is that climate change will increase the prevalence of tick-borne diseases throughout the western US.  To test this hypothesis, the project brings together data scientists, biologists, geospatial modelers, and mathematicians from the University of Idaho, the University of Nevada Reno, Dartmouth University, and New Mexico State University.  These researchers collaborate on interdisciplinary projects to study the complex interactions among climate models, tick biology, spatial ecology, socioeconomics, and human behavior.
+
+![](Tickbasesystemdiagram.png)
+
+When we develop educational games and simulations for projects like TickBase, we first consider the research from a very broad perspective.  In this case, we concluded that the project brings together research from Infectious Disease, Spatial Ecology, and Data Science.  We therefore developed our outreach and educational materials to focus on the skills and knowledge inherent to these disciplines.  See the [Education and Outreach](Education.qmd) section to learn more about our plans and activities for Outbreak Simulator in K-12, undergraduate, and public health settings.
+
+![](TickbaseVenn.png)
+
+
+
+## Developers
+
+
+
+## Research Collaborators
+
+## Helpful Consultations

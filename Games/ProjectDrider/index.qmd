@@ -1,0 +1,37 @@
+---
+title: "PROJECT DRIDER"
+---
+
+## OVERVIEW
+
+A field ecology simulator that teaches basic principles of ecology and data literacy.
+Local Network Multiplayer with teacher controls.
+Learners collect data to test hypotheses based on structured lesson plans.
+Learners observe the data in-game.
+
+
+## GAME FOOTAGE
+
+![](DriderCut20221207.mp4)
+
+## TARGET AUDIENCE
+
+## THE CHARACTER
+
+### Character Creation
+
+### Controls
+
+## THE ENVIRONMENT
+
+### Biomes
+
+### Animal Species
+
+
+
+## THE LAB STATION
+
+### Data Representation
+
+### MiniMap
