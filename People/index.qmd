@@ -48,6 +48,12 @@ I like to make stuff.
 
 ## Carson Rueber
 
+![](Carson.JPG){width="40%"}
+
+I'm a third year student at the University of Idaho majoring in Computer Science with a Minor in French.
+
+[My Blog](https://blog.carsonrueber.com)
+
 ## Jonna Waage
 
 ![](Jonna.jpg){width="40%"}
