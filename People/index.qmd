@@ -38,15 +38,23 @@ Landon Wright
 
 # STUDENTS
 
-Carson Rueber
+## Carson Rueber
 
-Jonna Waage
+## Jonna Waage
 
-Ava Rummler
+## Ava Rummler
 
-Justin Riggs
+![](Ava.jpg){width="40%"}
 
-Kristin Martinet
+I'm an MFA Candidate and Instructor of record at the University of Idaho where I practice and teach design. My creative research focuses on human interaction through User Experience Design. My experience centers around App Design and Art Direction.
+
+[Ava's Portfolio](https://avarummler.com/)
+
+[Ava's Linkedin](https://www.linkedin.com/in/avarummler/)
+
+## Justin Riggs
+
+## Kristin Martinet
 
 
 # ALUMNI
