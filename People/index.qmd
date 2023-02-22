@@ -34,7 +34,15 @@ Department Chair, Professor, Eldritch Sorceror
 
 # STAFF
 
-Landon Wright
+## Landon Wright
+
+![](Landon.png){width=40%}
+
+Creative Director,
+UIdaho VTD graduate,
+I like to make stuff.
+
+[Landon's Instagram](https://www.instagram.com/lanwri/)
 
 # STUDENTS
 
