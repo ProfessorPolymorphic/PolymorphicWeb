@@ -19,7 +19,7 @@ I am a Professor of Biological Sciences at the University of Idaho, where I stud
 :::
 
 ::: {.column width="40%"}
-# Terry Soule
+## Terry Soule
 
 ![](terry.jpg)
 
