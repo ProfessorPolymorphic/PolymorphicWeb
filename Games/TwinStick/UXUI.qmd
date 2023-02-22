@@ -9,10 +9,10 @@ Data involving slime traits, fitness, and their offspring is all information tha
 ## Low Fidelity Explorations
 Lots of low fidelity prototypes were produced to explore different renditions of information.
 
-![](Slime.pedigree.exploration.1.mp4){width=130%}
+![](UXUImedia/Slimepedigreeexploration1.mp4)
 
 This is a prototype of how different slimes and their off spring can be communicated. Since evolution is an important factor of understanding transformed traits from offspring to offspring, pedigrees can be a helpful tool for players.
 
-![](pedigree.categorized.by.trait.mp4){width=130%}
+![](UXUImedia/pedigreecategorizedbytrait.mp4)
 
 It's also important to consider how slimes can be categorized. This prototype also explores what it would look like if players were able to pick specific slimes to learn about.
