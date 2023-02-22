@@ -19,7 +19,7 @@ I am a Professor of Biological Sciences at the University of Idaho, where I stud
 :::
 
 ::: {.column width="40%"}
-# Terry Soule
+## Terry Soule
 
 ![](terry.jpg)
 
@@ -34,13 +34,25 @@ Department Chair, Professor, Eldritch Sorceror
 
 # STAFF
 
-Landon Wright
+## Landon Wright
+
+![](Landon.png){width=40%}
+
+Creative Director,
+UIdaho VTD graduate,
+I like to make stuff.
+
+[Landon's Instagram](https://www.instagram.com/lanwri/)
 
 # STUDENTS
 
 ## Carson Rueber
 
 ## Jonna Waage
+
+![](Jonna.jpg){width="40%"}
+
+I am a third year computer science major and mathematics minor. 
 
 ## Ava Rummler
 
