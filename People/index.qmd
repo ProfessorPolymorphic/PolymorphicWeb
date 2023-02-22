@@ -50,6 +50,10 @@ I like to make stuff.
 
 ## Jonna Waage
 
+![](Jonna.jpg){width="40%"}
+
+I am a third year computer science major and mathematics minor. 
+
 ## Ava Rummler
 
 ![](Ava.jpg){width="40%"}
