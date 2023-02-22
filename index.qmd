@@ -1,9 +1,23 @@
 ---
-title: "Polymorphic Games"
+title: "POLYMORPHIC GAMES"
 ---
 
-# EVOLUTION ALWAYS WINS
+![](Polymorphic.png)
 
-We are bad ass.
+Polymorphic Games is an experimental video game development studio based at the University of Idaho.  We develop video games, interactive simulations, and visualizations that feature STEM concepts as core mechanics.
 
-![](BannerVid.mp4)
+Our main focus is **Evolutionary Games** that feature enemies that adapt to the player using mathematical models of biological evolution.  
+
+We have also collaborated with many different researchers to help them represent their model systems as interactive simulations or dynamic visualizations.
+
+# EVOLUTIONARY GAMES
+
+Instead of pre-programming, scripted enemy behaviors to escalate difficulty, our games use populations of creatures that evolve specifically to beat your strategy. Each creature has its own traits that it can pass onto its offspring. After you beat one wave of creatures, the creatures that were the hardest to beat reproduce and you’ll fight their offspring in the next wave. Evolving traits include features like size, speed, damage, resistances, and behavior. We use real principles of evolutionary biology to create a model that includes all the components of real evolution — variation, inheritance, selection, and time — just operating at a much faster pace. This creates dynamic enemies that adapt to how YOU play the game. We just give evolution the space to work.
+
+[*Learn more about our games...*](/Games/index.qmd)
+
+# DEVELOPMENT MODEL
+
+Our studio is based on the University of Idaho campus and populated by undergraduate students. A university setting is the one place where you can find programmers, artists, writers, musicians, marketers, and biologists — everyone you need to make a video game with foundations in evolutionary biology. We hire insanely talented teams of undergraduate students to develop our games. This gives us a team that can think outside the box, and it provides a great student experience. Our employees get to build skills in communication, leadership, and collaboration that they take with them when they graduate, all while honing their skills in their own trade.
+
+[*Learn more about our team...*](/People/index.qmd)

@@ -14,8 +14,8 @@
     "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
   },
   {
-    "objectID": "DevBlog/DevBlog.html",
-    "href": "DevBlog/DevBlog.html",
+    "objectID": "DevBlog/index.html",
+    "href": "DevBlog/index.html",
     "title": "DevBlog",
     "section": "",
     "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n\n\n\n\n  \n\n\n\n\nOUTBREAK SIMULATOR\n\n\nPreliminary Overview\n\n\n\n\nDevelopment\n\n\nTickbase\n\n\nModeling\n\n\ncode\n\n\n\n\n\n\n\n\n\n\n\nFeb 6, 2023\n\n\nCarson Rueber\n\n\n\n\n\n\n  \n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nFeb 3, 2023\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
@@ -44,16 +44,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Polymorphic Games",
+    "title": "POLYMORPHIC GAMES",
     "section": "",
-    "text": "EVOLUTION ALWAYS WINS\nWe are bad ass.\nVideo"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "Instead of pre-programming, scripted enemy behaviors to escalate difficulty, our games use populations of creatures that evolve specifically to beat your strategy. Each creature has its own traits that it can pass onto its offspring. After you beat one wave of creatures, the creatures that were the hardest to beat reproduce and you’ll fight their offspring in the next wave. Evolving traits include features like size, speed, damage, resistances, and behavior. We use real principles of evolutionary biology to create a model that includes all the components of real evolution — variation, inheritance, selection, and time — just operating at a much faster pace. This creates dynamic enemies that adapt to how YOU play the game. We just give evolution the space to work.\nOur studio is based on the University of Idaho campus and populated by undergraduate students. A university setting is the one place where you can find programmers, artists, writers, musicians, marketers, and biologists — everyone you need to make a video game with foundations in evolutionary biology. We hire insanely talented teams of undergraduate students to develop our games. This gives us a team that can think outside the box, and it provides a great student experience. Our employees get to build skills in communication, leadership, and collaboration that they take with them when they graduate, all while honing their skills in their own trade."
+    "text": "Polymorphic Games is an experimental video game development studio based at the University of Idaho. We develop video games, interactive simulations, and visualizations that feature STEM concepts as core mechanics.\nOur main focus is Evolutionary Games that feature enemies that adapt to the player using mathematical models of biological evolution.\nWe have also collaborated with many different researchers to help them represent their model systems as interactive simulations or dynamic visualizations.\n\nEVOLUTIONARY GAMES\nInstead of pre-programming, scripted enemy behaviors to escalate difficulty, our games use populations of creatures that evolve specifically to beat your strategy. Each creature has its own traits that it can pass onto its offspring. After you beat one wave of creatures, the creatures that were the hardest to beat reproduce and you’ll fight their offspring in the next wave. Evolving traits include features like size, speed, damage, resistances, and behavior. We use real principles of evolutionary biology to create a model that includes all the components of real evolution — variation, inheritance, selection, and time — just operating at a much faster pace. This creates dynamic enemies that adapt to how YOU play the game. We just give evolution the space to work.\nLearn more about our games…\n\n\nDEVELOPMENT MODEL\nOur studio is based on the University of Idaho campus and populated by undergraduate students. A university setting is the one place where you can find programmers, artists, writers, musicians, marketers, and biologists — everyone you need to make a video game with foundations in evolutionary biology. We hire insanely talented teams of undergraduate students to develop our games. This gives us a team that can think outside the box, and it provides a great student experience. Our employees get to build skills in communication, leadership, and collaboration that they take with them when they graduate, all while honing their skills in their own trade.\nLearn more about our team…"
   },
   {
     "objectID": "People/index.html",

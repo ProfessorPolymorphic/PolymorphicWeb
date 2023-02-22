@@ -3,19 +3,18 @@ project:
   output-dir: docs
 
 website:
-  title: "Polymorphic Games"
+  title: "POLYMORPHIC GAMES"
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
       - file: Games/index.qmd
       - text: "EDUCATION"
         file: Education/index.qmd
       - text: "PEOPLE"
         file: People/index.qmd
       - text: "BLOG"
-        file: DevBlog/DevBlog.qmd
+        file: DevBlog/index.qmd
 
   sidebar:
     style: "docked"
