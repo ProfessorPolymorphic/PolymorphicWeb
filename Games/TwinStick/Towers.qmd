@@ -4,22 +4,37 @@ title: "Towers"
 
 ## Tower Types
 
-There are 6 different tower types:
+There are 6 different kinds of towers, each of them have the ability to damage all slimes except for the slimes that have a resistance to that tower's type.
 
-Acid
+### Acid
 
-Ice
+![](towerPics/acidtower.png){width="20%"}
 
-Fire
+### Ice
 
-Lightning
+![](towerPics/icetower.png){width="20%"}
 
-Laser
+### Fire
 
-Blaster
+![](towerPics/firetower.png){width="20%"}
 
-Each of these have the ability to damage all slimes except for the slimes that have a resistance to that tower's type.
+### Lightning
+
+![](towerPics/lightningtower.png){width="20%"}
+
+### Laser
+
+![](towerPics/lasertower.png){width="20%"}
+
+### Blaster
+
+![](towerPics/blastertower.png){width="20%"}
+
 
 ## Projectiles
 
+Each tower has their own special projectile depending on the type. 
+
 ## AI
+
+The towers will be able to track the nearest slime and shoot at it once the slime gets close enough. This AI is important because otherwise the towers would not know where or if to shoot. This is done with a function that with every update, it goes through the array of all slimes and finds the distance between the tower and each of the slimes. The tower then rotates to point at that slime and shoot their specific projectile. If the slime has that resistance, it will not damage it. For example, if an acid tower shoots a bomb and hits a acid slime, nothing will happen but if it hits a fire slime, the slime will take damage. 

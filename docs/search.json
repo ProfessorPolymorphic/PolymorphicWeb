@@ -301,18 +301,25 @@
     "text": "STUFF!"
   },
   {
+    "objectID": "Games/TwinStick/Towers.html",
+    "href": "Games/TwinStick/Towers.html",
+    "title": "Towers",
+    "section": "",
+    "text": "There are 6 different kinds of towers, each of them have the ability to damage all slimes except for the slimes that have a resistance to that tower’s type."
+  },
+  {
     "objectID": "Games/TwinStick/Towers.html#projectiles",
     "href": "Games/TwinStick/Towers.html#projectiles",
     "title": "Towers",
     "section": "Projectiles",
-    "text": "Projectiles"
+    "text": "Projectiles\nEach tower has their own special projectile depending on the type."
   },
   {
     "objectID": "Games/TwinStick/Towers.html#ai",
     "href": "Games/TwinStick/Towers.html#ai",
     "title": "Towers",
     "section": "AI",
-    "text": "AI"
+    "text": "AI\nThe towers will be able to track the nearest slime and shoot at it once the slime gets close enough. This AI is important because otherwise the towers would not know where or if to shoot. This is done with a function that with every update, it goes through the array of all slimes and finds the distance between the tower and each of the slimes. The tower then rotates to point at that slime and shoot their specific projectile. If the slime has that resistance, it will not damage it. For example, if an acid tower shoots a bomb and hits a acid slime, nothing will happen but if it hits a fire slime, the slime will take damage."
   },
   {
     "objectID": "Games/TwinStick/UXUI.html",
@@ -361,7 +368,7 @@
     "href": "People/index.html#jonna-waage",
     "title": "People",
     "section": "Jonna Waage",
-    "text": "Jonna Waage\n\nI am a third year undergraduate computer science major and mathematics minor at the University of Idaho. I am a software developer here at Polymorphic Games. My current project is the TwinStick game."
+    "text": "Jonna Waage\n\nI am a third year undergraduate computer science major and mathematics minor at the University of Idaho. I am a software developer here at Polymorphic Games. My current project is the TwinStick game!"
   },
   {
     "objectID": "People/index.html#ava-rummler",
@@ -383,12 +390,5 @@
     "title": "People",
     "section": "Kristin Martinet",
     "text": "Kristin Martinet"
-  },
-  {
-    "objectID": "Games/TwinStick/Towers.html",
-    "href": "Games/TwinStick/Towers.html",
-    "title": "Towers",
-    "section": "",
-    "text": "There are 6 different tower types:\nAcid\nIce\nFire\nLightning\nLaser\nBlaster\nEach of these have the ability to damage all slimes except for the slimes that have a resistance to that tower’s type."
   }
 ]
