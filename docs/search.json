@@ -301,6 +301,20 @@
     "text": "STUFF!"
   },
   {
+    "objectID": "Games/TwinStick/Towers.html#projectiles",
+    "href": "Games/TwinStick/Towers.html#projectiles",
+    "title": "Towers",
+    "section": "Projectiles",
+    "text": "Projectiles"
+  },
+  {
+    "objectID": "Games/TwinStick/Towers.html#ai",
+    "href": "Games/TwinStick/Towers.html#ai",
+    "title": "Towers",
+    "section": "AI",
+    "text": "AI"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "POLYMORPHIC GAMES",
@@ -333,7 +347,7 @@
     "href": "People/index.html#jonna-waage",
     "title": "People",
     "section": "Jonna Waage",
-    "text": "Jonna Waage\n\nI am a third year computer science major and mathematics minor."
+    "text": "Jonna Waage\n\nI am a third year undergraduate computer science major and mathematics minor at the University of Idaho. I am a software developer here at Polymorphic Games. My current project is the Twin Stick game."
   },
   {
     "objectID": "People/index.html#ava-rummler",
