@@ -1,0 +1,18 @@
+---
+title: "UX/UI"
+---
+## Overview
+User Experience is a critical part of TwinStick because of the educational elements involved. This means that complex  information must be easy for players to understand to not only educate them on evolving slimes, but inform their decisions on how to interact with the next generation of slimes.
+
+Data involving slime traits, fitness, and their offspring is all information that players should be able to interpret on the screens displayed between each round of generations. UX/UI principles play a key roll in the design of these screens for this reason. 
+
+## Low Fidelity Explorations
+Lots of low fidelity prototypes were produced to explore different renditions of information.
+
+![](UXUImedia/Slimepedigreeexploration1.mp4)
+
+This is a prototype of how different slimes and their off spring can be communicated. Since evolution is an important factor of understanding transformed traits from offspring to offspring, pedigrees can be a helpful tool for players.
+
+![](UXUImedia/pedigreecategorizedbytrait.mp4)
+
+It's also important to consider how slimes can be categorized. This prototype also explores what it would look like if players were able to pick specific slimes to learn about.

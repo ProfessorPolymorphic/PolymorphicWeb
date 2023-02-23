@@ -48,6 +48,13 @@ I like to make stuff.
 
 ## Carson Rueber
 
+![](Carson.JPG){width="40%"}
+
+I'm a third year student at the University of Idaho majoring in Computer Science with a Minor in French.
+
+[My Blog](https://blog.carsonrueber.com)
+[My GitHub](https://github.com/CJ5518)
+
 ## Jonna Waage
 
 ![](Jonna.jpg){width="30%"}
@@ -58,7 +65,7 @@ I am a third year undergraduate computer science major and mathematics minor at 
 
 ![](Ava.jpg){width="40%"}
 
-I'm an MFA Candidate and Instructor of record at the University of Idaho where I practice and teach design. My creative research focuses on human interaction through User Experience Design. My experience centers around App Design and Art Direction.
+I'm an MFA Candidate and Instructor of record at the University of Idaho where I practice and teach design. My practice focuses on human interaction through different principles of User Experience design and research. My professional experience ranges from App Design to Art Direction and I'm now the I'm the UX Designer for [TwinStick](../Games/TwinStick/index.qmd)! Here, I implement my design and research experiences to create accessible screens for TwinStick players to learn about evolution. 
 
 [Ava's Portfolio](https://avarummler.com/)
 

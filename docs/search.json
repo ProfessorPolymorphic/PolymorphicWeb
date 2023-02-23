@@ -315,6 +315,20 @@
     "text": "AI"
   },
   {
+    "objectID": "Games/TwinStick/UXUI.html",
+    "href": "Games/TwinStick/UXUI.html",
+    "title": "UX/UI",
+    "section": "",
+    "text": "User Experience is a critical part of TwinStick because of the educational elements involved. This means that complex information must be easy for players to understand to not only educate them on evolving slimes, but inform their decisions on how to interact with the next generation of slimes.\nData involving slime traits, fitness, and their offspring is all information that players should be able to interpret on the screens displayed between each round of generations. UX/UI principles play a key roll in the design of these screens for this reason."
+  },
+  {
+    "objectID": "Games/TwinStick/UXUI.html#low-fidelity-explorations",
+    "href": "Games/TwinStick/UXUI.html#low-fidelity-explorations",
+    "title": "UX/UI",
+    "section": "Low Fidelity Explorations",
+    "text": "Low Fidelity Explorations\nLots of low fidelity prototypes were produced to explore different renditions of information.\nVideo\nThis is a prototype of how different slimes and their off spring can be communicated. Since evolution is an important factor of understanding transformed traits from offspring to offspring, pedigrees can be a helpful tool for players.\nVideo\nIt’s also important to consider how slimes can be categorized. This prototype also explores what it would look like if players were able to pick specific slimes to learn about."
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "POLYMORPHIC GAMES",
@@ -340,21 +354,21 @@
     "href": "People/index.html#carson-rueber",
     "title": "People",
     "section": "Carson Rueber",
-    "text": "Carson Rueber"
+    "text": "Carson Rueber\n\nI’m a third year student at the University of Idaho majoring in Computer Science with a Minor in French.\nMy Blog My GitHub"
   },
   {
     "objectID": "People/index.html#jonna-waage",
     "href": "People/index.html#jonna-waage",
     "title": "People",
     "section": "Jonna Waage",
-    "text": "Jonna Waage\n\nI am a third year undergraduate computer science major and mathematics minor at the University of Idaho. I am a software developer here at Polymorphic Games. My current project is the Twin Stick game."
+    "text": "Jonna Waage\n\nI am a third year undergraduate computer science major and mathematics minor at the University of Idaho. I am a software developer here at Polymorphic Games. My current project is the TwinStick game."
   },
   {
     "objectID": "People/index.html#ava-rummler",
     "href": "People/index.html#ava-rummler",
     "title": "People",
     "section": "Ava Rummler",
-    "text": "Ava Rummler\n\nI’m an MFA Candidate and Instructor of record at the University of Idaho where I practice and teach design. My creative research focuses on human interaction through User Experience Design. My experience centers around App Design and Art Direction.\nAva’s Portfolio\nAva’s Linkedin"
+    "text": "Ava Rummler\n\nI’m an MFA Candidate and Instructor of record at the University of Idaho where I practice and teach design. My practice focuses on human interaction through different principles of User Experience design and research. My professional experience ranges from App Design to Art Direction and I’m now the I’m the UX Designer for TwinStick! Here, I implement my design and research experiences to create accessible screens for TwinStick players to learn about evolution.\nAva’s Portfolio\nAva’s Linkedin"
   },
   {
     "objectID": "People/index.html#justin-riggs",
