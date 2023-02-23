@@ -59,7 +59,7 @@ I'm a third year student at the University of Idaho majoring in Computer Science
 
 ![](Jonna.jpg){width="30%"}
 
-I am a third year undergraduate computer science major and mathematics minor at the University of Idaho. I am a software developer here at Polymorphic Games. My current project is the Twin Stick game.
+I am a third year undergraduate computer science major and mathematics minor at the University of Idaho. I am a software developer here at Polymorphic Games. My current project is the TwinStick game.
 
 ## Ava Rummler
 
