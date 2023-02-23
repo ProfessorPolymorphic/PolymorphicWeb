@@ -383,5 +383,12 @@
     "title": "People",
     "section": "Kristin Martinet",
     "text": "Kristin Martinet"
+  },
+  {
+    "objectID": "Games/TwinStick/Towers.html",
+    "href": "Games/TwinStick/Towers.html",
+    "title": "Towers",
+    "section": "",
+    "text": "There are 6 different tower types:\nAcid\nIce\nFire\nLightning\nLaser\nBlaster\nEach of these have the ability to damage all slimes except for the slimes that have a resistance to that tower’s type."
   }
 ]

@@ -4,6 +4,22 @@ title: "Towers"
 
 ## Tower Types
 
+There are 6 different tower types:
+
+Acid
+
+Ice
+
+Fire
+
+Lightning
+
+Laser
+
+Blaster
+
+Each of these have the ability to damage all slimes except for the slimes that have a resistance to that tower's type.
+
 ## Projectiles
 
 ## AI
