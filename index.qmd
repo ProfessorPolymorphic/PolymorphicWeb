@@ -21,3 +21,37 @@ Instead of pre-programming, scripted enemy behaviors to escalate difficulty, our
 Our studio is based on the University of Idaho campus and populated by undergraduate students. A university setting is the one place where you can find programmers, artists, writers, musicians, marketers, and biologists — everyone you need to make a video game with foundations in evolutionary biology. We hire insanely talented teams of undergraduate students to develop our games. This gives us a team that can think outside the box, and it provides a great student experience. Our employees get to build skills in communication, leadership, and collaboration that they take with them when they graduate, all while honing their skills in their own trade.
 
 [*Learn more about our team...*](/People/index.qmd)
+
+# SUPPORT
+
+Polymorphic Games has been made possible through grants and support from the following:
+
+```{r}
+library(tidyverse)
+library(tidyr)
+library(readxl)
+library(gtExtras)
+library(gt)
+support <- read_excel("support.xlsx")
+
+```
+
+```{r}
+head(mtcars) %>%
+  gt() %>% 
+  gt_theme_538() %>% 
+  tab_header(title = "Table styled like the FiveThirtyEight")
+
+
+test<-support %>%
+  gt() %>% 
+  gt_theme_guardian() %>% 
+  tab_header(title = "Grant support to Polymorphic Games")
+```
+
+
+```{r}
+
+test
+
+```
