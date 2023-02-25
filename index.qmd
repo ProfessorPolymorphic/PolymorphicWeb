@@ -27,31 +27,41 @@ Our studio is based on the University of Idaho campus and populated by undergrad
 Polymorphic Games has been made possible through grants and support from the following:
 
 ```{r}
+#| output: false
+#| echo: false
+
+library(rlang)
 library(tidyverse)
 library(tidyr)
 library(readxl)
-library(gtExtras)
 library(gt)
+library(gtExtras)
+
 support <- read_excel("support.xlsx")
 
 ```
 
 ```{r}
-head(mtcars) %>%
-  gt() %>% 
-  gt_theme_538() %>% 
-  tab_header(title = "Table styled like the FiveThirtyEight")
+#| echo: false
 
 
-test<-support %>%
+support %>%
   gt() %>% 
-  gt_theme_guardian() %>% 
-  tab_header(title = "Grant support to Polymorphic Games")
+  gt_theme_guardian() %>%
+  tab_caption("Funding Sources:  Polymorphic Games") %>%
+   fmt_currency(
+    columns = c("Total Award", "Studio Funding"),
+    currency = "USD", decimals=0) %>%
+  cols_width(
+    Title ~ px(250),
+    ends_with("rd") ~ px(90),
+    CoPIs ~ px(80),
+    
+    everything() ~ px(80)
+  ) %>%
+   fmt_date(
+    columns = c("Start", "End"),
+    date_style = "yM"
+  )
 ```
 
-
-```{r}
-
-test
-
-```

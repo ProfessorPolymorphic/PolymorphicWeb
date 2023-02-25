@@ -26,6 +26,8 @@ I am a Professor of Biological Sciences at the University of Idaho, where I stud
 I am a Professor of Computer Science at the University of Idaho, and am also currently serving as Department Chair.  My research interests include evolutionary computation, artificial intelligence, genetic algorithms, and evolutionary video games.  I am also active in computer science education through teacher training and summer camps.  I teach courses in programming at the undergraduate and graduate levels.
 
 [Terry's Website](https://webpages.uidaho.edu/tsoule/index.html)
+
+[Programming Chaos Youtube](https://www.youtube.com/channel/UC2rO9hEjJkjqzktvtj0ggNQ)
 :::
 :::
 
