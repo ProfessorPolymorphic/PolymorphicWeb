@@ -16,6 +16,31 @@ When we develop educational games and simulations for projects like TickBase, we
 
 ## Developers
 
+### Landon Wright
+
+### Erik Marsh
+
+![](ErikHeadshot.jpg){width="400"}
+
+Erik is currently a first-year Master’s student in Computer Science at the University of Nevada, Reno. He received his B.S. in Computer Science and Engineering from the University of Nevada, Reno in 2022. Here, he primarily works on keeping Drider running smoothly, particularly the networking aspects.
+
+### Joshua Dahl
+
+![](JoshHeadshot.jpg){width="400"}
+
+Joshua Dahl is currently a student at the University of Nevada, Reno. He is pursuing a BS with a major in Computer Science and Engineering and a minor in Mathematics. When he graduates he is planning on pursuing a Ph.D. in Computer Science where he hopes to continue to make contributions to both the fields of computer graphics and programming languages. 
+
+Due to the rapidly evolving nature of the Virtual Reality field, many frameworks for multiuser interaction have become outdated, with few, if any, designed to support mixed virtual and non-virtual interactions. We have developed uMuVR, a framework that lays an extensible and forward-looking foundation for the development of mixed interactions based upon a novel method of ensuring that inputs, visuals, and networking can all communicate without needing to understand the others’ internals. This framework also provides utilities for representing user avatars in a physicalized manner while supporting a range of different input methods. We tested this framework in the development of several applications and show that it can easily be adapted to support application requirements it was not originally designed for.
+
+### Daniel Enriquez
+
+
+### Ryan Wagoner
+
+### Lily Mason
+
+### Sam Carlson
+
 
 
 ## Research Collaborators

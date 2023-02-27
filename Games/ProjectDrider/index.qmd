@@ -16,6 +16,19 @@ Learners observe the data in-game.
 
 ## TARGET AUDIENCE
 
+
+
+### Letting the teacher view student progress (Erik Marsh)
+
+Drider has a task system where the teacher can assign each student a task to perform. These tasks usually involve catching a certain number of animals to analyze some data (such as the number of ticks on each animal). For a while in the development cycle, players were only aware of their own tasks. In a teaching environment, however, this is far from optimal. The teacher should be aware of each student’s task progress, or else it becomes hard to continue a lesson.
+
+Recently, I reworked the tasks system to allow for the teacher to see individual student progress. It is not yet implemented into the menu system, but the proof-of-concept is shown in the video. Here, the teacher is able to see task progress for themself and their two students in a centralized, scrollable list. Having this functionality is critical, since a student that is goofing off or is struggling to complete the task may slow down the teacher’s lesson plan. Since the teacher is also an active player of the game, checking in on each student’s progress by walking around the room becomes an interruption, which is why in-game progress monitoring is useful.
+
+The logic behind this functionality is quite simple. The existing task system simply “listens” for when players catch animals. If the proper conditions are met (such as the player catching the right animal), task progress increases. This progress is shown on the screen with a progress bar. Usually, the task only listens to the player that is being controlled on the local computer, and ignores the players on the other, remote computers. However, every time the teacher assigns a task, an “extra copy” of the task is put on the teacher’s computer that “listens to” the player that it was assigned to. Thus, the task is aware of that player’s progress, and it can be displayed on screen to the teacher as well.
+
+![](teacher-task-menu-demo.mp4)
+
+
 ## THE CHARACTER
 
 ### Character Creation

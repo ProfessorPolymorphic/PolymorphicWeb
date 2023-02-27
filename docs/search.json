@@ -14,11 +14,67 @@
     "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
   },
   {
+    "objectID": "DevBlog/posts/TickbaseSeminarFeb2023/index.html#overview",
+    "href": "DevBlog/posts/TickbaseSeminarFeb2023/index.html#overview",
+    "title": "TICKBASE PRESENTATION - Datathon Preparation",
+    "section": "OVERVIEW",
+    "text": "OVERVIEW\nObjective: Present an integrated collaboration framework for the Tickbase Outreach and Education projects that will facilitate integration into the datathon components of our annual meeting.\n\nFramework\nTeam\nProjects\nOpportunities"
+  },
+  {
+    "objectID": "DevBlog/posts/TickbaseSeminarFeb2023/index.html#framework",
+    "href": "DevBlog/posts/TickbaseSeminarFeb2023/index.html#framework",
+    "title": "TICKBASE PRESENTATION - Datathon Preparation",
+    "section": "FRAMEWORK",
+    "text": "FRAMEWORK\n\nQuarto / RStudio\nGitHub Repository\nGitHub Pages"
+  },
+  {
+    "objectID": "DevBlog/posts/TickbaseSeminarFeb2023/index.html#framework-1-qarto-rstudio",
+    "href": "DevBlog/posts/TickbaseSeminarFeb2023/index.html#framework-1-qarto-rstudio",
+    "title": "TICKBASE PRESENTATION - Datathon Preparation",
+    "section": "FRAMEWORK 1: Qarto / RStudio",
+    "text": "FRAMEWORK 1: Qarto / RStudio\nWe need a way to collaborate that:\n\nCan accomodate users of varying technical backgrounds.\nIs flexible in terms of publishing formats (html, websites, blogs, documents, presentations, etc).\nCan accomodate code exampes from the main data science languages (R, Python, Observable, etc).\n\nEnter Literate Programming with Quarto!"
+  },
+  {
+    "objectID": "DevBlog/posts/TickbaseSeminarFeb2023/index.html#framework-2-github-repository",
+    "href": "DevBlog/posts/TickbaseSeminarFeb2023/index.html#framework-2-github-repository",
+    "title": "TICKBASE PRESENTATION - Datathon Preparation",
+    "section": "FRAMEWORK 2: GitHub Repository",
+    "text": "FRAMEWORK 2: GitHub Repository\nWe are rebuilding the Polymorphic Games website as a public GitHub repository. This allows us to:\n\nEasily invite collaborators to help us generate and modify content.\nHelp students from all technical backgrounds build skills in literate programming, reproducible research, and version control.\nFacilitate regular team updates through public blog posts.\nProvide much more detailed content about each project, allowing team members and collaborators to readily access information (How did that model work?) and assets (I want that one movie for my seminar!)."
+  },
+  {
+    "objectID": "DevBlog/posts/TickbaseSeminarFeb2023/index.html#framework-3-github-pages",
+    "href": "DevBlog/posts/TickbaseSeminarFeb2023/index.html#framework-3-github-pages",
+    "title": "TICKBASE PRESENTATION - Datathon Preparation",
+    "section": "FRAMEWORK 3: GitHub Pages",
+    "text": "FRAMEWORK 3: GitHub Pages\nWe are currently hosting the website using GitHub Pages. This allows us to:\n\nCollaborate on the website for the projects.\nEliminate the intermediary of a professional web developer* (Can you update this thing for me?).\nStill point to our domain name (www.polymorphicgames.com)."
+  },
+  {
+    "objectID": "DevBlog/posts/TickbaseSeminarFeb2023/index.html#team",
+    "href": "DevBlog/posts/TickbaseSeminarFeb2023/index.html#team",
+    "title": "TICKBASE PRESENTATION - Datathon Preparation",
+    "section": "TEAM",
+    "text": "TEAM\nWow, I wish I had all the information so I could make a slide about our developers…\nOh wait… HERE IT IS!"
+  },
+  {
+    "objectID": "DevBlog/posts/TickbaseSeminarFeb2023/index.html#projects",
+    "href": "DevBlog/posts/TickbaseSeminarFeb2023/index.html#projects",
+    "title": "TICKBASE PRESENTATION - Datathon Preparation",
+    "section": "PROJECTS",
+    "text": "PROJECTS\n\nOutbreak Simulator\nProject Drider\nTwinStick"
+  },
+  {
+    "objectID": "DevBlog/posts/TickbaseSeminarFeb2023/index.html#opportunities",
+    "href": "DevBlog/posts/TickbaseSeminarFeb2023/index.html#opportunities",
+    "title": "TICKBASE PRESENTATION - Datathon Preparation",
+    "section": "OPPORTUNITIES",
+    "text": "OPPORTUNITIES\n\nLesson plans, activities, demo ideas, use cases.\nModel improvements, feature additions.\nCommunications (blogs, website, youtube, etc)\n\n\n\nPOLYMORPHIC GAMES…GitHub Repo"
+  },
+  {
     "objectID": "DevBlog/index.html",
     "href": "DevBlog/index.html",
     "title": "DevBlog",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n\n\n\n\n  \n\n\n\n\nOUTBREAK SIMULATOR\n\n\nPreliminary Overview\n\n\n\n\nDevelopment\n\n\nTickbase\n\n\nModeling\n\n\ncode\n\n\n\n\n\n\n\n\n\n\n\nFeb 6, 2023\n\n\nCarson Rueber\n\n\n\n\n\n\n  \n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nFeb 3, 2023\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n\n\n\n\n  \n\n\n\n\nTICKBASE PRESENTATION - Datathon Preparation\n\n\nFebruary 27, 2023\n\n\n\n\nSeminar\n\n\nTickbase\n\n\nDatathon\n\n\n\n\nOverview of the Tickbase game projects.\n\n\n\n\n\n\nFeb 27, 2023\n\n\nBarrie Robison\n\n\n\n\n\n\n  \n\n\n\n\nOUTBREAK SIMULATOR\n\n\nPreliminary Overview\n\n\n\n\nDevelopment\n\n\nTickbase\n\n\nModeling\n\n\ncode\n\n\n\n\n\n\n\n\n\n\n\nFeb 6, 2023\n\n\nCarson Rueber\n\n\n\n\n\n\n  \n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nFeb 3, 2023\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "DevBlog/about.html",
@@ -56,6 +112,55 @@
     "text": "I am a Professor of Biological Sciences at the University of Idaho, where I study evolution and adaptation using an unusual mixture of model systems. Over the course of my career, I have conducted research on the genetic basis of quantitative traits in Salmonids, behavioral genomics and adaptation to captivity in zebrafish, and the implementation of evolutionary models in video games. I taught Genomics and General Genetics for 15 years, and I now teach various courses in Data Science as part of our new Graduate Certificate in Professional Applications of Data Science.\nBarrie’s Website\n\n\n\n\n\n\n\nI am a Professor of Computer Science at the University of Idaho, and am also currently serving as Department Chair. My research interests include evolutionary computation, artificial intelligence, genetic algorithms, and evolutionary video games. I am also active in computer science education through teacher training and summer camps. I teach courses in programming at the undergraduate and graduate levels.\nTerry’s Website\nProgramming Chaos Youtube"
   },
   {
+    "objectID": "People/index.html#landon-wright",
+    "href": "People/index.html#landon-wright",
+    "title": "PEOPLE",
+    "section": "Landon Wright",
+    "text": "Landon Wright\n\nCreative Director, UIdaho VTD graduate, I like to make stuff.\nLandon’s Instagram"
+  },
+  {
+    "objectID": "People/index.html#carson-rueber",
+    "href": "People/index.html#carson-rueber",
+    "title": "PEOPLE",
+    "section": "Carson Rueber",
+    "text": "Carson Rueber\n\nI’m a third year student at the University of Idaho majoring in Computer Science with a Minor in French. I am the lead programmer on the [Outbreak Simulator] project, and have been working for Polymorphic Games since the summer of 2021.\nMy Blog My GitHub"
+  },
+  {
+    "objectID": "People/index.html#jonna-waage",
+    "href": "People/index.html#jonna-waage",
+    "title": "PEOPLE",
+    "section": "Jonna Waage",
+    "text": "Jonna Waage\n\nI am a third year undergraduate computer science major and mathematics minor at the University of Idaho. I have been a software developer with Polymorphic Games since the Fall of 2022. My current project is the TwinStick game, where I am working on the AI that controls the defensive towers."
+  },
+  {
+    "objectID": "People/index.html#ava-rummler",
+    "href": "People/index.html#ava-rummler",
+    "title": "PEOPLE",
+    "section": "Ava Rummler",
+    "text": "Ava Rummler\n\nI’m an MFA Candidate and Instructor of record at the University of Idaho where I practice and teach design. My practice focuses on human interaction through different principles of user experience design and research. My professional experience ranges from App Design to Art Direction and I’m now UX Designer for TwinStick! Here, I implement my design and research experiences to create accessible screens for TwinStick players to learn about evolution and data science. You can see how the UI/UX of project TwinStick is coming together here!\nAva’s Portfolio\nAva’s Linkedin"
+  },
+  {
+    "objectID": "People/index.html#justin-riggs",
+    "href": "People/index.html#justin-riggs",
+    "title": "PEOPLE",
+    "section": "Justin Riggs",
+    "text": "Justin Riggs"
+  },
+  {
+    "objectID": "People/index.html#elisha-coad",
+    "href": "People/index.html#elisha-coad",
+    "title": "PEOPLE",
+    "section": "Elisha Coad",
+    "text": "Elisha Coad"
+  },
+  {
+    "objectID": "People/index.html#kristin-martinet",
+    "href": "People/index.html#kristin-martinet",
+    "title": "PEOPLE",
+    "section": "Kristin Martinet",
+    "text": "Kristin Martinet"
+  },
+  {
     "objectID": "Games/ProjectHastur/index.html#end-of-webgl-test",
     "href": "Games/ProjectHastur/index.html#end-of-webgl-test",
     "title": "PROJECT HASTUR",
@@ -82,6 +187,41 @@
     "title": "TWIN STICK",
     "section": "STUFF!",
     "text": "STUFF!"
+  },
+  {
+    "objectID": "Games/TwinStick/Towers.html",
+    "href": "Games/TwinStick/Towers.html",
+    "title": "Towers",
+    "section": "",
+    "text": "There are 6 different kinds of towers, each of them have the ability to damage all slimes except for the slimes that have a resistance to that tower’s type."
+  },
+  {
+    "objectID": "Games/TwinStick/Towers.html#projectiles",
+    "href": "Games/TwinStick/Towers.html#projectiles",
+    "title": "Towers",
+    "section": "Projectiles",
+    "text": "Projectiles\nEach tower has their own special projectile depending on the type."
+  },
+  {
+    "objectID": "Games/TwinStick/Towers.html#ai",
+    "href": "Games/TwinStick/Towers.html#ai",
+    "title": "Towers",
+    "section": "AI",
+    "text": "AI\nThe towers will be able to track the nearest slime and shoot at it once the slime gets close enough. This AI is important because otherwise the towers would not know where or if to shoot. This is done with a function that with every update, it goes through the array of all slimes and finds the distance between the tower and each of the slimes. The tower then rotates to point at that slime and shoot their specific projectile. If the slime has that resistance, it will not damage it. For example, if an acid tower shoots a bomb and hits a acid slime, nothing will happen but if it hits a fire slime, the slime will take damage."
+  },
+  {
+    "objectID": "Games/TwinStick/UXUI.html",
+    "href": "Games/TwinStick/UXUI.html",
+    "title": "UX/UI",
+    "section": "",
+    "text": "User Experience is a critical part of TwinStick because of the educational elements involved. This means that complex information must be easy for players to understand to not only educate them on evolving slimes, but inform their decisions on how to interact with the next generation of slimes.\nData involving slime traits, fitness, and their offspring is all information that players should be able to interpret on the screens displayed between each round of generations. UX/UI principles play a key roll in the design of these screens for this reason."
+  },
+  {
+    "objectID": "Games/TwinStick/UXUI.html#low-fidelity-explorations",
+    "href": "Games/TwinStick/UXUI.html#low-fidelity-explorations",
+    "title": "UX/UI",
+    "section": "Low Fidelity Explorations",
+    "text": "Low Fidelity Explorations\nLots of low fidelity prototypes were produced to explore different renditions of information.\nVideo\nThis is a prototype of how different slimes and their off spring can be communicated. Since evolution is an important factor of understanding transformed traits from offspring to offspring, pedigrees can be a helpful tool for players.\nVideo\nIt’s also important to consider how slimes can be categorized. This prototype also explores what it would look like if players were able to pick specific slimes to learn about."
   },
   {
     "objectID": "Games/index.html",
@@ -123,7 +263,7 @@
     "href": "Games/ProjectDrider/index.html#target-audience",
     "title": "PROJECT DRIDER",
     "section": "TARGET AUDIENCE",
-    "text": "TARGET AUDIENCE"
+    "text": "TARGET AUDIENCE\n\nLetting the teacher view student progress (Erik Marsh)\nDrider has a task system where the teacher can assign each student a task to perform. These tasks usually involve catching a certain number of animals to analyze some data (such as the number of ticks on each animal). For a while in the development cycle, players were only aware of their own tasks. In a teaching environment, however, this is far from optimal. The teacher should be aware of each student’s task progress, or else it becomes hard to continue a lesson.\nRecently, I reworked the tasks system to allow for the teacher to see individual student progress. It is not yet implemented into the menu system, but the proof-of-concept is shown in the video. Here, the teacher is able to see task progress for themself and their two students in a centralized, scrollable list. Having this functionality is critical, since a student that is goofing off or is struggling to complete the task may slow down the teacher’s lesson plan. Since the teacher is also an active player of the game, checking in on each student’s progress by walking around the room becomes an interruption, which is why in-game progress monitoring is useful.\nThe logic behind this functionality is quite simple. The existing task system simply “listens” for when players catch animals. If the proper conditions are met (such as the player catching the right animal), task progress increases. This progress is shown on the screen with a progress bar. Usually, the task only listens to the player that is being controlled on the local computer, and ignores the players on the other, remote computers. However, every time the teacher assigns a task, an “extra copy” of the task is put on the teacher’s computer that “listens to” the player that it was assigned to. Thus, the task is aware of that player’s progress, and it can be displayed on screen to the teacher as well.\nVideo"
   },
   {
     "objectID": "Games/ProjectDrider/index.html#the-character",
@@ -165,7 +305,7 @@
     "href": "Games/ProjectDrider/DevTeam.html#developers",
     "title": "Dev Team",
     "section": "Developers",
-    "text": "Developers"
+    "text": "Developers\n\nLandon Wright\n\n\nErik Marsh\n\nErik is currently a first-year Master’s student in Computer Science at the University of Nevada, Reno. He received his B.S. in Computer Science and Engineering from the University of Nevada, Reno in 2022. Here, he primarily works on keeping Drider running smoothly, particularly the networking aspects.\n\n\nJoshua Dahl\n\nJoshua Dahl is currently a student at the University of Nevada, Reno. He is pursuing a BS with a major in Computer Science and Engineering and a minor in Mathematics. When he graduates he is planning on pursuing a Ph.D. in Computer Science where he hopes to continue to make contributions to both the fields of computer graphics and programming languages.\nDue to the rapidly evolving nature of the Virtual Reality field, many frameworks for multiuser interaction have become outdated, with few, if any, designed to support mixed virtual and non-virtual interactions. We have developed uMuVR, a framework that lays an extensible and forward-looking foundation for the development of mixed interactions based upon a novel method of ensuring that inputs, visuals, and networking can all communicate without needing to understand the others’ internals. This framework also provides utilities for representing user avatars in a physicalized manner while supporting a range of different input methods. We tested this framework in the development of several applications and show that it can easily be adapted to support application requirements it was not originally designed for.\n\n\nDaniel Enriquez\n\n\nRyan Wagoner\n\n\nLily Mason\n\n\nSam Carlson"
   },
   {
     "objectID": "Games/ProjectDrider/DevTeam.html#research-collaborators",
@@ -313,54 +453,5 @@
     "title": "Maps and Data Layers",
     "section": "Data Layers",
     "text": "Data Layers\n\nPopulation\n\n\nElevation\n\n\nWater\n\n\nRoadways\n\n\nAir Travel\n\n\nVaccine Hesitancy"
-  },
-  {
-    "objectID": "People/index.html#landon-wright",
-    "href": "People/index.html#landon-wright",
-    "title": "PEOPLE",
-    "section": "Landon Wright",
-    "text": "Landon Wright\n\nCreative Director, UIdaho VTD graduate, I like to make stuff.\nLandon’s Instagram"
-  },
-  {
-    "objectID": "People/index.html#carson-rueber",
-    "href": "People/index.html#carson-rueber",
-    "title": "PEOPLE",
-    "section": "Carson Rueber",
-    "text": "Carson Rueber\n\nI’m a third year student at the University of Idaho majoring in Computer Science with a Minor in French. I am the lead programmer on the [Outbreak Simulator] project, and have been working for Polymorphic Games since the summer of 2021.\nMy Blog My GitHub"
-  },
-  {
-    "objectID": "People/index.html#jonna-waage",
-    "href": "People/index.html#jonna-waage",
-    "title": "PEOPLE",
-    "section": "Jonna Waage",
-    "text": "Jonna Waage\n\nI am a third year undergraduate computer science major and mathematics minor at the University of Idaho. I have been a software developer with Polymorphic Games since the Fall of 2022. My current project is the TwinStick game, where I am working on the AI that controls the defensive towers."
-  },
-  {
-    "objectID": "People/index.html#ava-rummler",
-    "href": "People/index.html#ava-rummler",
-    "title": "PEOPLE",
-    "section": "Ava Rummler",
-    "text": "Ava Rummler\n\nI’m an MFA Candidate and Instructor of record at the University of Idaho where I practice and teach design. My practice focuses on human interaction through different principles of user experience design and research. My professional experience ranges from App Design to Art Direction and I’m now UX Designer for TwinStick! Here, I implement my design and research experiences to create accessible screens for TwinStick players to learn about evolution and data science. You can see how the UI/UX of project TwinStick is coming together here!\nAva’s Portfolio\nAva’s Linkedin"
-  },
-  {
-    "objectID": "People/index.html#justin-riggs",
-    "href": "People/index.html#justin-riggs",
-    "title": "PEOPLE",
-    "section": "Justin Riggs",
-    "text": "Justin Riggs"
-  },
-  {
-    "objectID": "People/index.html#elisha-coad",
-    "href": "People/index.html#elisha-coad",
-    "title": "PEOPLE",
-    "section": "Elisha Coad",
-    "text": "Elisha Coad"
-  },
-  {
-    "objectID": "People/index.html#kristin-martinet",
-    "href": "People/index.html#kristin-martinet",
-    "title": "PEOPLE",
-    "section": "Kristin Martinet",
-    "text": "Kristin Martinet"
   }
 ]
