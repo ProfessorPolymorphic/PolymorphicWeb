@@ -1,0 +1,80 @@
+---
+title: "TICKBASE PRESENTATION - Datathon Preparation"
+subtitle: "February 27, 2023"
+format:
+  revealjs: 
+    slide-number: true
+    chalkboard: 
+      buttons: false
+    preview-links: auto
+    css: styles.css
+    footer: <a href="https://professorpolymorphic.github.io/PolymorphicWeb/" target="_blank">POLYMORPHIC GAMES</a>...<a href="https://github.com/ProfessorPolymorphic/PolymorphicWeb/settings/pages" target="_blank">GitHub Repo</a>
+    theme: [default, custom.scss]
+author: "Barrie Robison"
+date: "2023-02-27"
+categories: [Seminar, Tickbase, Datathon]
+image: "Cthulhuthumb.png"
+code-fold: true
+description: "Overview of the Tickbase game projects."
+---
+
+## OVERVIEW
+
+**Objective:**  Present an integrated collaboration framework for the Tickbase Outreach and Education projects that will facilitate integration into the datathon components of our annual meeting.
+
+1. Framework
+2. Team
+3. Projects
+4. Opportunities
+
+## FRAMEWORK
+
+1. Quarto / RStudio
+2. GitHub Repository
+3. GitHub Pages
+
+## FRAMEWORK 1: Qarto / RStudio {.smaller}
+
+**We need a way to collaborate that:**
+
+1. Can accomodate users of varying technical backgrounds.
+2. Is flexible in terms of publishing formats (html, websites, blogs, documents, presentations, etc).
+3. Can accomodate code exampes from the main data science languages (R, Python, Observable, etc).
+
+Enter [Literate Programming with Quarto](https://professorpolymorphic.github.io/RobisonWebSite/BCB520/posts/A1-Lit-Prog/)!
+
+
+## FRAMEWORK 2: GitHub Repository {.smaller}
+
+We are rebuilding the Polymorphic Games website as a public GitHub repository.  This allows us to:
+
+1. Easily invite collaborators to help us generate and modify content.
+2. Help students from all technical backgrounds build skills in literate programming, reproducible research, and version control.
+3. Facilitate regular team updates through public blog posts.
+4. Provide much more detailed content about each project, allowing team members and collaborators to readily access information (How did that model work?) and assets (I want that one movie for my seminar!).
+
+## FRAMEWORK 3: GitHub Pages {.smaller}
+
+We are currently hosting the website using GitHub Pages.  This allows us to:
+
+1. Collaborate on the website for the projects.
+2. Eliminate the intermediary of a professional web developer* (Can you update this thing for me?).
+3. Still point to our domain name (www.polymorphicgames.com).
+
+## TEAM
+
+**Wow, I wish I had all the information so I could make a slide about our developers...**
+
+Oh wait...  [HERE IT IS!](../../../People/index.qmd)
+
+## PROJECTS
+
+1. Outbreak Simulator
+2. Project Drider
+3. TwinStick
+
+## OPPORTUNITIES
+
+1. Lesson plans, activities, demo ideas, use cases.
+2. Model improvements, feature additions.
+3. Communications (blogs, website, youtube, etc)
