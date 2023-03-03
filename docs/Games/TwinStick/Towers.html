@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>POLYMORPHIC GAMES - UX/UI</title>
+<title>POLYMORPHIC GAMES - Towers</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -111,7 +111,7 @@ ul.task-list li input[type="checkbox"] {
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">UX/UI</h1>
+      <h1 class="quarto-secondary-nav-title">Towers</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -272,12 +272,12 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Games/TwinStick/Towers.html" class="sidebar-item-text sidebar-link">Towers</a>
+  <a href="../../Games/TwinStick/Towers.html" class="sidebar-item-text sidebar-link active">Towers</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Games/TwinStick/UXUI.html" class="sidebar-item-text sidebar-link active">UX/UI</a>
+  <a href="../../Games/TwinStick/UXUI.html" class="sidebar-item-text sidebar-link">UX/UI</a>
   </div>
 </li>
       </ul>
@@ -293,8 +293,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#low-fidelity-explorations" id="toc-low-fidelity-explorations" class="nav-link" data-scroll-target="#low-fidelity-explorations">Low Fidelity Explorations</a></li>
+  <li><a href="#tower-types" id="toc-tower-types" class="nav-link active" data-scroll-target="#tower-types">Tower Types</a>
+  <ul class="collapse">
+  <li><a href="#acid" id="toc-acid" class="nav-link" data-scroll-target="#acid">Acid</a></li>
+  <li><a href="#ice" id="toc-ice" class="nav-link" data-scroll-target="#ice">Ice</a></li>
+  <li><a href="#fire" id="toc-fire" class="nav-link" data-scroll-target="#fire">Fire</a></li>
+  <li><a href="#lightning" id="toc-lightning" class="nav-link" data-scroll-target="#lightning">Lightning</a></li>
+  <li><a href="#laser" id="toc-laser" class="nav-link" data-scroll-target="#laser">Laser</a></li>
+  <li><a href="#blaster" id="toc-blaster" class="nav-link" data-scroll-target="#blaster">Blaster</a></li>
+  </ul></li>
+  <li><a href="#projectiles" id="toc-projectiles" class="nav-link" data-scroll-target="#projectiles">Projectiles</a></li>
+  <li><a href="#ai" id="toc-ai" class="nav-link" data-scroll-target="#ai">AI</a></li>
   </ul>
 </nav>
     </div>
@@ -303,7 +312,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">UX/UI</h1>
+<h1 class="title d-none d-lg-block">Towers</h1>
 </div>
 
 
@@ -318,29 +327,41 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>User Experience is a critical part of TwinStick because of the educational elements involved. This means that complex information must be easy for players to understand to not only educate them on evolving slimes, but inform their decisions on how to interact with the next generation of slimes.</p>
-<p>Data involving slime traits, fitness, and their offspring is all information that players should be able to interpret on the screens displayed between each round of generations. UX/UI principles play a key roll in the design of these screens for this reason.</p>
+<section id="tower-types" class="level2">
+<h2 class="anchored" data-anchor-id="tower-types">Tower Types</h2>
+<p>There are 6 different kinds of towers, each of them have the ability to damage all slimes except for the slimes that have a resistance to that tower’s type.</p>
+<section id="acid" class="level3">
+<h3 class="anchored" data-anchor-id="acid">Acid</h3>
+<p><img src="towerPics/acidtower.png" class="img-fluid" style="width:20.0%"></p>
 </section>
-<section id="low-fidelity-explorations" class="level2">
-<h2 class="anchored" data-anchor-id="low-fidelity-explorations">Low Fidelity Explorations</h2>
-<p><video src="UXUImedia/pedigreecategorizedbytrait.mp4" class="img-fluid" controls=""><a href="UXUImedia/pedigreecategorizedbytrait.mp4">Video</a></video></p>
-<p>This is a prototype of how different slimes and their off spring can be communicated. Since evolution is an important factor of understanding transformed traits from offspring to offspring, pedigrees can be a helpful tool for players.</p>
-<p><video src="UXUImedia/pickingaslimetolearnabout.mp4" class="img-fluid" controls=""><a href="UXUImedia/pickingaslimetolearnabout.mp4">Video</a></video></p>
-<p>This prototype explores what it would look like if players were able to pick specific slimes to learn more about. This communicates what different “families” look like in terms of slimes and their offspring.</p>
-<p><video src="UXUImedia/categorizationandinfo.mp4" class="img-fluid" controls=""><a href="UXUImedia/categorizationandinfo.mp4">Video</a></video></p>
-<p>The slimes in TwinStick are complex when it comes to their specific traits and fitness. It’s important to categorize the slimes for the player to understand their characteristics. This prototype explores the layout of these categories and how the player could potentially interact with these controls.</p>
-<p>Another factor of this prototype is the potential graph placement and extended information on each slime in a family. The viewer would be able to get a description of each slime along with some important information on their traits, fitness, and maybe even their placement on the graph provided. Comparing and contrasting each slime is also an effectuve educational tool, so this prototype also explores what that would look like.</p>
-<p><video src="UXUImedia/inspectingredslime.mp4" class="img-fluid" controls=""><a href="UXUImedia/inspectingredslime.mp4">Video</a></video></p>
-<p>As traits become more official, more styles and information architecture styles can be explored as shown by the more “dark mode” approach. This is an exploration of categorizing every offspring in their “fitness,” but still keeping them all on the same screen because of the parents’ ability to have offspring in different fitness categories. Because this requires multiple slimes to be displayed, a different approach to pedigrees was explored.</p>
-<p>The traits on the side operate as controls to see each type of graph that the player can access. In this prototype, slimes have a value to each trait that’s displayed on the graph. The trait is highlighted with their prospective graph along with the value displayed under the description of the slime and their spot on the scatter plot.</p>
-<p><video src="UXUImedia/inspectingbothslimescomparing.mp4" class="img-fluid" controls=""><a href="UXUImedia/inspectingbothslimescomparing.mp4">Video</a></video></p>
-<p>On occasions where the player wants to compare slimes with the same trait, they can switch between the slime they’d like to see. Their scatter plot point is highlighted with their prospective point, which changes if the player selects another slime in the pedigree. The values in the slime description box also change to coincide with the slime selected.</p>
-<p><video src="UXUImedia/orangeslimescatterplot.mp4" class="img-fluid" controls=""><a href="UXUImedia/orangeslimescatterplot.mp4">Video</a></video></p>
-<p>Exploring more of the graph features, this is a prototype of what it could look like if a player wants to select a point on the scatter plot to see which slime coincides with that point. An image of the slime and their information will appear for the player to see.</p>
-<p><video src="UXUImedia/switchingbetweenpedigrees.mp4" class="img-fluid" controls=""><a href="UXUImedia/switchingbetweenpedigrees.mp4">Video</a></video></p>
-<p>If the player would want to switch between pedigrees, this prototype shows what that would potentially look like. All the information would be changed according to the player’s selection.</p>
+<section id="ice" class="level3">
+<h3 class="anchored" data-anchor-id="ice">Ice</h3>
+<p><img src="towerPics/icetower.png" class="img-fluid" style="width:20.0%"></p>
+</section>
+<section id="fire" class="level3">
+<h3 class="anchored" data-anchor-id="fire">Fire</h3>
+<p><img src="towerPics/firetower.png" class="img-fluid" style="width:20.0%"></p>
+</section>
+<section id="lightning" class="level3">
+<h3 class="anchored" data-anchor-id="lightning">Lightning</h3>
+<p><img src="towerPics/lightningtower.png" class="img-fluid" style="width:20.0%"></p>
+</section>
+<section id="laser" class="level3">
+<h3 class="anchored" data-anchor-id="laser">Laser</h3>
+<p><img src="towerPics/lasertower.png" class="img-fluid" style="width:20.0%"></p>
+</section>
+<section id="blaster" class="level3">
+<h3 class="anchored" data-anchor-id="blaster">Blaster</h3>
+<p><img src="towerPics/blastertower.png" class="img-fluid" style="width:20.0%"></p>
+</section>
+</section>
+<section id="projectiles" class="level2">
+<h2 class="anchored" data-anchor-id="projectiles">Projectiles</h2>
+<p>Each tower has their own special projectile depending on the type.</p>
+</section>
+<section id="ai" class="level2">
+<h2 class="anchored" data-anchor-id="ai">AI</h2>
+<p>The towers will be able to track the nearest slime and shoot at it once the slime gets close enough. This AI is important because otherwise the towers would not know where or if to shoot. This is done with a function that with every update, it goes through the array of all slimes and finds the distance between the tower and each of the slimes. The tower then rotates to point at that slime and shoot their specific projectile. If the slime has that resistance, it will not damage it. For example, if an acid tower shoots a bomb and hits a acid slime, nothing will happen but if it hits a fire slime, the slime will take damage.</p>
 
 
 </section>

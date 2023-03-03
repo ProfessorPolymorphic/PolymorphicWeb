@@ -48,11 +48,18 @@ I like to make stuff.
 
 ## Carson Rueber
 
+![](Carson.JPG){width="40%"}
+
+I'm a third year student at the University of Idaho majoring in Computer Science with a Minor in French.
+
+[My Blog](https://blog.carsonrueber.com)
+[My GitHub](https://github.com/CJ5518)
+
 ## Jonna Waage
 
-![](Jonna.jpg){width="40%"}
+![](Jonna.jpg){width="30%"}
 
-I am a third year computer science major and mathematics minor. 
+I am a third year undergraduate computer science major and mathematics minor at the University of Idaho. I am a software developer here at Polymorphic Games. My current project is the TwinStick game!
 
 ## Ava Rummler
 
