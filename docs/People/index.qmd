@@ -61,7 +61,11 @@ I am a third year undergraduate computer science major and mathematics minor at 
 
 ![](Ava.jpg){width="40%"}
 
+<<<<<<< HEAD
+I'm an MFA Candidate and Instructor of record at the University of Idaho where I practice and teach design. My practice focuses on human interaction through different principles of User Experience design and research. My professional experience ranges from App Design to Art Direction and I'm now the I'm the UX Designer for [TwinStick](../Games/TwinStick/index.qmd)!  
+=======
 I'm an MFA Candidate and Instructor of record at the University of Idaho where I practice and teach design. My practice focuses on human interaction through different principles of user experience design and research. My professional experience ranges from App Design to Art Direction and I'm now  UX Designer for [TwinStick](../Games/TwinStick/index.qmd)! Here, I implement my design and research experiences to create accessible screens for TwinStick players to learn about evolution and data science.  You can see how the UI/UX of project TwinStick is coming together [here](../Games/TwinStick/UXUI.qmd)!
+>>>>>>> d5ca71142af61566ccaf167db56d5c5571d66967
 
 [Ava's Portfolio](https://avarummler.com/)
 

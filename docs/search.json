@@ -14,8 +14,6 @@
     "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
   },
   {
-<<<<<<< HEAD
-=======
     "objectID": "DevBlog/posts/TickbaseSeminarFeb2023/index.html#overview",
     "href": "DevBlog/posts/TickbaseSeminarFeb2023/index.html#overview",
     "title": "TICKBASE PRESENTATION - Datathon Preparation",
@@ -72,16 +70,11 @@
     "text": "OPPORTUNITIES\n\nLesson plans, activities, demo ideas, use cases.\nModel improvements, feature additions.\nCommunications (blogs, website, youtube, etc)\n\n\n\nPOLYMORPHIC GAMES…GitHub Repo"
   },
   {
->>>>>>> d5ca71142af61566ccaf167db56d5c5571d66967
     "objectID": "DevBlog/index.html",
     "href": "DevBlog/index.html",
     "title": "DevBlog",
     "section": "",
-<<<<<<< HEAD
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n\n\n\n\n  \n\n\n\n\nOUTBREAK SIMULATOR\n\n\nPreliminary Overview\n\n\n\n\nDevelopment\n\n\nTickbase\n\n\nModeling\n\n\ncode\n\n\n\n\n\n\n\n\n\n\n\nFeb 6, 2023\n\n\nCarson Rueber\n\n\n\n\n\n\n  \n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nFeb 3, 2023\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
-=======
     "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n\n\n\n\n  \n\n\n\n\nTICKBASE PRESENTATION - Datathon Preparation\n\n\nFebruary 27, 2023\n\n\n\n\nSeminar\n\n\nTickbase\n\n\nDatathon\n\n\n\n\nOverview of the Tickbase game projects.\n\n\n\n\n\n\nFeb 27, 2023\n\n\nBarrie Robison\n\n\n\n\n\n\n  \n\n\n\n\nOUTBREAK SIMULATOR\n\n\nPreliminary Overview\n\n\n\n\nDevelopment\n\n\nTickbase\n\n\nModeling\n\n\ncode\n\n\n\n\n\n\n\n\n\n\n\nFeb 6, 2023\n\n\nCarson Rueber\n\n\n\n\n\n\n  \n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nFeb 3, 2023\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
->>>>>>> d5ca71142af61566ccaf167db56d5c5571d66967
   },
   {
     "objectID": "DevBlog/about.html",
@@ -109,92 +102,51 @@
     "href": "index.html",
     "title": "POLYMORPHIC GAMES",
     "section": "",
-<<<<<<< HEAD
-    "text": "Polymorphic Games is an experimental video game development studio based at the University of Idaho. We develop video games, interactive simulations, and visualizations that feature STEM concepts as core mechanics.\nOur main focus is Evolutionary Games that feature enemies that adapt to the player using mathematical models of biological evolution.\nWe have also collaborated with many different researchers to help them represent their model systems as interactive simulations or dynamic visualizations.\n\nEVOLUTIONARY GAMES\nInstead of pre-programming, scripted enemy behaviors to escalate difficulty, our games use populations of creatures that evolve specifically to beat your strategy. Each creature has its own traits that it can pass onto its offspring. After you beat one wave of creatures, the creatures that were the hardest to beat reproduce and you’ll fight their offspring in the next wave. Evolving traits include features like size, speed, damage, resistances, and behavior. We use real principles of evolutionary biology to create a model that includes all the components of real evolution — variation, inheritance, selection, and time — just operating at a much faster pace. This creates dynamic enemies that adapt to how YOU play the game. We just give evolution the space to work.\nLearn more about our games…\n\n\nDEVELOPMENT MODEL\nOur studio is based on the University of Idaho campus and populated by undergraduate students. A university setting is the one place where you can find programmers, artists, writers, musicians, marketers, and biologists — everyone you need to make a video game with foundations in evolutionary biology. We hire insanely talented teams of undergraduate students to develop our games. This gives us a team that can think outside the box, and it provides a great student experience. Our employees get to build skills in communication, leadership, and collaboration that they take with them when they graduate, all while honing their skills in their own trade.\nLearn more about our team…"
-=======
-    "text": "Polymorphic Games is an experimental video game development studio based at the University of Idaho. We develop video games, interactive simulations, and visualizations that feature STEM concepts as core mechanics.\nOur main focus is Evolutionary Games that feature enemies that adapt to the player using mathematical models of biological evolution.\nWe have also collaborated with many different researchers to help them represent their model systems as interactive simulations or dynamic visualizations.\n\nEVOLUTIONARY GAMES\nInstead of pre-programming, scripted enemy behaviors to escalate difficulty, our games use populations of creatures that evolve specifically to beat your strategy. Each creature has its own traits that it can pass onto its offspring. After you beat one wave of creatures, the creatures that were the hardest to beat reproduce and you’ll fight their offspring in the next wave. Evolving traits include features like size, speed, damage, resistances, and behavior. We use real principles of evolutionary biology to create a model that includes all the components of real evolution — variation, inheritance, selection, and time — just operating at a much faster pace. This creates dynamic enemies that adapt to how YOU play the game. We just give evolution the space to work.\nLearn more about our games…\n\n\nDEVELOPMENT MODEL\nOur studio is based on the University of Idaho campus and populated by undergraduate students. A university setting is the one place where you can find programmers, artists, writers, musicians, marketers, and biologists — everyone you need to make a video game with foundations in evolutionary biology. We hire insanely talented teams of undergraduate students to develop our games. This gives us a team that can think outside the box, and it provides a great student experience. Our employees get to build skills in communication, leadership, and collaboration that they take with them when they graduate, all while honing their skills in their own trade.\nLearn more about our team…\n\n\nSUPPORT\nPolymorphic Games has been made possible through grants and support from the following:\n\n\n\n\n\n\n  Funding Sources:  Polymorphic Games\n  \n    \n    \n    \n    \n    \n    \n    \n    \n    \n  \n  \n  \n    \n      Total Award\n      Studio Funding\n      Sponsor\n      Title\n      CoPIs\n      PI\n      Start\n      End\n      Projects\n    \n  \n  \n    $936,605\n$234,492\nNSF\nCollaborative Research: BEE: Ecological and coevolutionary feedbacks in multi-mutualist communities.\nRobison\nD. Althoff\n4/2022\n4/2025\nTBD\n    $5,830,709\n$400,000\nNSF\nRII Track-2 FEC: Leveraging Big Data to Improve Prediction of Tick-Borne Disease Patterns and Dynamics.\nRobison, Harris, Shi\nX. Ma\n9/2020\n9/2024\nOutbreak Simulator, Project Drider, TwinStick\n    $74,700\n$74,700\nIGEM\nDarwin’s Demons mobile.\nSoule\nRobison\n7/2019\n7/2020\nEvolvy Bugs\n    $33,801\n$33,801\nNSF BEACON\nSalmon Run: An Evolutionary Ecology Educational Game.\nRobison, Blackwood, Soule\nR. Pennock\n7/2018\n7/2019\nSalmon Run\n    $67,600\n$67,600\nIGEM\nAn evolutionary approach to procedural opponent generation in video games.\nSoule\nRobison\n7/2017\n7/2018\nDarwin's Demons, Project Hastur\n    $99,328\n$99,328\nNSF BEACON\nTeaching evolution through game based simulation.\nRobison\nSoule\n5/2016\n8/2017\nDarwin's Demons, Project Hastur\n    $65,000\n$65,000\nVandal Ideas Program\nPolymorphic Games – an interdisciplinary game design studio.\nSoule, Hall, Bukvich, Caisely, Bennett, Nicotra, Kelly-Riley, Tanner, Clevely, Bird\nRobison\n7/2016\n8/2017\nDarwin's Demons"
->>>>>>> d5ca71142af61566ccaf167db56d5c5571d66967
+    "text": "Polymorphic Games is an experimental video game development studio based at the University of Idaho. We develop video games, interactive simulations, and visualizations that feature STEM concepts as core mechanics.\nOur main focus is Evolutionary Games that feature enemies that adapt to the player using mathematical models of biological evolution.\nWe have also collaborated with many different researchers to help them represent their model systems as interactive simulations or dynamic visualizations.\n\nEVOLUTIONARY GAMES\nInstead of pre-programming, scripted enemy behaviors to escalate difficulty, our games use populations of creatures that evolve specifically to beat your strategy. Each creature has its own traits that it can pass onto its offspring. After you beat one wave of creatures, the creatures that were the hardest to beat reproduce and you’ll fight their offspring in the next wave. Evolving traits include features like size, speed, damage, resistances, and behavior. We use real principles of evolutionary biology to create a model that includes all the components of real evolution — variation, inheritance, selection, and time — just operating at a much faster pace. This creates dynamic enemies that adapt to how YOU play the game. We just give evolution the space to work.\nLearn more about our games…\n\n\nDEVELOPMENT MODEL\nOur studio is based on the University of Idaho campus and populated by undergraduate students. A university setting is the one place where you can find programmers, artists, writers, musicians, marketers, and biologists — everyone you need to make a video game with foundations in evolutionary biology. We hire insanely talented teams of undergraduate students to develop our games. This gives us a team that can think outside the box, and it provides a great student experience. Our employees get to build skills in communication, leadership, and collaboration that they take with them when they graduate, all while honing their skills in their own trade.\nLearn more about our team…\n\n\nSUPPORT\nPolymorphic Games has been made possible through grants and support from the following:\n\n\n\n\n\n\n\n\n\n  Funding Sources:  Polymorphic Games\n  \n    \n    \n    \n    \n    \n    \n    \n    \n    \n  \n  \n  \n    \n      Total Award\n      Studio Funding\n      Sponsor\n      Title\n      CoPIs\n      PI\n      Start\n      End\n      Projects\n    \n  \n  \n    $936,605\n$234,492\nNSF\nCollaborative Research: BEE: Ecological and coevolutionary feedbacks in multi-mutualist communities.\nRobison\nD. Althoff\n4/2022\n4/2025\nTBD\n    $5,830,709\n$400,000\nNSF\nRII Track-2 FEC: Leveraging Big Data to Improve Prediction of Tick-Borne Disease Patterns and Dynamics.\nRobison, Harris, Shi\nX. Ma\n9/2020\n9/2024\nOutbreak Simulator, Project Drider, TwinStick\n    $74,700\n$74,700\nIGEM\nDarwin’s Demons mobile.\nSoule\nRobison\n7/2019\n7/2020\nEvolvy Bugs\n    $33,801\n$33,801\nNSF BEACON\nSalmon Run: An Evolutionary Ecology Educational Game.\nRobison, Blackwood, Soule\nR. Pennock\n7/2018\n7/2019\nSalmon Run\n    $67,600\n$67,600\nIGEM\nAn evolutionary approach to procedural opponent generation in video games.\nSoule\nRobison\n7/2017\n7/2018\nDarwin's Demons, Project Hastur\n    $99,328\n$99,328\nNSF BEACON\nTeaching evolution through game based simulation.\nRobison\nSoule\n5/2016\n8/2017\nDarwin's Demons, Project Hastur\n    $65,000\n$65,000\nVandal Ideas Program\nPolymorphic Games – an interdisciplinary game design studio.\nSoule, Hall, Bukvich, Caisely, Bennett, Nicotra, Kelly-Riley, Tanner, Clevely, Bird\nRobison\n7/2016\n8/2017\nDarwin's Demons"
   },
   {
     "objectID": "People/index.html",
     "href": "People/index.html",
-<<<<<<< HEAD
-    "title": "People",
-    "section": "",
-    "text": "I am a Professor of Biological Sciences at the University of Idaho, where I study evolution and adaptation using an unusual mixture of model systems. Over the course of my career, I have conducted research on the genetic basis of quantitative traits in Salmonids, behavioral genomics and adaptation to captivity in zebrafish, and the implementation of evolutionary models in video games. I taught Genomics and General Genetics for 15 years, and I now teach various courses in Data Science as part of our new Graduate Certificate in Professional Applications of Data Science.\nBarrie’s Website\n\n\n\n\n\n\n\nDepartment Chair, Professor, Eldritch Sorceror\nTerry’s Website"
-=======
     "title": "PEOPLE",
     "section": "",
     "text": "I am a Professor of Biological Sciences at the University of Idaho, where I study evolution and adaptation using an unusual mixture of model systems. Over the course of my career, I have conducted research on the genetic basis of quantitative traits in Salmonids, behavioral genomics and adaptation to captivity in zebrafish, and the implementation of evolutionary models in video games. I taught Genomics and General Genetics for 15 years, and I now teach various courses in Data Science as part of our new Graduate Certificate in Professional Applications of Data Science.\nBarrie’s Website\n\n\n\n\n\n\n\nI am a Professor of Computer Science at the University of Idaho, and am also currently serving as Department Chair. My research interests include evolutionary computation, artificial intelligence, genetic algorithms, and evolutionary video games. I am also active in computer science education through teacher training and summer camps. I teach courses in programming at the undergraduate and graduate levels.\nTerry’s Website\nProgramming Chaos Youtube"
->>>>>>> d5ca71142af61566ccaf167db56d5c5571d66967
   },
   {
     "objectID": "People/index.html#landon-wright",
     "href": "People/index.html#landon-wright",
-<<<<<<< HEAD
-    "title": "People",
-=======
     "title": "PEOPLE",
->>>>>>> d5ca71142af61566ccaf167db56d5c5571d66967
     "section": "Landon Wright",
     "text": "Landon Wright\n\nCreative Director, UIdaho VTD graduate, I like to make stuff.\nLandon’s Instagram"
   },
   {
     "objectID": "People/index.html#carson-rueber",
     "href": "People/index.html#carson-rueber",
-<<<<<<< HEAD
-    "title": "People",
-    "section": "Carson Rueber",
-    "text": "Carson Rueber\n\nI’m a third year student at the University of Idaho majoring in Computer Science with a Minor in French.\nMy Blog My GitHub"
-=======
     "title": "PEOPLE",
     "section": "Carson Rueber",
     "text": "Carson Rueber\n\nI’m a third year student at the University of Idaho majoring in Computer Science with a Minor in French. I am the lead programmer on the [Outbreak Simulator] project, and have been working for Polymorphic Games since the summer of 2021.\nMy Blog My GitHub"
->>>>>>> d5ca71142af61566ccaf167db56d5c5571d66967
   },
   {
     "objectID": "People/index.html#jonna-waage",
     "href": "People/index.html#jonna-waage",
-<<<<<<< HEAD
-    "title": "People",
-    "section": "Jonna Waage",
-    "text": "Jonna Waage\n\nI am a third year undergraduate computer science major and mathematics minor at the University of Idaho. I am a software developer here at Polymorphic Games. My current project is the TwinStick game!"
-=======
     "title": "PEOPLE",
     "section": "Jonna Waage",
     "text": "Jonna Waage\n\nI am a third year undergraduate computer science major and mathematics minor at the University of Idaho. I have been a software developer with Polymorphic Games since the Fall of 2022. My current project is the TwinStick game, where I am working on the AI that controls the defensive towers."
->>>>>>> d5ca71142af61566ccaf167db56d5c5571d66967
   },
   {
     "objectID": "People/index.html#ava-rummler",
     "href": "People/index.html#ava-rummler",
-<<<<<<< HEAD
-    "title": "People",
-    "section": "Ava Rummler",
-    "text": "Ava Rummler\n\nI’m an MFA Candidate and Instructor of record at the University of Idaho where I practice and teach design. My practice focuses on human interaction through different principles of User Experience design and research. My professional experience ranges from App Design to Art Direction and I’m now the I’m the UX Designer for TwinStick!\nAva’s Portfolio\nAva’s Linkedin"
-=======
     "title": "PEOPLE",
     "section": "Ava Rummler",
-    "text": "Ava Rummler\n\nI’m an MFA Candidate and Instructor of record at the University of Idaho where I practice and teach design. My practice focuses on human interaction through different principles of user experience design and research. My professional experience ranges from App Design to Art Direction and I’m now UX Designer for TwinStick! Here, I implement my design and research experiences to create accessible screens for TwinStick players to learn about evolution and data science. You can see how the UI/UX of project TwinStick is coming together here!\nAva’s Portfolio\nAva’s Linkedin"
->>>>>>> d5ca71142af61566ccaf167db56d5c5571d66967
+    "text": "Ava Rummler\n\n<<<<<<< HEAD I’m an MFA Candidate and Instructor of record at the University of Idaho where I practice and teach design. My practice focuses on human interaction through different principles of User Experience design and research. My professional experience ranges from App Design to Art Direction and I’m now the I’m the UX Designer for TwinStick!\n======= I’m an MFA Candidate and Instructor of record at the University of Idaho where I practice and teach design. My practice focuses on human interaction through different principles of user experience design and research. My professional experience ranges from App Design to Art Direction and I’m now UX Designer for TwinStick! Here, I implement my design and research experiences to create accessible screens for TwinStick players to learn about evolution and data science. You can see how the UI/UX of project TwinStick is coming together here! >>>>>>> d5ca71142af61566ccaf167db56d5c5571d66967\nAva’s Portfolio\nAva’s Linkedin"
   },
   {
     "objectID": "People/index.html#justin-riggs",
     "href": "People/index.html#justin-riggs",
-<<<<<<< HEAD
-    "title": "People",
-=======
     "title": "PEOPLE",
->>>>>>> d5ca71142af61566ccaf167db56d5c5571d66967
     "section": "Justin Riggs",
     "text": "Justin Riggs"
   },
   {
-<<<<<<< HEAD
-    "objectID": "People/index.html#kristin-martinet",
-    "href": "People/index.html#kristin-martinet",
-    "title": "People",
-=======
     "objectID": "People/index.html#elisha-coad",
     "href": "People/index.html#elisha-coad",
     "title": "PEOPLE",
@@ -205,7 +157,6 @@
     "objectID": "People/index.html#kristin-martinet",
     "href": "People/index.html#kristin-martinet",
     "title": "PEOPLE",
->>>>>>> d5ca71142af61566ccaf167db56d5c5571d66967
     "section": "Kristin Martinet",
     "text": "Kristin Martinet"
   },
@@ -312,11 +263,7 @@
     "href": "Games/ProjectDrider/index.html#target-audience",
     "title": "PROJECT DRIDER",
     "section": "TARGET AUDIENCE",
-<<<<<<< HEAD
-    "text": "TARGET AUDIENCE"
-=======
     "text": "TARGET AUDIENCE\n\nLetting the teacher view student progress (Erik Marsh)\nDrider has a task system where the teacher can assign each student a task to perform. These tasks usually involve catching a certain number of animals to analyze some data (such as the number of ticks on each animal). For a while in the development cycle, players were only aware of their own tasks. In a teaching environment, however, this is far from optimal. The teacher should be aware of each student’s task progress, or else it becomes hard to continue a lesson.\nRecently, I reworked the tasks system to allow for the teacher to see individual student progress. It is not yet implemented into the menu system, but the proof-of-concept is shown in the video. Here, the teacher is able to see task progress for themself and their two students in a centralized, scrollable list. Having this functionality is critical, since a student that is goofing off or is struggling to complete the task may slow down the teacher’s lesson plan. Since the teacher is also an active player of the game, checking in on each student’s progress by walking around the room becomes an interruption, which is why in-game progress monitoring is useful.\nThe logic behind this functionality is quite simple. The existing task system simply “listens” for when players catch animals. If the proper conditions are met (such as the player catching the right animal), task progress increases. This progress is shown on the screen with a progress bar. Usually, the task only listens to the player that is being controlled on the local computer, and ignores the players on the other, remote computers. However, every time the teacher assigns a task, an “extra copy” of the task is put on the teacher’s computer that “listens to” the player that it was assigned to. Thus, the task is aware of that player’s progress, and it can be displayed on screen to the teacher as well.\nVideo"
->>>>>>> d5ca71142af61566ccaf167db56d5c5571d66967
   },
   {
     "objectID": "Games/ProjectDrider/index.html#the-character",
@@ -358,11 +305,7 @@
     "href": "Games/ProjectDrider/DevTeam.html#developers",
     "title": "Dev Team",
     "section": "Developers",
-<<<<<<< HEAD
-    "text": "Developers"
-=======
     "text": "Developers\n\nLandon Wright\n\n\nErik Marsh\n\nErik is currently a first-year Master’s student in Computer Science at the University of Nevada, Reno. He received his B.S. in Computer Science and Engineering from the University of Nevada, Reno in 2022. Here, he primarily works on keeping Drider running smoothly, particularly the networking aspects.\n\n\nJoshua Dahl\n\nJoshua Dahl is currently a student at the University of Nevada, Reno. He is pursuing a BS with a major in Computer Science and Engineering and a minor in Mathematics. When he graduates he is planning on pursuing a Ph.D. in Computer Science where he hopes to continue to make contributions to both the fields of computer graphics and programming languages.\nDue to the rapidly evolving nature of the Virtual Reality field, many frameworks for multiuser interaction have become outdated, with few, if any, designed to support mixed virtual and non-virtual interactions. We have developed uMuVR, a framework that lays an extensible and forward-looking foundation for the development of mixed interactions based upon a novel method of ensuring that inputs, visuals, and networking can all communicate without needing to understand the others’ internals. This framework also provides utilities for representing user avatars in a physicalized manner while supporting a range of different input methods. We tested this framework in the development of several applications and show that it can easily be adapted to support application requirements it was not originally designed for.\n\n\nDaniel Enriquez\n\n\nRyan Wagoner\n\n\nLily Mason\n\n\nSam Carlson"
->>>>>>> d5ca71142af61566ccaf167db56d5c5571d66967
   },
   {
     "objectID": "Games/ProjectDrider/DevTeam.html#research-collaborators",
