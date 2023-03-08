@@ -3,10 +3,16 @@ title: "Maps and Data Layers"
 ---
 
 ## Geospatial Representation
-The compartment model described above assumes a homogeneous and well mixed population - an assumption that is clearly violated when we consider the geographic scope of many infectious diseases.  For example, consider the population of the continental United States.  There are many factors within the US population that affect the mixing of individuals, including transportation patterns at the local and national scale. While modern transportation increases the mixing of the US population compared to previous pandemics (such as the 1918 influenza outbreak), we have seen that social distancing and travel restrictions can profoundly affect transmission dynamics at the national scale. There can also be considerable geospatial variation in the parameters of the model itself. For example, contact rate (number of individuals that an infectious individual contacts per time interval t) is likely to vary between urban and rural environments. Even seasonal outbreaks of influenza and the common cold can vary depending on spatial and temporal variation of temperature and host health (E. Lofgren et al., 2007).  These spatial effects on the modeling of disease can be important in showing learners how outbreaks might affect their region, and how spatial heterogeneity adds complexity to model predictions.
-To represent the spatial effects of infectious disease dynamics, our simulation models the population as a gridded set of subpopulations. Outbreak Simulator incorporates also uses spatial data layers (Table 1) to modify the parameters of the disease and movement models for each grid cell. We have installed two movement models – a diffusion model and a gravitation model (Simini et al., 2021). We use these models for commuting scale movements between adjacent grid cells.  For longer (national) movement, we use a data layer of the travel rates between the 150 largest airports in the continental US.  
+The compartment model described [here](DiseaseModel.qmd) assumes a homogeneous and well mixed population - an assumption that is clearly violated when we consider the geographic scope of many infectious diseases.  For example, consider the population of the continental United States.  There are many factors within the US population that affect the mixing of individuals, especially transportation patterns at the local and national scale. While modern transportation increases the mixing of the US population compared to previous pandemics (such as the 1918 influenza outbreak), interventions such as social distancing and travel restrictions can profoundly affect transmission dynamics at the national scale. 
+
+There can also be considerable geospatial variation in the parameters of the model itself. For example, contact rate (number of individuals that an infectious individual contacts per time interval *t*) is likely to vary between urban and rural environments. Even seasonal outbreaks of influenza and the common cold can vary depending on spatial and temporal variation of temperature and host health (E. Lofgren et al., 2007).  These spatial effects on the modeling of disease can be important in showing learners how outbreaks might affect their region, and how spatial heterogeneity adds complexity to model predictions.
+
+To represent the spatial effects of infectious disease dynamics, our simulation models the population as a gridded set of subpopulations. Outbreak Simulator also uses spatial data layers to modify the parameters of the [disease](DiseaseModel.qmd) and [movement](Movement.qmd) models for each grid cell. 
+
 
 ## Data Layers
+
+Outbreak Simulator is designed to use spatial data in GEOTIFF format.
 
 ### Population
 

@@ -2,8 +2,39 @@
 title: "Movement Models"
 ---
 
+We have installed two movement models -- a diffusion model and a gravitation model (Simini et al., 2021). We use these models for commuting scale movements between adjacent grid cells. For longer (national) movement, we use a data layer of the travel rates between the 150 largest airports in the continental US.
+
 ## Population Representation
+
+The basic framework of our simulation is essentially a map of population density. The source data for the continental US map is **SOURCE**. We use a spatial resolution of approximately 11km by 11km, and treat each cell in this grid as an independent population in which mixing is assumed to be homogeneous. Each 'tick' of the simulation (each time step, *t*) the compartment model computes the transition of individuals between states. After this step is completed for every grid cell, we then compute movement of individuals between cells as described below.
 
 ## Diffusion Model
 
+In this simple movement model, we assume that infected individuals diffuse out from their starting grid cell into adjacent cells (often called the [Moore neighborhood](https://en.wikipedia.org/wiki/Moore_neighborhood)). The rate at which this diffusion occurs is modulated by several parameters, depending on the scenario:
+
+1.  **Basal diffusion rate.** Note that is rate can vary by scenario because the severity of disease can affect mobility of contagious individuals.
+2.  **Size of the source population.**
+3.  **Size of the destination population.**
+4.  **Presence of major roadways.**
+5.  **Presence of significant water bodies.**
+6.  **Change in elevation.**
+
+In addition, certain scenarios allow for user interventions that affect movement:
+
+1.  **Lockdowns** are modeled as a global restriction on mobility, regardless of infection status.
+2.  **Quarantine requirements** are modeled as restrictions on mobility for infectious individuals.
+
 ## Gravitation Model
+
+Diffusion is a simple system to implement, but isn't a very good reflection of actual human mobility patterns.  This is because we have transportation technology (cars, trains, airplanes) that make it very easy for us to move well past our "Moore Neighborhood" of 11km in a very short amount of time.  
+
+Gravitation models of human mobility have been developed that consider the relative sizes of two grid cells anywhere on the map (not just adjacent ones), and modulate exchange of individuals based on the distance between the cells.  
+
+We used the [framework by Simini et al (2012)](https://www.nature.com/articles/nature10856.pdf) to parameterize a gravitation model of mobility in our simulation.
+
+
+## Air Travel
+
+Another approach to capturing long distance human mobility is to directly model air travel.  To do this we obtained the average flux between the 150 major US airports, and allow proportional travel of infected individuals using this matrix.
+
+![](trails.png)
