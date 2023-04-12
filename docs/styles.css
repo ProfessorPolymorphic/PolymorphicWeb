@@ -16,6 +16,18 @@
  }
 
 
-	h1 {
-		font-family: Hastur, Arial, Helvetica, sans-serif;
+	
+	h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
+	  font-family: Hastur, Arial, Helvetica, sans-serif;
+	  color: #e1a051;
 	}
+	.navbar-dark {
+    background-color: #725430;
+  }
+  
+  #quarto-sidebar {
+    background-color: #1b1b1b;
+  }
+  body{
+    color: #999;
+  }
