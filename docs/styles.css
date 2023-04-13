@@ -31,3 +31,11 @@
   body{
     color: #999;
   }
+  .floatright{
+    float: right;
+    padding-left: 10px;
+  }
+  .floatleft{
+    float: left;
+    padding-right: 10px;
+  }
