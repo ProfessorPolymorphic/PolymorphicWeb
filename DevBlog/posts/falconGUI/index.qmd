@@ -1,0 +1,43 @@
+---
+title: "OutbreakSim GUI"
+author: "Carson Rueber"
+date: "2023-06-15"
+categories: [Development]
+title-block-banner: true
+---
+
+On Getting a GUI Program to Submit Jobs on a Supercomputer
+
+After making the program work on the command line and accept arguments, it was time to create a GUI interface to let people more easily interact with the program and run jobs.
+The actual GUI program runs in a [singularity](https://sylabs.io/) container with [wxLua](https://github.com/pkulchenko/wxlua), a [Lua](https://lua.org) binding to [wxWidgets](https://www.wxwidgets.org/).
+
+![](program.png)
+
+The program has a number of text inputs and will spit out a slurm file like this:
+
+```sh
+#!/bin/bash
+
+#SBATCH -p tiny -a 1-5
+
+cd $SLURM_SUBMIT_DIR
+
+./OutbreakSimulator --params id=0.5 -opost -Run1-$SLURM_ARRAY_TASK_ID -startat ATL --stop 5 -airports 
+```
+
+And then I ran into a problem, how do I submit this file to the job system while running in a container? The container doesn't have access to the host system's environment, this is after all kind of the point. So how do we get access to the job system from here?
+
+One of the interesting features of singularity is that it automatically binds the user's home directory to the container's environment. So the container can read file from the user's home directory, and the container can write files there as well. This opens up a very nice way to communicate between the two environments. 
+
+The basic way the communication works is as follows:
+
+1. The user open the GUI program using the provided shell script
+2. The shell script also opens a seperate program that runs in the background on the host system
+3. When the GUI program needs to do something on the host, it writes to a file somehwere which we'll call `input`
+4. When the GUI program is done writing, it creates a file called `inputset`
+5. The program on the host waits for the inputset file to be created, and when it is, will run the contents of `input` as Lua code using the Lua function `dofile`
+6. After the code is ran on the host, the program will delete the `inputset` file to mark that it is ready for new input
+
+In this way, the GUI program can specify any artbitrary code to run on the host. The only thing it does with this power is access the `sbatch` and `squeue` command to execute and read the status of the job queue respectively. 
+
+In the end, it was quite a simple program to get working. The GUI library is relatively easy to use, and the communication between the host and container wasn't hard to implement; however, it was a real noodle scratcher to get some pieces of this working. 
