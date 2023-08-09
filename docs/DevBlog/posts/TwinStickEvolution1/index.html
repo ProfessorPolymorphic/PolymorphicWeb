@@ -1,0 +1,2032 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.220">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Barrie D. Robison">
+<meta name="dcterms.date" content="2023-08-09">
+<meta name="description" content="How can we encode a damage resistance game mechanic that interacts well with a generational model of evolution?">
+
+<title>POLYMORPHIC GAMES - Testing Evolution in Project TwinStick</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">POLYMORPHIC GAMES</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../../../Games/index.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Games</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../Education/index.html" rel="" target="">
+ <span class="menu-text">EDUCATION</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../People/index.html" rel="" target="">
+ <span class="menu-text">PEOPLE</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../DevBlog/index.html" rel="" target="">
+ <span class="menu-text">BLOG</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../DevBlog/index.html">DevBlog</a></li><li class="breadcrumb-item"><a href="../../../DevBlog/posts/post-with-code/index.html">Posts</a></li><li class="breadcrumb-item"><a href="../../../DevBlog/posts/TwinStickEvolution1/index.html">Testing Evolution in Project TwinStick</a></li></ol></nav>
+      <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <div class="quarto-title-block"><div><h1 class="title">Testing Evolution in Project TwinStick</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+            <p class="subtitle lead">1 - The Evolution of Damage Resistance</p>
+                  <div>
+        <div class="description">
+          How can we encode a damage resistance game mechanic that interacts well with a generational model of evolution?
+        </div>
+      </div>
+                </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Barrie D. Robison </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">August 9, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../People/index.html" class="sidebar-item-text sidebar-link">PEOPLE</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../DevBlog/index.html" class="sidebar-item-text sidebar-link">DevBlog</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../DevBlog/about.html" class="sidebar-item-text sidebar-link">About</a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Posts</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../DevBlog/posts/post-with-code/index.html" class="sidebar-item-text sidebar-link">OUTBREAK SIMULATOR</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../DevBlog/posts/falconGUI/index.html" class="sidebar-item-text sidebar-link">OutbreakSim GUI</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../DevBlog/posts/TwinStickEvolution1/index.html" class="sidebar-item-text sidebar-link active">Testing Evolution in Project TwinStick</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../DevBlog/posts/welcome/index.html" class="sidebar-item-text sidebar-link">Welcome To My Blog</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../DevBlog/posts/TickbaseSeminarFeb2023/index.html" class="sidebar-item-text sidebar-link">TICKBASE PRESENTATION - Datathon Preparation</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../DevBlog/posts/Falcon/index.html" class="sidebar-item-text sidebar-link">Outbreak Simulator on Falcon!</a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../Education/index.html" class="sidebar-item-text sidebar-link">Education</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Education/DataScienceqmd.html" class="sidebar-item-text sidebar-link">Data Science</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../Games/index.html" class="sidebar-item-text sidebar-link">Games</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Games/ProjectHastur/index.html" class="sidebar-item-text sidebar-link">PROJECT HASTUR</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Games/DarwinsDemons/index.html" class="sidebar-item-text sidebar-link">DARWIN’S DEMONS</a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../Games/TwinStick/index.html" class="sidebar-item-text sidebar-link">TWIN STICK</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Games/TwinStick/Towers.html" class="sidebar-item-text sidebar-link">Towers</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Games/TwinStick/UXUI.html" class="sidebar-item-text sidebar-link">UX/UI</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../Games/ProjectDrider/index.html" class="sidebar-item-text sidebar-link">PROJECT DRIDER</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Games/ProjectDrider/DevTeam.html" class="sidebar-item-text sidebar-link">Dev Team</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Games/ProjectDrider/EDUCATION.html" class="sidebar-item-text sidebar-link">EDUCATION</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Games/ProjectDrider/MultiplayerNetworking.html" class="sidebar-item-text sidebar-link">MULTIPLAYER ARCHITECTURE</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../Games/OutbreakSimulator/index.html" class="sidebar-item-text sidebar-link">OUTBREAK SIMULATOR</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Games/OutbreakSimulator/DataTextures.html" class="sidebar-item-text sidebar-link">Data Textures</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Games/OutbreakSimulator/DevTeam.html" class="sidebar-item-text sidebar-link">Dev Team</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Games/OutbreakSimulator/DiseaseModel.html" class="sidebar-item-text sidebar-link">Disease Model</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Games/OutbreakSimulator/Education.html" class="sidebar-item-text sidebar-link">Education and Outreach</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Games/OutbreakSimulator/Maps.html" class="sidebar-item-text sidebar-link">Maps and Data Layers</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Games/OutbreakSimulator/Movement.html" class="sidebar-item-text sidebar-link">Movement Models</a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#project-twin-stick" id="toc-project-twin-stick" class="nav-link active" data-scroll-target="#project-twin-stick">PROJECT TWIN STICK</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">DATA</a></li>
+  <li><a href="#experimental-conditions" id="toc-experimental-conditions" class="nav-link" data-scroll-target="#experimental-conditions">EXPERIMENTAL CONDITIONS</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">RESULTS</a>
+  <ul class="collapse">
+  <li><a href="#slime-types" id="toc-slime-types" class="nav-link" data-scroll-target="#slime-types">Slime Types</a></li>
+  </ul></li>
+  <li><a href="#slime-fitness" id="toc-slime-fitness" class="nav-link" data-scroll-target="#slime-fitness">Slime Fitness</a></li>
+  <li><a href="#evolutionary-responses" id="toc-evolutionary-responses" class="nav-link" data-scroll-target="#evolutionary-responses">Evolutionary Responses</a></li>
+  <li><a href="#heatmap" id="toc-heatmap" class="nav-link" data-scroll-target="#heatmap">Heatmap</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<p>Is it really an <em>Evolutionary</em> game?</p>
+<p>When we are developing our games, we perform extensive testing to make sure the underlying biological models are performing as expected. In the case of evolutionary games, we need to test that the population of enemies is indeed adapting the game conditions as we intended. This post is (I hope) the first in a series in which we document those tests.</p>
+<p>My hope is that performing these tests in this format will serve as an organized archive of our analyses, improving reproducibility and rigor. I also have a vain glimmer of hope that some person other than me might actually be interested in this topic.</p>
+<section id="project-twin-stick" class="level2">
+<h2 class="anchored" data-anchor-id="project-twin-stick">PROJECT TWIN STICK</h2>
+<p>This is intended to be an evolutionary shooter. The game is described in detail <a href="../Games/TwinStick/index.qmd">here</a>.</p>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">DATA</h2>
+<p>In this section, we ingest the data from whatever runs are relevant to the analysis. The data are written from the project in <code>.csv</code> files. The following code reads all <code>.csv</code> files from the working directory. It creates new variables for the source file name (<code>file</code>) and the number of offspring produced by each individual (<code>offspring_count</code>). It then appends all the data files into a single data frame called <code>allfiles</code>. I also create a few aggregations of the data by generating mean values of interest (traits, genes, fitness estimates) for each generation in each file (<code>TraitAvg</code>, <code>GeneAvg</code>, <code>FitAvg</code>)</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pheatmap)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">pattern =</span> <span class="st">"*.csv"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>allfiles <span class="ot">=</span> <span class="fu">data.frame</span>()</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(csv <span class="cf">in</span> files){</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  Twin3 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(csv, <span class="at">as.is=</span>T, <span class="at">header=</span>T)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  Twin3[<span class="st">'file'</span>] <span class="ot">=</span> csv</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>Twin3<span class="ot">&lt;-</span>Twin3<span class="sc">%&gt;%</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Unique.Slime.ID =</span> <span class="fu">paste</span>(Wave.Number, <span class="st">"."</span>, Slime.ID))<span class="sc">%&gt;%</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Unique.Parent.One =</span> <span class="fu">paste</span>(Wave.Number<span class="dv">-1</span>, <span class="st">"."</span>, Parent.One))<span class="sc">%&gt;%</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Unique.Parent.Two =</span> <span class="fu">paste</span>(Wave.Number<span class="dv">-1</span>, <span class="st">"."</span>, Parent.Two))</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>df_parents <span class="ot">&lt;-</span> Twin3 <span class="sc">%&gt;%</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Unique.Parent.One, Unique.Parent.Two) <span class="sc">%&gt;%</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"parent_type"</span>, <span class="at">values_to =</span> <span class="st">"parent_id"</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Count the number of offspring for each parent</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>offspring_counts <span class="ot">&lt;-</span> df_parents <span class="sc">%&gt;%</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(parent_id) <span class="sc">%&gt;%</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">offspring_count =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>offspring_counts <span class="ot">&lt;-</span> offspring_counts<span class="sc">%&gt;%</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(parent_id <span class="sc">!=</span> <span class="st">"-1 . N/A"</span>)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>offspring_counts<span class="ot">&lt;-</span> <span class="fu">rename</span>(offspring_counts, <span class="at">Unique.Slime.ID =</span> parent_id)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>Twin3 <span class="ot">&lt;-</span> Twin3 <span class="sc">%&gt;%</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(offspring_counts, <span class="at">by =</span> <span class="st">"Unique.Slime.ID"</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">replace_na</span>(<span class="fu">list</span>(<span class="at">offspring_count =</span> <span class="dv">0</span>))</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>allfiles<span class="ot">&lt;-</span><span class="fu">rbind</span>(allfiles,Twin3)</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>Traits <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Main.Resistance.Trait"</span>, <span class="st">"Secondary.Resistance.Trait"</span>, <span class="st">"Speed.Trait"</span>,</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>           <span class="st">"Tower.Attraction.Trait"</span>, <span class="st">"Slime.Optimal.Distance.Trait"</span>, <span class="st">"Turn.Rate.Trait"</span>, </span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>           <span class="st">"Slime.View.Range.Trait"</span>, <span class="st">"Tower.View.Range.Trait"</span>)</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>Genes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Main.Resistance.Gene"</span>, <span class="st">"Secondary.Resistance.Gene"</span>, <span class="st">"Speed.Gene"</span>,</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>           <span class="st">"Tower.Attraction.Gene"</span>, <span class="st">"Slime.Optimal.Distance.Gene"</span>, <span class="st">"Turn.Rate.Gene"</span>, </span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>           <span class="st">"Slime.View.Range.Gene"</span>, <span class="st">"Tower.View.Range.Gene"</span>)</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>allfiles<span class="ot">&lt;-</span>allfiles<span class="sc">%&gt;%</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Generation=</span><span class="fu">as.factor</span>(Wave.Number))<span class="sc">%&gt;%</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">offspring.count.Fitness =</span> offspring_count)</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>TraitAvg <span class="ot">&lt;-</span> allfiles <span class="sc">%&gt;%</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(file, Generation) <span class="sc">%&gt;%</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">across</span>(<span class="fu">ends_with</span>(<span class="st">"Trait"</span>), mean,  <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>GeneAvg <span class="ot">&lt;-</span> allfiles <span class="sc">%&gt;%</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(file, Generation) <span class="sc">%&gt;%</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">across</span>(<span class="fu">ends_with</span>(<span class="st">"Gene"</span>), <span class="fu">list</span>(<span class="at">mean =</span> mean, <span class="at">var =</span> var), <span class="at">na.rm =</span> <span class="cn">TRUE</span>, <span class="at">.names =</span> <span class="st">"{.fn}.{.col}"</span>))</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>FitAvg <span class="ot">&lt;-</span> allfiles <span class="sc">%&gt;%</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(file, Generation) <span class="sc">%&gt;%</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">across</span>(<span class="fu">ends_with</span>(<span class="st">"Fitness"</span>), <span class="fu">list</span>(<span class="at">mean =</span> mean, <span class="at">var =</span> var), <span class="at">na.rm =</span> <span class="cn">TRUE</span>, <span class="at">.names =</span> <span class="st">"{.fn}.{.col}"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>The <code>allfiles</code> dataframe contains the following variables (I also show a few columns of the example data):</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data.dictionary <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">as.data.frame</span>(<span class="fu">head</span>(allfiles)))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(data.dictionary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">1</th>
+<th style="text-align: left;">2</th>
+<th style="text-align: left;">3</th>
+<th style="text-align: left;">4</th>
+<th style="text-align: left;">5</th>
+<th style="text-align: left;">6</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Slime.ID</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Wave.Number</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Path.Distance.To.Player</td>
+<td style="text-align: left;">48.85652</td>
+<td style="text-align: left;">243.28900</td>
+<td style="text-align: left;">52.24455</td>
+<td style="text-align: left;">47.97002</td>
+<td style="text-align: left;">52.37562</td>
+<td style="text-align: left;">49.61573</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Player.Distance.Fitness</td>
+<td style="text-align: left;">6220.8410</td>
+<td style="text-align: left;">817.3569</td>
+<td style="text-align: left;">4242.2990</td>
+<td style="text-align: left;">886.9061</td>
+<td style="text-align: left;">840.3026</td>
+<td style="text-align: left;">11859.4700</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Parent.One</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">N/A</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Parent.Two</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">N/A</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Main.Type</td>
+<td style="text-align: left;">Fire</td>
+<td style="text-align: left;">Balanced</td>
+<td style="text-align: left;">Ice</td>
+<td style="text-align: left;">Laser</td>
+<td style="text-align: left;">Fire</td>
+<td style="text-align: left;">Balanced</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Secondary.Type</td>
+<td style="text-align: left;">Lightning</td>
+<td style="text-align: left;">Laser</td>
+<td style="text-align: left;">Player</td>
+<td style="text-align: left;">Balanced</td>
+<td style="text-align: left;">Laser</td>
+<td style="text-align: left;">Balanced</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Main.Resistance.Gene</td>
+<td style="text-align: left;">2.0608870</td>
+<td style="text-align: left;">1.9661370</td>
+<td style="text-align: left;">-0.2818377</td>
+<td style="text-align: left;">-0.4680732</td>
+<td style="text-align: left;">-0.8439584</td>
+<td style="text-align: left;">1.1251110</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Main.Resistance.Trait</td>
+<td style="text-align: left;">0.5781593</td>
+<td style="text-align: left;">0.5723717</td>
+<td style="text-align: left;">0.4327943</td>
+<td style="text-align: left;">0.4214026</td>
+<td style="text-align: left;">0.3986749</td>
+<td style="text-align: left;">0.5203083</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Secondary.Resistance.Gene</td>
+<td style="text-align: left;">0.01938968</td>
+<td style="text-align: left;">-0.98718220</td>
+<td style="text-align: left;">2.00895400</td>
+<td style="text-align: left;">-1.95939400</td>
+<td style="text-align: left;">-0.14754200</td>
+<td style="text-align: left;">1.69588300</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Secondary.Resistance.Trait</td>
+<td style="text-align: left;">0.1831496</td>
+<td style="text-align: left;">0.1484518</td>
+<td style="text-align: left;">0.2693818</td>
+<td style="text-align: left;">0.1202729</td>
+<td style="text-align: left;">0.1769885</td>
+<td style="text-align: left;">0.2542582</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Slime.View.Range.Gene</td>
+<td style="text-align: left;">1.4521710</td>
+<td style="text-align: left;">1.2083730</td>
+<td style="text-align: left;">-1.2260780</td>
+<td style="text-align: left;">0.5501021</td>
+<td style="text-align: left;">1.7734190</td>
+<td style="text-align: left;">-0.2817471</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Slime.View.Range.Trait</td>
+<td style="text-align: left;">9.846652</td>
+<td style="text-align: left;">9.624311</td>
+<td style="text-align: left;">7.359468</td>
+<td style="text-align: left;">9.014909</td>
+<td style="text-align: left;">10.135870</td>
+<td style="text-align: left;">8.235971</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Tower.View.Range.Gene</td>
+<td style="text-align: left;">0.7422258</td>
+<td style="text-align: left;">-0.1091797</td>
+<td style="text-align: left;">1.7339480</td>
+<td style="text-align: left;">-0.6273459</td>
+<td style="text-align: left;">-5.1927860</td>
+<td style="text-align: left;">3.4309650</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Tower.View.Range.Trait</td>
+<td style="text-align: left;">22.850260</td>
+<td style="text-align: left;">20.727070</td>
+<td style="text-align: left;">25.268240</td>
+<td style="text-align: left;">19.434840</td>
+<td style="text-align: left;">9.578748</td>
+<td style="text-align: left;">29.087540</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Player.View.Range.Gene</td>
+<td style="text-align: left;">-0.7063282</td>
+<td style="text-align: left;">-2.1725960</td>
+<td style="text-align: left;">1.6474010</td>
+<td style="text-align: left;">1.4230030</td>
+<td style="text-align: left;">1.4728720</td>
+<td style="text-align: left;">-0.9215398</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Player.View.Range.Trait</td>
+<td style="text-align: left;">3.356673</td>
+<td style="text-align: left;">2.760780</td>
+<td style="text-align: left;">4.570595</td>
+<td style="text-align: left;">4.442866</td>
+<td style="text-align: left;">4.471066</td>
+<td style="text-align: left;">3.261141</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Wall.View.Range.Gene</td>
+<td style="text-align: left;">0.1313843</td>
+<td style="text-align: left;">0.4750734</td>
+<td style="text-align: left;">-1.5232850</td>
+<td style="text-align: left;">-3.8257190</td>
+<td style="text-align: left;">2.0445590</td>
+<td style="text-align: left;">0.9626993</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Wall.View.Range.Trait</td>
+<td style="text-align: left;">5.131722</td>
+<td style="text-align: left;">5.393839</td>
+<td style="text-align: left;">4.013157</td>
+<td style="text-align: left;">2.857810</td>
+<td style="text-align: left;">6.702432</td>
+<td style="text-align: left;">5.781892</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sheep.View.Range.Gene</td>
+<td style="text-align: left;">1.7711210</td>
+<td style="text-align: left;">0.9314346</td>
+<td style="text-align: left;">-1.5420110</td>
+<td style="text-align: left;">-1.2949050</td>
+<td style="text-align: left;">0.2431266</td>
+<td style="text-align: left;">1.1810520</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sheep.View.Range.Trait</td>
+<td style="text-align: left;">6.462865</td>
+<td style="text-align: left;">5.756467</td>
+<td style="text-align: left;">4.001901</td>
+<td style="text-align: left;">4.152985</td>
+<td style="text-align: left;">5.215874</td>
+<td style="text-align: left;">5.961442</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Slime.Attraction.Gene</td>
+<td style="text-align: left;">-0.9736148</td>
+<td style="text-align: left;">2.7849460</td>
+<td style="text-align: left;">-4.7560740</td>
+<td style="text-align: left;">-1.4975330</td>
+<td style="text-align: left;">3.8921370</td>
+<td style="text-align: left;">-1.2803270</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Slime.Attraction.Trait</td>
+<td style="text-align: left;">0.4394477</td>
+<td style="text-align: left;">0.6673529</td>
+<td style="text-align: left;">0.2334345</td>
+<td style="text-align: left;">0.4074823</td>
+<td style="text-align: left;">0.7257239</td>
+<td style="text-align: left;">0.4206558</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Tower.Attraction.Gene</td>
+<td style="text-align: left;">-0.4425031</td>
+<td style="text-align: left;">-1.4073980</td>
+<td style="text-align: left;">2.1533490</td>
+<td style="text-align: left;">-2.2012160</td>
+<td style="text-align: left;">-1.0032450</td>
+<td style="text-align: left;">5.0503550</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Tower.Attraction.Trait</td>
+<td style="text-align: left;">-0.29616710</td>
+<td style="text-align: left;">-0.40190990</td>
+<td style="text-align: left;">0.01916635</td>
+<td style="text-align: left;">-0.48166660</td>
+<td style="text-align: left;">-0.35871090</td>
+<td style="text-align: left;">0.36383100</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Player.Attraction.Gene</td>
+<td style="text-align: left;">-0.6821441</td>
+<td style="text-align: left;">-1.5962090</td>
+<td style="text-align: left;">0.1492842</td>
+<td style="text-align: left;">-0.6433153</td>
+<td style="text-align: left;">5.3284170</td>
+<td style="text-align: left;">3.0868470</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Player.Attraction.Trait</td>
+<td style="text-align: left;">0.01473093</td>
+<td style="text-align: left;">-0.09919876</td>
+<td style="text-align: left;">0.11810670</td>
+<td style="text-align: left;">0.01958311</td>
+<td style="text-align: left;">0.64462790</td>
+<td style="text-align: left;">0.45092120</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Wall.Attraction.Gene</td>
+<td style="text-align: left;">0.11956880</td>
+<td style="text-align: left;">-0.02190518</td>
+<td style="text-align: left;">-1.25375300</td>
+<td style="text-align: left;">1.15285900</td>
+<td style="text-align: left;">2.16463900</td>
+<td style="text-align: left;">1.75254500</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Wall.Attraction.Trait</td>
+<td style="text-align: left;">-0.8776227</td>
+<td style="text-align: left;">-0.8813708</td>
+<td style="text-align: left;">-0.9099839</td>
+<td style="text-align: left;">-0.8470677</td>
+<td style="text-align: left;">-0.8113552</td>
+<td style="text-align: left;">-0.8266206</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sheep.Attraction.Gene</td>
+<td style="text-align: left;">0.8572116</td>
+<td style="text-align: left;">-2.7688480</td>
+<td style="text-align: left;">-1.5240110</td>
+<td style="text-align: left;">-1.0484580</td>
+<td style="text-align: left;">-1.1801490</td>
+<td style="text-align: left;">-0.6187063</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sheep.Attraction.Trait</td>
+<td style="text-align: left;">0.7710594</td>
+<td style="text-align: left;">0.5763453</td>
+<td style="text-align: left;">0.6499905</td>
+<td style="text-align: left;">0.6765333</td>
+<td style="text-align: left;">0.6692872</td>
+<td style="text-align: left;">0.6995852</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Slime.Optimal.Distance.Gene</td>
+<td style="text-align: left;">0.2664202</td>
+<td style="text-align: left;">-2.2980430</td>
+<td style="text-align: left;">-2.9115990</td>
+<td style="text-align: left;">-0.2503796</td>
+<td style="text-align: left;">-1.6853910</td>
+<td style="text-align: left;">-2.4088830</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Slime.Optimal.Distance.Trait</td>
+<td style="text-align: left;">0.27595890</td>
+<td style="text-align: left;">-0.03723812</td>
+<td style="text-align: left;">-0.11345930</td>
+<td style="text-align: left;">0.21528110</td>
+<td style="text-align: left;">0.03930581</td>
+<td style="text-align: left;">-0.05106586</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Speed.Gene</td>
+<td style="text-align: left;">2.67080900</td>
+<td style="text-align: left;">-2.43531700</td>
+<td style="text-align: left;">0.79449970</td>
+<td style="text-align: left;">-0.09684456</td>
+<td style="text-align: left;">-0.07920066</td>
+<td style="text-align: left;">4.90996600</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Speed.Trait</td>
+<td style="text-align: left;">3.594294</td>
+<td style="text-align: left;">1.761624</td>
+<td style="text-align: left;">2.809378</td>
+<td style="text-align: left;">2.480475</td>
+<td style="text-align: left;">2.486693</td>
+<td style="text-align: left;">4.657131</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Turn.Rate.Gene</td>
+<td style="text-align: left;">-2.0039470</td>
+<td style="text-align: left;">-1.0869590</td>
+<td style="text-align: left;">2.0893600</td>
+<td style="text-align: left;">1.9250450</td>
+<td style="text-align: left;">-0.7608740</td>
+<td style="text-align: left;">-0.4138883</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Turn.Rate.Trait</td>
+<td style="text-align: left;">0.1190994</td>
+<td style="text-align: left;">0.1453261</td>
+<td style="text-align: left;">0.2733563</td>
+<td style="text-align: left;">0.2652731</td>
+<td style="text-align: left;">0.1557471</td>
+<td style="text-align: left;">0.1674969</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sprint.Duration.Gene</td>
+<td style="text-align: left;">0.3580502</td>
+<td style="text-align: left;">1.4855350</td>
+<td style="text-align: left;">-2.5910690</td>
+<td style="text-align: left;">-4.1994710</td>
+<td style="text-align: left;">3.6484950</td>
+<td style="text-align: left;">0.9284849</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sprint.Duration.Trait</td>
+<td style="text-align: left;">2.611816</td>
+<td style="text-align: left;">2.958966</td>
+<td style="text-align: left;">1.717464</td>
+<td style="text-align: left;">1.296253</td>
+<td style="text-align: left;">3.567173</td>
+<td style="text-align: left;">2.788856</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sprint.Cooldown.Gene</td>
+<td style="text-align: left;">0.1790418</td>
+<td style="text-align: left;">-1.2494470</td>
+<td style="text-align: left;">3.2872270</td>
+<td style="text-align: left;">-2.1884230</td>
+<td style="text-align: left;">1.2849080</td>
+<td style="text-align: left;">2.4639170</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sprint.Cooldown.Trait</td>
+<td style="text-align: left;">2.7232060</td>
+<td style="text-align: left;">1.1139800</td>
+<td style="text-align: left;">4.8199400</td>
+<td style="text-align: left;">0.5039746</td>
+<td style="text-align: left;">3.9164200</td>
+<td style="text-align: left;">4.6078660</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">X</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">file</td>
+<td style="text-align: left;">./geneWriteFile08_09_2023_15-22-57.csv</td>
+<td style="text-align: left;">./geneWriteFile08_09_2023_15-22-57.csv</td>
+<td style="text-align: left;">./geneWriteFile08_09_2023_15-22-57.csv</td>
+<td style="text-align: left;">./geneWriteFile08_09_2023_15-22-57.csv</td>
+<td style="text-align: left;">./geneWriteFile08_09_2023_15-22-57.csv</td>
+<td style="text-align: left;">./geneWriteFile08_09_2023_15-22-57.csv</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Unique.Slime.ID</td>
+<td style="text-align: left;">0 . 0</td>
+<td style="text-align: left;">0 . 1</td>
+<td style="text-align: left;">0 . 2</td>
+<td style="text-align: left;">0 . 3</td>
+<td style="text-align: left;">0 . 4</td>
+<td style="text-align: left;">0 . 5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Unique.Parent.One</td>
+<td style="text-align: left;">-1 . N/A</td>
+<td style="text-align: left;">-1 . N/A</td>
+<td style="text-align: left;">-1 . N/A</td>
+<td style="text-align: left;">-1 . N/A</td>
+<td style="text-align: left;">-1 . N/A</td>
+<td style="text-align: left;">-1 . N/A</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Unique.Parent.Two</td>
+<td style="text-align: left;">-1 . N/A</td>
+<td style="text-align: left;">-1 . N/A</td>
+<td style="text-align: left;">-1 . N/A</td>
+<td style="text-align: left;">-1 . N/A</td>
+<td style="text-align: left;">-1 . N/A</td>
+<td style="text-align: left;">-1 . N/A</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">offspring_count</td>
+<td style="text-align: left;">17</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">34</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Generation</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">offspring.count.Fitness</td>
+<td style="text-align: left;">17</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">34</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Variables that end in <code>.Gene</code> are the values of the genome for that particular locus. Variables that end in <code>.Trait</code> are the values of the trait for that particular locus. Variables that end in <code>.Fitness</code> are the values of that particular Fitness component.</p>
+</section>
+<section id="experimental-conditions" class="level2">
+<h2 class="anchored" data-anchor-id="experimental-conditions">EXPERIMENTAL CONDITIONS</h2>
+<p>The enemies in this game are slimes of several different types. These types correspond to the different damage types that can be caused by the player’s towers (Lightning, Ice, Fire, etc). Our initial idea is that the slimes of a specific type should be resistant to that type of damage. The average resistance of the whole population should increase over time if the player relies on only one type of tower.</p>
+<p>The current resistance model is as follows:</p>
+<p>Damage Resistance = (Main.Type)0.6 + (Secondary.Type)0.4</p>
+<p>Where Main.Type and Secondary.Type = 1 if they match the Damage Type and 0 if they do not.</p>
+<p>Our hypothesis is that resistance of the population will adapt to the damage type of the defense used. If true, this hypothesis predicts that the mean resistance of the population will increase over time, primarily through the proliferation of slimes of a Type that matches the Damage Type.</p>
+<p>We constructed a simple defense in the center of the playing area, consisting of three towers. The only Fitness Function at this time is related to Path Distance to the Player (the closer they get to the player, the more fitness they acquire).</p>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">RESULTS</h2>
+<section id="slime-types" class="level3">
+<h3 class="anchored" data-anchor-id="slime-types">Slime Types</h3>
+<p>Each Slime has a <code>Main.Type</code> and a <code>Secondary.Type</code>. These types use the <code>~.Resistance.~</code> category to confer resistance to the appropriate damage type.</p>
+<p>The following code creates two summary dataframes with the suffix <code>~Typecounts</code> that count the number of slimes of each <code>~.Type</code> in each generation for each replicate. It then creates the graphs of <code>~Type</code> frequency over time.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>MainTypecounts <span class="ot">&lt;-</span> allfiles <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Main.Type, Generation, file) <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Main.count =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>SecondaryTypecounts <span class="ot">&lt;-</span> allfiles <span class="sc">%&gt;%</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Secondary.Type, Generation, file) <span class="sc">%&gt;%</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Secondary.count =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(MainTypecounts, <span class="fu">aes</span>(<span class="at">x =</span> Generation, <span class="at">y =</span> Main.count, <span class="at">fill =</span> <span class="fu">as.factor</span>(Main.Type))) <span class="sc">+</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"stack"</span>) <span class="sc">+</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Generation"</span>, <span class="at">y =</span> <span class="st">"Count"</span>, <span class="at">fill =</span> <span class="st">"Main Slime Type"</span>) <span class="sc">+</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>file, <span class="at">ncol=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(SecondaryTypecounts, <span class="fu">aes</span>(<span class="at">x =</span> Generation, <span class="at">y =</span> Secondary.count, <span class="at">fill =</span> <span class="fu">as.factor</span>(Secondary.Type))) <span class="sc">+</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"stack"</span>) <span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Generation"</span>, <span class="at">y =</span> <span class="st">"Count"</span>, <span class="at">fill =</span> <span class="st">"Secondary Slime Type"</span>) <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>file, <span class="at">ncol=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>These results do not align with the predictions of our hypothesis. There is a modest increase in the Lightning Secondary.Type.</p>
+</section>
+</section>
+<section id="slime-fitness" class="level2">
+<h2 class="anchored" data-anchor-id="slime-fitness">Slime Fitness</h2>
+<p>In most cases, it is useful to summarize the behavior of the fitness function for each experiment. In this case, the fitness function calculates a value of 50,000/(distance to player +1). I will also reverse calculate that for visualization. We then use Roulette Wheel selection to determine the parents of the next generation.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(allfiles, <span class="fu">aes</span>(<span class="at">x=</span>Wave.Number, <span class="at">y=</span> Path.Distance.To.Player))<span class="sc">+</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="fu">aes</span>(<span class="at">x=</span>Wave.Number, <span class="at">y=</span> Path.Distance.To.Player, <span class="at">color =</span> offspring_count, <span class="at">alpha =</span> offspring_count))<span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()<span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>file, <span class="at">ncol =</span> <span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_continuous</span>(<span class="at">low=</span><span class="st">"blue"</span>, <span class="at">high =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = "cs")'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 11196 rows containing non-finite values (`stat_smooth()`).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 11196 rows containing missing values (`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(allfiles, <span class="fu">aes</span>(<span class="at">x=</span>Wave.Number, <span class="at">y=</span> Player.Distance.Fitness))<span class="sc">+</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="fu">aes</span>(<span class="at">x=</span>Wave.Number, <span class="at">y=</span> Player.Distance.Fitness, <span class="at">color =</span> offspring_count, <span class="at">alpha =</span> offspring_count))<span class="sc">+</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()<span class="sc">+</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>file, <span class="at">ncol =</span> <span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_continuous</span>(<span class="at">low=</span><span class="st">"blue"</span>, <span class="at">high =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = "cs")'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(allfiles, <span class="fu">aes</span>(<span class="at">x=</span>Path.Distance.To.Player, <span class="at">y =</span> Player.Distance.Fitness))<span class="sc">+</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>Path.Distance.To.Player, <span class="at">y =</span> Player.Distance.Fitness), <span class="at">alpha =</span> <span class="fl">0.5</span>)<span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>file, <span class="at">ncol =</span> <span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_continuous</span>(<span class="at">low=</span><span class="st">"blue"</span>, <span class="at">high =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 11196 rows containing missing values (`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-4-3.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> FitAvg, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.numeric</span>(Generation), <span class="at">y =</span> var.offspring.count.Fitness))<span class="sc">+</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>) <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>file, <span class="at">ncol =</span> <span class="dv">2</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-4-4.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(allfiles, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.factor</span>(Wave.Number), <span class="at">y =</span> <span class="fu">log10</span>(offspring_count))) <span class="sc">+</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill=</span><span class="st">"lightblue"</span>) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)<span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>file, <span class="at">ncol =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 8419 rows containing non-finite values (`stat_boxplot()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-4-5.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="evolutionary-responses" class="level2">
+<h2 class="anchored" data-anchor-id="evolutionary-responses">Evolutionary Responses</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>Gradientslong <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">seq_along</span>(Traits)){</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>traittemp<span class="ot">&lt;-</span>allfiles<span class="sc">%&gt;%</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Generation, offspring_count, file, <span class="sc">!!</span><span class="fu">sym</span>(Traits[i]))<span class="sc">%&gt;%</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Generation, file)<span class="sc">%&gt;%</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">scaleST0 =</span> <span class="fu">scale</span>(<span class="sc">!!</span><span class="fu">sym</span>(Traits[i]), <span class="at">center =</span> <span class="cn">TRUE</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">scaleST02 =</span> scaleST0<span class="sc">*</span>scaleST0)<span class="sc">%&gt;%</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Generation =</span> <span class="fu">as.numeric</span>(Generation))</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>Gradients <span class="ot">&lt;-</span> traittemp <span class="sc">%&gt;%</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Generation, file) <span class="sc">%&gt;%</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do</span>({</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    model <span class="ot">&lt;-</span> <span class="fu">lm</span>(offspring_count <span class="sc">~</span> scaleST0 <span class="sc">+</span> scaleST02, <span class="at">data =</span> .)</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data.frame</span>(</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">Beta =</span> <span class="fu">coefficients</span>(model)[<span class="dv">2</span>],</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">PB =</span> <span class="fu">summary</span>(model)<span class="sc">$</span>coef[<span class="dv">2</span>, <span class="dv">4</span>],</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">Trait =</span> Traits[i]</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>Gradients <span class="ot">&lt;-</span> Gradients <span class="sc">%&gt;%</span></span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sig =</span> <span class="fu">if_else</span>(PB <span class="sc">&lt;</span> <span class="fl">0.05</span> , <span class="st">"Y"</span>, <span class="st">"N"</span>))</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>Gradientslong <span class="ot">&lt;-</span> <span class="fu">rbind</span>(Gradientslong, Gradients)</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>G <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> GeneAvg, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.numeric</span>(Generation), <span class="at">y =</span> <span class="sc">!!</span><span class="fu">sym</span>(Genes[i])))<span class="sc">+</span></span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">data =</span> allfiles, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.numeric</span>(Generation), <span class="at">y =</span> <span class="sc">!!</span><span class="fu">sym</span>(Genes[i])), <span class="at">size=</span><span class="fl">0.1</span>, <span class="at">alpha =</span> <span class="fl">0.02</span>)<span class="sc">+</span></span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">data =</span> GeneAvg, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.numeric</span>(Generation), <span class="at">y =</span> <span class="sc">!!</span><span class="fu">sym</span>(<span class="fu">paste</span>(<span class="st">"mean."</span>,Genes[i], <span class="at">sep =</span> <span class="st">""</span>)), <span class="at">method =</span> <span class="st">"loess"</span>)) <span class="sc">+</span></span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>file, <span class="at">ncol =</span> <span class="dv">2</span>) </span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>P <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> TraitAvg, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.numeric</span>(Generation), <span class="at">y =</span> <span class="sc">!!</span><span class="fu">sym</span>(Traits[i])))<span class="sc">+</span></span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">data =</span> TraitAvg, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.numeric</span>(Generation), <span class="at">y =</span> <span class="sc">!!</span><span class="fu">sym</span>(Traits[i])), <span class="at">method =</span> <span class="st">"loess"</span>) <span class="sc">+</span></span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">data=</span>allfiles, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.numeric</span>(Generation), <span class="at">y =</span> <span class="sc">!!</span><span class="fu">sym</span>(Traits[i]), <span class="at">color =</span> offspring_count), <span class="at">size =</span> <span class="fl">0.5</span>, <span class="at">alpha =</span><span class="fl">0.1</span>)<span class="sc">+</span></span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>file, <span class="at">ncol =</span> <span class="dv">2</span>) </span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>S <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(Gradients, <span class="fu">aes</span>(<span class="at">x=</span>Generation, <span class="at">y =</span> Beta))<span class="sc">+</span></span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> sig))<span class="sc">+</span></span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">fill=</span><span class="st">"blue"</span>)<span class="sc">+</span></span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"grey"</span>,<span class="st">"red"</span>))<span class="sc">+</span></span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">0</span>, <span class="at">linetype=</span><span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"black"</span>)<span class="sc">+</span></span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>())<span class="sc">+</span></span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>file)</span>
+<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(G)</span>
+<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(P)</span>
+<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(S)</span>
+<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in geom_smooth(data = GeneAvg, aes(x = as.numeric(Generation), y =
+!!sym(paste("mean.", : Ignoring unknown aesthetics: method</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in geom_smooth(data = GeneAvg, aes(x = as.numeric(Generation), y =
+!!sym(paste("mean.", : Ignoring unknown aesthetics: method</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-3.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-4.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-5.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in geom_smooth(data = GeneAvg, aes(x = as.numeric(Generation), y =
+!!sym(paste("mean.", : Ignoring unknown aesthetics: method</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-6.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-7.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-8.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in geom_smooth(data = GeneAvg, aes(x = as.numeric(Generation), y =
+!!sym(paste("mean.", : Ignoring unknown aesthetics: method</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-9.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-10.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-11.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in geom_smooth(data = GeneAvg, aes(x = as.numeric(Generation), y =
+!!sym(paste("mean.", : Ignoring unknown aesthetics: method</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-12.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-13.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-14.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in geom_smooth(data = GeneAvg, aes(x = as.numeric(Generation), y =
+!!sym(paste("mean.", : Ignoring unknown aesthetics: method</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-15.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-16.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-17.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in geom_smooth(data = GeneAvg, aes(x = as.numeric(Generation), y =
+!!sym(paste("mean.", : Ignoring unknown aesthetics: method</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-18.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-19.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-20.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in geom_smooth(data = GeneAvg, aes(x = as.numeric(Generation), y =
+!!sym(paste("mean.", : Ignoring unknown aesthetics: method</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-21.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-22.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-23.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-24.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="heatmap" class="level2">
+<h2 class="anchored" data-anchor-id="heatmap">Heatmap</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>maxwave <span class="ot">=</span> <span class="fu">max</span>(allfiles<span class="sc">$</span>Wave.Number)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>Twin3 <span class="ot">&lt;-</span> allfiles <span class="sc">%&gt;%</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Wave.Number, Slime.ID, Player.Distance.Fitness, Main.Resistance.Trait, Secondary.Resistance.Trait, Slime.View.Range.Trait, </span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>         Tower.View.Range.Trait, Player.View.Range.Trait, Wall.View.Range.Trait, Sheep.View.Range.Trait, Slime.Attraction.Trait, </span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>         Tower.Attraction.Trait, Player.Attraction.Trait, Wall.Attraction.Trait, Sheep.Attraction.Trait, Slime.Optimal.Distance.Trait, </span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>         Speed.Trait, Turn.Rate.Trait, Sprint.Duration.Trait, Sprint.Cooldown.Trait, offspring_count) <span class="sc">%&gt;%</span></span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Wave.Number <span class="sc">==</span> maxwave)</span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>paletteLength <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>myColor <span class="ot">&lt;-</span> <span class="fu">colorRampPalette</span>(<span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"white"</span>, <span class="st">"#ED2024"</span>))(paletteLength)</span>
+<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a><span class="co"># length(breaks) == length(paletteLength) + 1</span></span>
+<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a><span class="co"># use floor and ceiling to deal with even/odd length pallettelengths</span></span>
+<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-16"><a href="#cb50-16" aria-hidden="true" tabindex="-1"></a>Heatmap <span class="ot">&lt;-</span> Twin3 <span class="sc">%&gt;%</span></span>
+<span id="cb50-17"><a href="#cb50-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Player.Distance.Fitness, Main.Resistance.Trait, Secondary.Resistance.Trait, Slime.View.Range.Trait, </span>
+<span id="cb50-18"><a href="#cb50-18" aria-hidden="true" tabindex="-1"></a>         Tower.View.Range.Trait, Slime.Attraction.Trait, </span>
+<span id="cb50-19"><a href="#cb50-19" aria-hidden="true" tabindex="-1"></a>         Tower.Attraction.Trait, Slime.Optimal.Distance.Trait, </span>
+<span id="cb50-20"><a href="#cb50-20" aria-hidden="true" tabindex="-1"></a>         Speed.Trait, Turn.Rate.Trait)</span>
+<span id="cb50-21"><a href="#cb50-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-22"><a href="#cb50-22" aria-hidden="true" tabindex="-1"></a>Heatmap <span class="ot">&lt;-</span> <span class="fu">scale</span>(Heatmap)</span>
+<span id="cb50-23"><a href="#cb50-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-24"><a href="#cb50-24" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(Heatmap) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'Fitness'</span>, <span class="st">'Main Resistance'</span>, <span class="st">'Secondary Resistance'</span>, <span class="st">'Slime View Range'</span>,</span>
+<span id="cb50-25"><a href="#cb50-25" aria-hidden="true" tabindex="-1"></a>                       <span class="st">'Tower View Range'</span>, <span class="st">'Slime Attraction'</span>, <span class="st">'Tower Attraction'</span>,</span>
+<span id="cb50-26"><a href="#cb50-26" aria-hidden="true" tabindex="-1"></a>                       <span class="st">'Slime Optimal Distance'</span>, <span class="st">'Speed'</span>, <span class="st">'Turn Rate'</span>)</span>
+<span id="cb50-27"><a href="#cb50-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-28"><a href="#cb50-28" aria-hidden="true" tabindex="-1"></a>Heatmatrix2 <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(Heatmap)</span>
+<span id="cb50-29"><a href="#cb50-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-30"><a href="#cb50-30" aria-hidden="true" tabindex="-1"></a>myBreaks2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">seq</span>(<span class="fu">min</span>(Heatmatrix2), <span class="dv">0</span>, <span class="at">length.out=</span><span class="fu">ceiling</span>(paletteLength<span class="sc">/</span><span class="dv">2</span>) <span class="sc">+</span> <span class="dv">1</span>), <span class="fu">seq</span>(<span class="fu">max</span>(Heatmatrix2)<span class="sc">/</span>paletteLength, <span class="fu">max</span>(Heatmatrix2), </span>
+<span id="cb50-31"><a href="#cb50-31" aria-hidden="true" tabindex="-1"></a>                                                                                      <span class="at">length.out=</span><span class="fu">floor</span>(paletteLength<span class="sc">/</span><span class="dv">2</span>)))</span>
+<span id="cb50-32"><a href="#cb50-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-33"><a href="#cb50-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-34"><a href="#cb50-34" aria-hidden="true" tabindex="-1"></a>heatmap2 <span class="ot">=</span> <span class="fu">pheatmap</span>(Heatmatrix2,</span>
+<span id="cb50-35"><a href="#cb50-35" aria-hidden="true" tabindex="-1"></a>         <span class="at">cluster_rows =</span> <span class="cn">TRUE</span>, <span class="co"># don't cluster rows</span></span>
+<span id="cb50-36"><a href="#cb50-36" aria-hidden="true" tabindex="-1"></a>         <span class="at">cluster_cols =</span> <span class="cn">TRUE</span>, <span class="co"># don't cluster columns</span></span>
+<span id="cb50-37"><a href="#cb50-37" aria-hidden="true" tabindex="-1"></a>         <span class="at">clustering_distance_cols =</span> <span class="st">"euclidean"</span>,</span>
+<span id="cb50-38"><a href="#cb50-38" aria-hidden="true" tabindex="-1"></a>         <span class="at">clustering_distance_rows =</span> <span class="st">"euclidean"</span>,</span>
+<span id="cb50-39"><a href="#cb50-39" aria-hidden="true" tabindex="-1"></a>         <span class="at">clustering_method =</span> <span class="st">"complete"</span>,</span>
+<span id="cb50-40"><a href="#cb50-40" aria-hidden="true" tabindex="-1"></a>         <span class="at">color =</span> myColor,</span>
+<span id="cb50-41"><a href="#cb50-41" aria-hidden="true" tabindex="-1"></a>         <span class="at">breaks =</span> myBreaks2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb51" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Testing Evolution in Project TwinStick"</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "1 - The Evolution of Damage Resistance"</span></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "How can we encode a damage resistance game mechanic that interacts well with a generational model of evolution?"</span></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Barrie D. Robison"</span></span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "August 9, 2023"</span></span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a><span class="an">code-fold:</span><span class="co"> true  </span></span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a><span class="an">code-tools:</span><span class="co"> true</span></span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a>Is it really an *Evolutionary* game?</span>
+<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a>When we are developing our games, we perform extensive testing to make sure the underlying biological models are performing as expected. In the case of evolutionary games, we need to test that the population of enemies is indeed adapting the game conditions as we intended. This post is (I hope) the first in a series in which we document those tests.</span>
+<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-15"><a href="#cb51-15" aria-hidden="true" tabindex="-1"></a>My hope is that performing these tests in this format will serve as an organized archive of our analyses, improving reproducibility and rigor. I also have a vain glimmer of hope that some person other than me might actually be interested in this topic.</span>
+<span id="cb51-16"><a href="#cb51-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-17"><a href="#cb51-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## PROJECT TWIN STICK</span></span>
+<span id="cb51-18"><a href="#cb51-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-19"><a href="#cb51-19" aria-hidden="true" tabindex="-1"></a>This is intended to be an evolutionary shooter. The game is described in detail <span class="co">[</span><span class="ot">here</span><span class="co">](../Games/TwinStick/index.qmd)</span>.</span>
+<span id="cb51-20"><a href="#cb51-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-21"><a href="#cb51-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## DATA</span></span>
+<span id="cb51-22"><a href="#cb51-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-23"><a href="#cb51-23" aria-hidden="true" tabindex="-1"></a>In this section, we ingest the data from whatever runs are relevant to the analysis. The data are written from the project in <span class="in">`.csv`</span> files. The following code reads all <span class="in">`.csv`</span> files from the working directory. It creates new variables for the source file name (<span class="in">`file`</span>) and the number of offspring produced by each individual (<span class="in">`offspring_count`</span>). It then appends all the data files into a single data frame called <span class="in">`allfiles`</span>. I also create a few aggregations of the data by generating mean values of interest (traits, genes, fitness estimates) for each generation in each file (<span class="in">`TraitAvg`</span>, <span class="in">`GeneAvg`</span>, <span class="in">`FitAvg`</span>)</span>
+<span id="cb51-24"><a href="#cb51-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-27"><a href="#cb51-27" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb51-28"><a href="#cb51-28" aria-hidden="true" tabindex="-1"></a><span class="co">#| output: false</span></span>
+<span id="cb51-29"><a href="#cb51-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-30"><a href="#cb51-30" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb51-31"><a href="#cb51-31" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pheatmap)</span>
+<span id="cb51-32"><a href="#cb51-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-33"><a href="#cb51-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-34"><a href="#cb51-34" aria-hidden="true" tabindex="-1"></a>files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">pattern =</span> <span class="st">"*.csv"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb51-35"><a href="#cb51-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-36"><a href="#cb51-36" aria-hidden="true" tabindex="-1"></a>allfiles <span class="ot">=</span> <span class="fu">data.frame</span>()</span>
+<span id="cb51-37"><a href="#cb51-37" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(csv <span class="cf">in</span> files){</span>
+<span id="cb51-38"><a href="#cb51-38" aria-hidden="true" tabindex="-1"></a>  Twin3 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(csv, <span class="at">as.is=</span>T, <span class="at">header=</span>T)</span>
+<span id="cb51-39"><a href="#cb51-39" aria-hidden="true" tabindex="-1"></a>  Twin3[<span class="st">'file'</span>] <span class="ot">=</span> csv</span>
+<span id="cb51-40"><a href="#cb51-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-41"><a href="#cb51-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-42"><a href="#cb51-42" aria-hidden="true" tabindex="-1"></a>Twin3<span class="ot">&lt;-</span>Twin3<span class="sc">%&gt;%</span></span>
+<span id="cb51-43"><a href="#cb51-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Unique.Slime.ID =</span> <span class="fu">paste</span>(Wave.Number, <span class="st">"."</span>, Slime.ID))<span class="sc">%&gt;%</span></span>
+<span id="cb51-44"><a href="#cb51-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Unique.Parent.One =</span> <span class="fu">paste</span>(Wave.Number<span class="dv">-1</span>, <span class="st">"."</span>, Parent.One))<span class="sc">%&gt;%</span></span>
+<span id="cb51-45"><a href="#cb51-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Unique.Parent.Two =</span> <span class="fu">paste</span>(Wave.Number<span class="dv">-1</span>, <span class="st">"."</span>, Parent.Two))</span>
+<span id="cb51-46"><a href="#cb51-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-47"><a href="#cb51-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-48"><a href="#cb51-48" aria-hidden="true" tabindex="-1"></a>df_parents <span class="ot">&lt;-</span> Twin3 <span class="sc">%&gt;%</span></span>
+<span id="cb51-49"><a href="#cb51-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Unique.Parent.One, Unique.Parent.Two) <span class="sc">%&gt;%</span></span>
+<span id="cb51-50"><a href="#cb51-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"parent_type"</span>, <span class="at">values_to =</span> <span class="st">"parent_id"</span>)</span>
+<span id="cb51-51"><a href="#cb51-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-52"><a href="#cb51-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Count the number of offspring for each parent</span></span>
+<span id="cb51-53"><a href="#cb51-53" aria-hidden="true" tabindex="-1"></a>offspring_counts <span class="ot">&lt;-</span> df_parents <span class="sc">%&gt;%</span></span>
+<span id="cb51-54"><a href="#cb51-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(parent_id) <span class="sc">%&gt;%</span></span>
+<span id="cb51-55"><a href="#cb51-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">offspring_count =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb51-56"><a href="#cb51-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-57"><a href="#cb51-57" aria-hidden="true" tabindex="-1"></a>offspring_counts <span class="ot">&lt;-</span> offspring_counts<span class="sc">%&gt;%</span></span>
+<span id="cb51-58"><a href="#cb51-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(parent_id <span class="sc">!=</span> <span class="st">"-1 . N/A"</span>)</span>
+<span id="cb51-59"><a href="#cb51-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-60"><a href="#cb51-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-61"><a href="#cb51-61" aria-hidden="true" tabindex="-1"></a>offspring_counts<span class="ot">&lt;-</span> <span class="fu">rename</span>(offspring_counts, <span class="at">Unique.Slime.ID =</span> parent_id)</span>
+<span id="cb51-62"><a href="#cb51-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-63"><a href="#cb51-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-64"><a href="#cb51-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-65"><a href="#cb51-65" aria-hidden="true" tabindex="-1"></a>Twin3 <span class="ot">&lt;-</span> Twin3 <span class="sc">%&gt;%</span></span>
+<span id="cb51-66"><a href="#cb51-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(offspring_counts, <span class="at">by =</span> <span class="st">"Unique.Slime.ID"</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb51-67"><a href="#cb51-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">replace_na</span>(<span class="fu">list</span>(<span class="at">offspring_count =</span> <span class="dv">0</span>))</span>
+<span id="cb51-68"><a href="#cb51-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-69"><a href="#cb51-69" aria-hidden="true" tabindex="-1"></a>allfiles<span class="ot">&lt;-</span><span class="fu">rbind</span>(allfiles,Twin3)</span>
+<span id="cb51-70"><a href="#cb51-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-71"><a href="#cb51-71" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb51-72"><a href="#cb51-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-73"><a href="#cb51-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-74"><a href="#cb51-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-75"><a href="#cb51-75" aria-hidden="true" tabindex="-1"></a>Traits <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Main.Resistance.Trait"</span>, <span class="st">"Secondary.Resistance.Trait"</span>, <span class="st">"Speed.Trait"</span>,</span>
+<span id="cb51-76"><a href="#cb51-76" aria-hidden="true" tabindex="-1"></a>           <span class="st">"Tower.Attraction.Trait"</span>, <span class="st">"Slime.Optimal.Distance.Trait"</span>, <span class="st">"Turn.Rate.Trait"</span>, </span>
+<span id="cb51-77"><a href="#cb51-77" aria-hidden="true" tabindex="-1"></a>           <span class="st">"Slime.View.Range.Trait"</span>, <span class="st">"Tower.View.Range.Trait"</span>)</span>
+<span id="cb51-78"><a href="#cb51-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-79"><a href="#cb51-79" aria-hidden="true" tabindex="-1"></a>Genes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Main.Resistance.Gene"</span>, <span class="st">"Secondary.Resistance.Gene"</span>, <span class="st">"Speed.Gene"</span>,</span>
+<span id="cb51-80"><a href="#cb51-80" aria-hidden="true" tabindex="-1"></a>           <span class="st">"Tower.Attraction.Gene"</span>, <span class="st">"Slime.Optimal.Distance.Gene"</span>, <span class="st">"Turn.Rate.Gene"</span>, </span>
+<span id="cb51-81"><a href="#cb51-81" aria-hidden="true" tabindex="-1"></a>           <span class="st">"Slime.View.Range.Gene"</span>, <span class="st">"Tower.View.Range.Gene"</span>)</span>
+<span id="cb51-82"><a href="#cb51-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-83"><a href="#cb51-83" aria-hidden="true" tabindex="-1"></a>allfiles<span class="ot">&lt;-</span>allfiles<span class="sc">%&gt;%</span></span>
+<span id="cb51-84"><a href="#cb51-84" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Generation=</span><span class="fu">as.factor</span>(Wave.Number))<span class="sc">%&gt;%</span></span>
+<span id="cb51-85"><a href="#cb51-85" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">offspring.count.Fitness =</span> offspring_count)</span>
+<span id="cb51-86"><a href="#cb51-86" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb51-87"><a href="#cb51-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-88"><a href="#cb51-88" aria-hidden="true" tabindex="-1"></a>TraitAvg <span class="ot">&lt;-</span> allfiles <span class="sc">%&gt;%</span></span>
+<span id="cb51-89"><a href="#cb51-89" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(file, Generation) <span class="sc">%&gt;%</span></span>
+<span id="cb51-90"><a href="#cb51-90" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">across</span>(<span class="fu">ends_with</span>(<span class="st">"Trait"</span>), mean,  <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb51-91"><a href="#cb51-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-92"><a href="#cb51-92" aria-hidden="true" tabindex="-1"></a>GeneAvg <span class="ot">&lt;-</span> allfiles <span class="sc">%&gt;%</span></span>
+<span id="cb51-93"><a href="#cb51-93" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(file, Generation) <span class="sc">%&gt;%</span></span>
+<span id="cb51-94"><a href="#cb51-94" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">across</span>(<span class="fu">ends_with</span>(<span class="st">"Gene"</span>), <span class="fu">list</span>(<span class="at">mean =</span> mean, <span class="at">var =</span> var), <span class="at">na.rm =</span> <span class="cn">TRUE</span>, <span class="at">.names =</span> <span class="st">"{.fn}.{.col}"</span>))</span>
+<span id="cb51-95"><a href="#cb51-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-96"><a href="#cb51-96" aria-hidden="true" tabindex="-1"></a>FitAvg <span class="ot">&lt;-</span> allfiles <span class="sc">%&gt;%</span></span>
+<span id="cb51-97"><a href="#cb51-97" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(file, Generation) <span class="sc">%&gt;%</span></span>
+<span id="cb51-98"><a href="#cb51-98" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">across</span>(<span class="fu">ends_with</span>(<span class="st">"Fitness"</span>), <span class="fu">list</span>(<span class="at">mean =</span> mean, <span class="at">var =</span> var), <span class="at">na.rm =</span> <span class="cn">TRUE</span>, <span class="at">.names =</span> <span class="st">"{.fn}.{.col}"</span>))</span>
+<span id="cb51-99"><a href="#cb51-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-100"><a href="#cb51-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-101"><a href="#cb51-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-102"><a href="#cb51-102" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb51-103"><a href="#cb51-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-104"><a href="#cb51-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-105"><a href="#cb51-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-106"><a href="#cb51-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-107"><a href="#cb51-107" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb51-108"><a href="#cb51-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-109"><a href="#cb51-109" aria-hidden="true" tabindex="-1"></a>The <span class="in">`allfiles`</span> dataframe contains the following variables (I also show a few columns of the example data):</span>
+<span id="cb51-110"><a href="#cb51-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-113"><a href="#cb51-113" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb51-114"><a href="#cb51-114" aria-hidden="true" tabindex="-1"></a>data.dictionary <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">as.data.frame</span>(<span class="fu">head</span>(allfiles)))</span>
+<span id="cb51-115"><a href="#cb51-115" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(data.dictionary)</span>
+<span id="cb51-116"><a href="#cb51-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-117"><a href="#cb51-117" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb51-118"><a href="#cb51-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-119"><a href="#cb51-119" aria-hidden="true" tabindex="-1"></a>Variables that end in <span class="in">`.Gene`</span> are the values of the genome for that particular locus. Variables that end in <span class="in">`.Trait`</span> are the values of the trait for that particular locus. Variables that end in <span class="in">`.Fitness`</span> are the values of that particular Fitness component.</span>
+<span id="cb51-120"><a href="#cb51-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-121"><a href="#cb51-121" aria-hidden="true" tabindex="-1"></a><span class="fu">## EXPERIMENTAL CONDITIONS</span></span>
+<span id="cb51-122"><a href="#cb51-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-123"><a href="#cb51-123" aria-hidden="true" tabindex="-1"></a>The enemies in this game are slimes of several different types. These types correspond to the different damage types that can be caused by the player's towers (Lightning, Ice, Fire, etc). Our initial idea is that the slimes of a specific type should be resistant to that type of damage. The average resistance of the whole population should increase over time if the player relies on only one type of tower.</span>
+<span id="cb51-124"><a href="#cb51-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-125"><a href="#cb51-125" aria-hidden="true" tabindex="-1"></a>The current resistance model is as follows:</span>
+<span id="cb51-126"><a href="#cb51-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-127"><a href="#cb51-127" aria-hidden="true" tabindex="-1"></a>Damage Resistance = (Main.Type)0.6 + (Secondary.Type)0.4</span>
+<span id="cb51-128"><a href="#cb51-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-129"><a href="#cb51-129" aria-hidden="true" tabindex="-1"></a>Where Main.Type and Secondary.Type = 1 if they match the Damage Type and 0 if they do not.</span>
+<span id="cb51-130"><a href="#cb51-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-131"><a href="#cb51-131" aria-hidden="true" tabindex="-1"></a>Our hypothesis is that resistance of the population will adapt to the damage type of the defense used. If true, this hypothesis predicts that the mean resistance of the population will increase over time, primarily through the proliferation of slimes of a Type that matches the Damage Type.</span>
+<span id="cb51-132"><a href="#cb51-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-133"><a href="#cb51-133" aria-hidden="true" tabindex="-1"></a>We constructed a simple defense in the center of the playing area, consisting of three towers. The only Fitness Function at this time is related to Path Distance to the Player (the closer they get to the player, the more fitness they acquire).</span>
+<span id="cb51-134"><a href="#cb51-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-135"><a href="#cb51-135" aria-hidden="true" tabindex="-1"></a><span class="fu">## RESULTS</span></span>
+<span id="cb51-136"><a href="#cb51-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-137"><a href="#cb51-137" aria-hidden="true" tabindex="-1"></a><span class="fu">### Slime Types</span></span>
+<span id="cb51-138"><a href="#cb51-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-139"><a href="#cb51-139" aria-hidden="true" tabindex="-1"></a>Each Slime has a <span class="in">`Main.Type`</span> and a <span class="in">`Secondary.Type`</span>. These types use the <span class="in">`~.Resistance.~`</span> category to confer resistance to the appropriate damage type.</span>
+<span id="cb51-140"><a href="#cb51-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-141"><a href="#cb51-141" aria-hidden="true" tabindex="-1"></a>The following code creates two summary dataframes with the suffix <span class="in">`~Typecounts`</span> that count the number of slimes of each <span class="in">`~.Type`</span> in each generation for each replicate. It then creates the graphs of <span class="in">`~Type`</span> frequency over time.</span>
+<span id="cb51-142"><a href="#cb51-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-145"><a href="#cb51-145" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb51-146"><a href="#cb51-146" aria-hidden="true" tabindex="-1"></a>MainTypecounts <span class="ot">&lt;-</span> allfiles <span class="sc">%&gt;%</span></span>
+<span id="cb51-147"><a href="#cb51-147" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Main.Type, Generation, file) <span class="sc">%&gt;%</span></span>
+<span id="cb51-148"><a href="#cb51-148" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Main.count =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb51-149"><a href="#cb51-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-150"><a href="#cb51-150" aria-hidden="true" tabindex="-1"></a>SecondaryTypecounts <span class="ot">&lt;-</span> allfiles <span class="sc">%&gt;%</span></span>
+<span id="cb51-151"><a href="#cb51-151" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Secondary.Type, Generation, file) <span class="sc">%&gt;%</span></span>
+<span id="cb51-152"><a href="#cb51-152" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Secondary.count =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb51-153"><a href="#cb51-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-154"><a href="#cb51-154" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb51-155"><a href="#cb51-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-156"><a href="#cb51-156" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(MainTypecounts, <span class="fu">aes</span>(<span class="at">x =</span> Generation, <span class="at">y =</span> Main.count, <span class="at">fill =</span> <span class="fu">as.factor</span>(Main.Type))) <span class="sc">+</span></span>
+<span id="cb51-157"><a href="#cb51-157" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"stack"</span>) <span class="sc">+</span></span>
+<span id="cb51-158"><a href="#cb51-158" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Generation"</span>, <span class="at">y =</span> <span class="st">"Count"</span>, <span class="at">fill =</span> <span class="st">"Main Slime Type"</span>) <span class="sc">+</span></span>
+<span id="cb51-159"><a href="#cb51-159" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb51-160"><a href="#cb51-160" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>file, <span class="at">ncol=</span><span class="dv">2</span>)</span>
+<span id="cb51-161"><a href="#cb51-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-162"><a href="#cb51-162" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(SecondaryTypecounts, <span class="fu">aes</span>(<span class="at">x =</span> Generation, <span class="at">y =</span> Secondary.count, <span class="at">fill =</span> <span class="fu">as.factor</span>(Secondary.Type))) <span class="sc">+</span></span>
+<span id="cb51-163"><a href="#cb51-163" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"stack"</span>) <span class="sc">+</span></span>
+<span id="cb51-164"><a href="#cb51-164" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Generation"</span>, <span class="at">y =</span> <span class="st">"Count"</span>, <span class="at">fill =</span> <span class="st">"Secondary Slime Type"</span>) <span class="sc">+</span></span>
+<span id="cb51-165"><a href="#cb51-165" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb51-166"><a href="#cb51-166" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>file, <span class="at">ncol=</span><span class="dv">2</span>)</span>
+<span id="cb51-167"><a href="#cb51-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-168"><a href="#cb51-168" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb51-169"><a href="#cb51-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-170"><a href="#cb51-170" aria-hidden="true" tabindex="-1"></a>These results do not align with the predictions of our hypothesis. There is a modest increase in the Lightning Secondary.Type.</span>
+<span id="cb51-171"><a href="#cb51-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-172"><a href="#cb51-172" aria-hidden="true" tabindex="-1"></a><span class="fu">## Slime Fitness</span></span>
+<span id="cb51-173"><a href="#cb51-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-174"><a href="#cb51-174" aria-hidden="true" tabindex="-1"></a>In most cases, it is useful to summarize the behavior of the fitness function for each experiment. In this case, the fitness function calculates a value of 50,000/(distance to player +1). I will also reverse calculate that for visualization. We then use Roulette Wheel selection to determine the parents of the next generation.</span>
+<span id="cb51-175"><a href="#cb51-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-178"><a href="#cb51-178" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb51-179"><a href="#cb51-179" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(allfiles, <span class="fu">aes</span>(<span class="at">x=</span>Wave.Number, <span class="at">y=</span> Path.Distance.To.Player))<span class="sc">+</span></span>
+<span id="cb51-180"><a href="#cb51-180" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="fu">aes</span>(<span class="at">x=</span>Wave.Number, <span class="at">y=</span> Path.Distance.To.Player, <span class="at">color =</span> offspring_count, <span class="at">alpha =</span> offspring_count))<span class="sc">+</span></span>
+<span id="cb51-181"><a href="#cb51-181" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()<span class="sc">+</span></span>
+<span id="cb51-182"><a href="#cb51-182" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>file, <span class="at">ncol =</span> <span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb51-183"><a href="#cb51-183" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_continuous</span>(<span class="at">low=</span><span class="st">"blue"</span>, <span class="at">high =</span> <span class="st">"red"</span>)</span>
+<span id="cb51-184"><a href="#cb51-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-185"><a href="#cb51-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-186"><a href="#cb51-186" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(allfiles, <span class="fu">aes</span>(<span class="at">x=</span>Wave.Number, <span class="at">y=</span> <span class="fu">log10</span>(Player.Distance.Fitness)))<span class="sc">+</span></span>
+<span id="cb51-187"><a href="#cb51-187" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="fu">aes</span>(<span class="at">x=</span>Wave.Number, <span class="at">y=</span> <span class="fu">log10</span>(Player.Distance.Fitness), <span class="at">color =</span> offspring_count, <span class="at">alpha =</span> offspring_count))<span class="sc">+</span></span>
+<span id="cb51-188"><a href="#cb51-188" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()<span class="sc">+</span></span>
+<span id="cb51-189"><a href="#cb51-189" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>file, <span class="at">ncol =</span> <span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb51-190"><a href="#cb51-190" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_continuous</span>(<span class="at">low=</span><span class="st">"blue"</span>, <span class="at">high =</span> <span class="st">"red"</span>)</span>
+<span id="cb51-191"><a href="#cb51-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-192"><a href="#cb51-192" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(allfiles, <span class="fu">aes</span>(<span class="at">x=</span>Path.Distance.To.Player, <span class="at">y =</span> Player.Distance.Fitness))<span class="sc">+</span></span>
+<span id="cb51-193"><a href="#cb51-193" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>Path.Distance.To.Player, <span class="at">y =</span> Player.Distance.Fitness), <span class="at">alpha =</span> <span class="fl">0.5</span>)<span class="sc">+</span></span>
+<span id="cb51-194"><a href="#cb51-194" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>file, <span class="at">ncol =</span> <span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb51-195"><a href="#cb51-195" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_continuous</span>(<span class="at">low=</span><span class="st">"blue"</span>, <span class="at">high =</span> <span class="st">"red"</span>)</span>
+<span id="cb51-196"><a href="#cb51-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-197"><a href="#cb51-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-198"><a href="#cb51-198" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> FitAvg, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.numeric</span>(Generation), <span class="at">y =</span> var.offspring.count.Fitness))<span class="sc">+</span></span>
+<span id="cb51-199"><a href="#cb51-199" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb51-200"><a href="#cb51-200" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>) <span class="sc">+</span></span>
+<span id="cb51-201"><a href="#cb51-201" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb51-202"><a href="#cb51-202" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>file, <span class="at">ncol =</span> <span class="dv">2</span>) </span>
+<span id="cb51-203"><a href="#cb51-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-204"><a href="#cb51-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-205"><a href="#cb51-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-206"><a href="#cb51-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-207"><a href="#cb51-207" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(allfiles, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.factor</span>(Wave.Number), <span class="at">y =</span> <span class="fu">log10</span>(offspring_count))) <span class="sc">+</span> </span>
+<span id="cb51-208"><a href="#cb51-208" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill=</span><span class="st">"lightblue"</span>) <span class="sc">+</span></span>
+<span id="cb51-209"><a href="#cb51-209" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)<span class="sc">+</span></span>
+<span id="cb51-210"><a href="#cb51-210" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>file, <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb51-211"><a href="#cb51-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-212"><a href="#cb51-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-213"><a href="#cb51-213" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb51-214"><a href="#cb51-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-215"><a href="#cb51-215" aria-hidden="true" tabindex="-1"></a><span class="fu">## Evolutionary Responses</span></span>
+<span id="cb51-216"><a href="#cb51-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-219"><a href="#cb51-219" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb51-220"><a href="#cb51-220" aria-hidden="true" tabindex="-1"></a>Gradientslong <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
+<span id="cb51-221"><a href="#cb51-221" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">seq_along</span>(Traits)){</span>
+<span id="cb51-222"><a href="#cb51-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-223"><a href="#cb51-223" aria-hidden="true" tabindex="-1"></a>traittemp<span class="ot">&lt;-</span>allfiles<span class="sc">%&gt;%</span></span>
+<span id="cb51-224"><a href="#cb51-224" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Generation, offspring_count, file, <span class="sc">!!</span><span class="fu">sym</span>(Traits[i]))<span class="sc">%&gt;%</span></span>
+<span id="cb51-225"><a href="#cb51-225" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Generation, file)<span class="sc">%&gt;%</span></span>
+<span id="cb51-226"><a href="#cb51-226" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">scaleST0 =</span> <span class="fu">scale</span>(<span class="sc">!!</span><span class="fu">sym</span>(Traits[i]), <span class="at">center =</span> <span class="cn">TRUE</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb51-227"><a href="#cb51-227" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">scaleST02 =</span> scaleST0<span class="sc">*</span>scaleST0)<span class="sc">%&gt;%</span></span>
+<span id="cb51-228"><a href="#cb51-228" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Generation =</span> <span class="fu">as.numeric</span>(Generation))</span>
+<span id="cb51-229"><a href="#cb51-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-230"><a href="#cb51-230" aria-hidden="true" tabindex="-1"></a>Gradients <span class="ot">&lt;-</span> traittemp <span class="sc">%&gt;%</span></span>
+<span id="cb51-231"><a href="#cb51-231" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Generation, file) <span class="sc">%&gt;%</span></span>
+<span id="cb51-232"><a href="#cb51-232" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do</span>({</span>
+<span id="cb51-233"><a href="#cb51-233" aria-hidden="true" tabindex="-1"></a>    model <span class="ot">&lt;-</span> <span class="fu">lm</span>(offspring_count <span class="sc">~</span> scaleST0 <span class="sc">+</span> scaleST02, <span class="at">data =</span> .)</span>
+<span id="cb51-234"><a href="#cb51-234" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data.frame</span>(</span>
+<span id="cb51-235"><a href="#cb51-235" aria-hidden="true" tabindex="-1"></a>      <span class="at">Beta =</span> <span class="fu">coefficients</span>(model)[<span class="dv">2</span>],</span>
+<span id="cb51-236"><a href="#cb51-236" aria-hidden="true" tabindex="-1"></a>      <span class="at">PB =</span> <span class="fu">summary</span>(model)<span class="sc">$</span>coef[<span class="dv">2</span>, <span class="dv">4</span>],</span>
+<span id="cb51-237"><a href="#cb51-237" aria-hidden="true" tabindex="-1"></a>      <span class="at">Trait =</span> Traits[i]</span>
+<span id="cb51-238"><a href="#cb51-238" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb51-239"><a href="#cb51-239" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb51-240"><a href="#cb51-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-241"><a href="#cb51-241" aria-hidden="true" tabindex="-1"></a>Gradients <span class="ot">&lt;-</span> Gradients <span class="sc">%&gt;%</span></span>
+<span id="cb51-242"><a href="#cb51-242" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sig =</span> <span class="fu">if_else</span>(PB <span class="sc">&lt;</span> <span class="fl">0.05</span> , <span class="st">"Y"</span>, <span class="st">"N"</span>))</span>
+<span id="cb51-243"><a href="#cb51-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-244"><a href="#cb51-244" aria-hidden="true" tabindex="-1"></a>Gradientslong <span class="ot">&lt;-</span> <span class="fu">rbind</span>(Gradientslong, Gradients)</span>
+<span id="cb51-245"><a href="#cb51-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-246"><a href="#cb51-246" aria-hidden="true" tabindex="-1"></a>G <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> GeneAvg, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.numeric</span>(Generation), <span class="at">y =</span> <span class="sc">!!</span><span class="fu">sym</span>(Genes[i])))<span class="sc">+</span></span>
+<span id="cb51-247"><a href="#cb51-247" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">data =</span> allfiles, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.numeric</span>(Generation), <span class="at">y =</span> <span class="sc">!!</span><span class="fu">sym</span>(Genes[i])), <span class="at">size=</span><span class="fl">0.1</span>, <span class="at">alpha =</span> <span class="fl">0.02</span>)<span class="sc">+</span></span>
+<span id="cb51-248"><a href="#cb51-248" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">data =</span> GeneAvg, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.numeric</span>(Generation), <span class="at">y =</span> <span class="sc">!!</span><span class="fu">sym</span>(<span class="fu">paste</span>(<span class="st">"mean."</span>,Genes[i], <span class="at">sep =</span> <span class="st">""</span>)), <span class="at">method =</span> <span class="st">"loess"</span>)) <span class="sc">+</span></span>
+<span id="cb51-249"><a href="#cb51-249" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb51-250"><a href="#cb51-250" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>file, <span class="at">ncol =</span> <span class="dv">2</span>) </span>
+<span id="cb51-251"><a href="#cb51-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-252"><a href="#cb51-252" aria-hidden="true" tabindex="-1"></a>P <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> TraitAvg, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.numeric</span>(Generation), <span class="at">y =</span> <span class="sc">!!</span><span class="fu">sym</span>(Traits[i])))<span class="sc">+</span></span>
+<span id="cb51-253"><a href="#cb51-253" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">data =</span> TraitAvg, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.numeric</span>(Generation), <span class="at">y =</span> <span class="sc">!!</span><span class="fu">sym</span>(Traits[i])), <span class="at">method =</span> <span class="st">"loess"</span>) <span class="sc">+</span></span>
+<span id="cb51-254"><a href="#cb51-254" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">data=</span>allfiles, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.numeric</span>(Generation), <span class="at">y =</span> <span class="sc">!!</span><span class="fu">sym</span>(Traits[i]), <span class="at">color =</span> offspring_count), <span class="at">size =</span> <span class="fl">0.5</span>, <span class="at">alpha =</span><span class="fl">0.1</span>)<span class="sc">+</span></span>
+<span id="cb51-255"><a href="#cb51-255" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb51-256"><a href="#cb51-256" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>file, <span class="at">ncol =</span> <span class="dv">2</span>) </span>
+<span id="cb51-257"><a href="#cb51-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-258"><a href="#cb51-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-259"><a href="#cb51-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-260"><a href="#cb51-260" aria-hidden="true" tabindex="-1"></a>S <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(Gradients, <span class="fu">aes</span>(<span class="at">x=</span>Generation, <span class="at">y =</span> Beta))<span class="sc">+</span></span>
+<span id="cb51-261"><a href="#cb51-261" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> sig))<span class="sc">+</span></span>
+<span id="cb51-262"><a href="#cb51-262" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">fill=</span><span class="st">"blue"</span>)<span class="sc">+</span></span>
+<span id="cb51-263"><a href="#cb51-263" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"grey"</span>,<span class="st">"red"</span>))<span class="sc">+</span></span>
+<span id="cb51-264"><a href="#cb51-264" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">0</span>, <span class="at">linetype=</span><span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"black"</span>)<span class="sc">+</span></span>
+<span id="cb51-265"><a href="#cb51-265" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
+<span id="cb51-266"><a href="#cb51-266" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>())<span class="sc">+</span></span>
+<span id="cb51-267"><a href="#cb51-267" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>file)</span>
+<span id="cb51-268"><a href="#cb51-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-269"><a href="#cb51-269" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(G)</span>
+<span id="cb51-270"><a href="#cb51-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-271"><a href="#cb51-271" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(P)</span>
+<span id="cb51-272"><a href="#cb51-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-273"><a href="#cb51-273" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(S)</span>
+<span id="cb51-274"><a href="#cb51-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-275"><a href="#cb51-275" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb51-276"><a href="#cb51-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-277"><a href="#cb51-277" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb51-278"><a href="#cb51-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-279"><a href="#cb51-279" aria-hidden="true" tabindex="-1"></a><span class="fu">## Heatmap</span></span>
+<span id="cb51-280"><a href="#cb51-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-283"><a href="#cb51-283" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb51-284"><a href="#cb51-284" aria-hidden="true" tabindex="-1"></a>maxwave <span class="ot">=</span> <span class="fu">max</span>(allfiles<span class="sc">$</span>Wave.Number)</span>
+<span id="cb51-285"><a href="#cb51-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-286"><a href="#cb51-286" aria-hidden="true" tabindex="-1"></a>Twin3 <span class="ot">&lt;-</span> allfiles <span class="sc">%&gt;%</span></span>
+<span id="cb51-287"><a href="#cb51-287" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Wave.Number, Slime.ID, Player.Distance.Fitness, Main.Resistance.Trait, Secondary.Resistance.Trait, Slime.View.Range.Trait, </span>
+<span id="cb51-288"><a href="#cb51-288" aria-hidden="true" tabindex="-1"></a>         Tower.View.Range.Trait, Player.View.Range.Trait, Wall.View.Range.Trait, Sheep.View.Range.Trait, Slime.Attraction.Trait, </span>
+<span id="cb51-289"><a href="#cb51-289" aria-hidden="true" tabindex="-1"></a>         Tower.Attraction.Trait, Player.Attraction.Trait, Wall.Attraction.Trait, Sheep.Attraction.Trait, Slime.Optimal.Distance.Trait, </span>
+<span id="cb51-290"><a href="#cb51-290" aria-hidden="true" tabindex="-1"></a>         Speed.Trait, Turn.Rate.Trait, Sprint.Duration.Trait, Sprint.Cooldown.Trait, offspring_count) <span class="sc">%&gt;%</span></span>
+<span id="cb51-291"><a href="#cb51-291" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Wave.Number <span class="sc">==</span> maxwave)</span>
+<span id="cb51-292"><a href="#cb51-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-293"><a href="#cb51-293" aria-hidden="true" tabindex="-1"></a>paletteLength <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb51-294"><a href="#cb51-294" aria-hidden="true" tabindex="-1"></a>myColor <span class="ot">&lt;-</span> <span class="fu">colorRampPalette</span>(<span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"white"</span>, <span class="st">"#ED2024"</span>))(paletteLength)</span>
+<span id="cb51-295"><a href="#cb51-295" aria-hidden="true" tabindex="-1"></a><span class="co"># length(breaks) == length(paletteLength) + 1</span></span>
+<span id="cb51-296"><a href="#cb51-296" aria-hidden="true" tabindex="-1"></a><span class="co"># use floor and ceiling to deal with even/odd length pallettelengths</span></span>
+<span id="cb51-297"><a href="#cb51-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-298"><a href="#cb51-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-299"><a href="#cb51-299" aria-hidden="true" tabindex="-1"></a>Heatmap <span class="ot">&lt;-</span> Twin3 <span class="sc">%&gt;%</span></span>
+<span id="cb51-300"><a href="#cb51-300" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Player.Distance.Fitness, Main.Resistance.Trait, Secondary.Resistance.Trait, Slime.View.Range.Trait, </span>
+<span id="cb51-301"><a href="#cb51-301" aria-hidden="true" tabindex="-1"></a>         Tower.View.Range.Trait, Slime.Attraction.Trait, </span>
+<span id="cb51-302"><a href="#cb51-302" aria-hidden="true" tabindex="-1"></a>         Tower.Attraction.Trait, Slime.Optimal.Distance.Trait, </span>
+<span id="cb51-303"><a href="#cb51-303" aria-hidden="true" tabindex="-1"></a>         Speed.Trait, Turn.Rate.Trait)</span>
+<span id="cb51-304"><a href="#cb51-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-305"><a href="#cb51-305" aria-hidden="true" tabindex="-1"></a>Heatmap <span class="ot">&lt;-</span> <span class="fu">scale</span>(Heatmap)</span>
+<span id="cb51-306"><a href="#cb51-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-307"><a href="#cb51-307" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(Heatmap) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'Fitness'</span>, <span class="st">'Main Resistance'</span>, <span class="st">'Secondary Resistance'</span>, <span class="st">'Slime View Range'</span>,</span>
+<span id="cb51-308"><a href="#cb51-308" aria-hidden="true" tabindex="-1"></a>                       <span class="st">'Tower View Range'</span>, <span class="st">'Slime Attraction'</span>, <span class="st">'Tower Attraction'</span>,</span>
+<span id="cb51-309"><a href="#cb51-309" aria-hidden="true" tabindex="-1"></a>                       <span class="st">'Slime Optimal Distance'</span>, <span class="st">'Speed'</span>, <span class="st">'Turn Rate'</span>)</span>
+<span id="cb51-310"><a href="#cb51-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-311"><a href="#cb51-311" aria-hidden="true" tabindex="-1"></a>Heatmatrix2 <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(Heatmap)</span>
+<span id="cb51-312"><a href="#cb51-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-313"><a href="#cb51-313" aria-hidden="true" tabindex="-1"></a>myBreaks2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">seq</span>(<span class="fu">min</span>(Heatmatrix2), <span class="dv">0</span>, <span class="at">length.out=</span><span class="fu">ceiling</span>(paletteLength<span class="sc">/</span><span class="dv">2</span>) <span class="sc">+</span> <span class="dv">1</span>), <span class="fu">seq</span>(<span class="fu">max</span>(Heatmatrix2)<span class="sc">/</span>paletteLength, <span class="fu">max</span>(Heatmatrix2), </span>
+<span id="cb51-314"><a href="#cb51-314" aria-hidden="true" tabindex="-1"></a>                                                                                      <span class="at">length.out=</span><span class="fu">floor</span>(paletteLength<span class="sc">/</span><span class="dv">2</span>)))</span>
+<span id="cb51-315"><a href="#cb51-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-316"><a href="#cb51-316" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-317"><a href="#cb51-317" aria-hidden="true" tabindex="-1"></a>heatmap2 <span class="ot">=</span> <span class="fu">pheatmap</span>(Heatmatrix2,</span>
+<span id="cb51-318"><a href="#cb51-318" aria-hidden="true" tabindex="-1"></a>         <span class="at">cluster_rows =</span> <span class="cn">TRUE</span>, <span class="co"># don't cluster rows</span></span>
+<span id="cb51-319"><a href="#cb51-319" aria-hidden="true" tabindex="-1"></a>         <span class="at">cluster_cols =</span> <span class="cn">TRUE</span>, <span class="co"># don't cluster columns</span></span>
+<span id="cb51-320"><a href="#cb51-320" aria-hidden="true" tabindex="-1"></a>         <span class="at">clustering_distance_cols =</span> <span class="st">"euclidean"</span>,</span>
+<span id="cb51-321"><a href="#cb51-321" aria-hidden="true" tabindex="-1"></a>         <span class="at">clustering_distance_rows =</span> <span class="st">"euclidean"</span>,</span>
+<span id="cb51-322"><a href="#cb51-322" aria-hidden="true" tabindex="-1"></a>         <span class="at">clustering_method =</span> <span class="st">"complete"</span>,</span>
+<span id="cb51-323"><a href="#cb51-323" aria-hidden="true" tabindex="-1"></a>         <span class="at">color =</span> myColor,</span>
+<span id="cb51-324"><a href="#cb51-324" aria-hidden="true" tabindex="-1"></a>         <span class="at">breaks =</span> myBreaks2)</span>
+<span id="cb51-325"><a href="#cb51-325" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>

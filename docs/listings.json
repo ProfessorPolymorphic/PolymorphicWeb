@@ -2,11 +2,10 @@
   {
     "listing": "/DevBlog/index.html",
     "items": [
-<<<<<<< Updated upstream
-      "/DevBlog/posts/falconGUI/index.html",
-=======
+      "/DevBlog/posts/TwinStickEvolution1/TwinStick.html",
       "/DevBlog/posts/Falcon/index.html",
->>>>>>> Stashed changes
+      "/DevBlog/posts/TwinStickEvolution1/index.html",
+      "/DevBlog/posts/falconGUI/index.html",
       "/DevBlog/posts/TickbaseSeminarFeb2023/index.html",
       "/DevBlog/posts/post-with-code/index.html",
       "/DevBlog/posts/welcome/index.html"
