@@ -1,0 +1,1992 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.220">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="Headless mode allows for many replicates!">
+
+<title>POLYMORPHIC GAMES - Outbreak Simulator on Falcon!</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">POLYMORPHIC GAMES</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../../../Games/index.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Games</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../Education/index.html" rel="" target="">
+ <span class="menu-text">EDUCATION</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../People/index.html" rel="" target="">
+ <span class="menu-text">PEOPLE</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../DevBlog/index.html" rel="" target="">
+ <span class="menu-text">BLOG</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../DevBlog/index.html">DevBlog</a></li><li class="breadcrumb-item"><a href="../../../DevBlog/posts/post-with-code/index.html">Posts</a></li><li class="breadcrumb-item"><a href="../../../DevBlog/posts/Falcon/index.html">Outbreak Simulator on Falcon!</a></li></ol></nav>
+      <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <div class="quarto-title-block"><div><h1 class="title">Outbreak Simulator on Falcon!</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+                  <div>
+        <div class="description">
+          Headless mode allows for many replicates!
+        </div>
+      </div>
+                </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../People/index.html" class="sidebar-item-text sidebar-link">PEOPLE</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../DevBlog/index.html" class="sidebar-item-text sidebar-link">DevBlog</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../DevBlog/about.html" class="sidebar-item-text sidebar-link">About</a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Posts</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../DevBlog/posts/post-with-code/index.html" class="sidebar-item-text sidebar-link">OUTBREAK SIMULATOR</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../DevBlog/posts/welcome/index.html" class="sidebar-item-text sidebar-link">Welcome To My Blog</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../DevBlog/posts/TickbaseSeminarFeb2023/index.html" class="sidebar-item-text sidebar-link">TICKBASE PRESENTATION - Datathon Preparation</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../DevBlog/posts/Falcon/index.html" class="sidebar-item-text sidebar-link active">Outbreak Simulator on Falcon!</a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../Education/index.html" class="sidebar-item-text sidebar-link">Education</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Education/DataScienceqmd.html" class="sidebar-item-text sidebar-link">Data Science</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../Games/index.html" class="sidebar-item-text sidebar-link">Games</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Games/ProjectHastur/index.html" class="sidebar-item-text sidebar-link">PROJECT HASTUR</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Games/DarwinsDemons/index.html" class="sidebar-item-text sidebar-link">DARWIN’S DEMONS</a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../Games/TwinStick/index.html" class="sidebar-item-text sidebar-link">TWIN STICK</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Games/TwinStick/Towers.html" class="sidebar-item-text sidebar-link">Towers</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Games/TwinStick/UXUI.html" class="sidebar-item-text sidebar-link">UX/UI</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../Games/ProjectDrider/index.html" class="sidebar-item-text sidebar-link">PROJECT DRIDER</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Games/ProjectDrider/DevTeam.html" class="sidebar-item-text sidebar-link">Dev Team</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Games/ProjectDrider/EDUCATION.html" class="sidebar-item-text sidebar-link">EDUCATION</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Games/ProjectDrider/MultiplayerNetworking.html" class="sidebar-item-text sidebar-link">MULTIPLAYER ARCHITECTURE</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../Games/OutbreakSimulator/index.html" class="sidebar-item-text sidebar-link">OUTBREAK SIMULATOR</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Games/OutbreakSimulator/DevTeam.html" class="sidebar-item-text sidebar-link">Dev Team</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Games/OutbreakSimulator/DiseaseModel.html" class="sidebar-item-text sidebar-link">Disease Model</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Games/OutbreakSimulator/Education.html" class="sidebar-item-text sidebar-link">Education and Outreach</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Games/OutbreakSimulator/Lesson1.html" class="sidebar-item-text sidebar-link">Hello, Tutorial!</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Games/OutbreakSimulator/Lesson1 2.html" class="sidebar-item-text sidebar-link">Summarise Tables</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Games/OutbreakSimulator/Lesson1 3.html" class="sidebar-item-text sidebar-link">Summarise Tables</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Games/OutbreakSimulator/Lesson1 4.html" class="sidebar-item-text sidebar-link">Summarise Tables</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Games/OutbreakSimulator/Lesson1 5.html" class="sidebar-item-text sidebar-link">Summarise Tables</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Games/OutbreakSimulator/Maps.html" class="sidebar-item-text sidebar-link">Maps and Data Layers</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Games/OutbreakSimulator/Movement.html" class="sidebar-item-text sidebar-link">Movement Models</a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Welcome</a></li>
+  <li><a href="#graph-interpretation" id="toc-graph-interpretation" class="nav-link" data-scroll-target="#graph-interpretation">GRAPH INTERPRETATION</a>
+  <ul class="collapse">
+  <li><a href="#epicurve" id="toc-epicurve" class="nav-link" data-scroll-target="#epicurve">Epicurve</a></li>
+  </ul></li>
+  <li><a href="#but-what-about..-states" id="toc-but-what-about..-states" class="nav-link" data-scroll-target="#but-what-about..-states">But what about….. STATES????</a></li>
+  <li><a href="#super-advanced-epidemiology" id="toc-super-advanced-epidemiology" class="nav-link" data-scroll-target="#super-advanced-epidemiology">SUPER ADVANCED EPIDEMIOLOGY</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="welcome" class="level2">
+<h2 class="anchored" data-anchor-id="welcome">Welcome</h2>
+<p>This is a demo scenario for Outbreak Simulator. A complete description of the project can be found <a href="https://professorpolymorphic.github.io/PolymorphicWeb/Games/OutbreakSimulator/">here</a></p>
+</section>
+<section id="graph-interpretation" class="level2">
+<h2 class="anchored" data-anchor-id="graph-interpretation">GRAPH INTERPRETATION</h2>
+<section id="epicurve" class="level3">
+<h3 class="anchored" data-anchor-id="epicurve">Epicurve</h3>
+<p>The following graph is an Epidemiological Curve using data from a single run of Outbreak Simulator. It shows the number of people in the various categories of the epidemiological compartement model.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>file_list <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">pattern =</span> <span class="st">"*.csv"</span>) </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> file_list <span class="sc">%&gt;%</span> </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_df</span>(<span class="sc">~</span><span class="fu">read_csv</span>(.) <span class="sc">%&gt;%</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>           <span class="fu">mutate</span>(<span class="at">source_file =</span> .x)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 201 Columns: 295
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (295): Time, Maryland_S, Maryland_E, Maryland_I, Maryland_R, Maryland_D,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df<span class="ot">&lt;-</span>df<span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">295</span>), as.numeric)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>dftotal <span class="ot">&lt;-</span> df<span class="sc">%&gt;%</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Time, source_file, <span class="fu">starts_with</span>(<span class="st">"Totals_"</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Time=</span>Time,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">S=</span>Totals_S,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">E=</span>Totals_E,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">V=</span>Totals_V,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">I=</span>Totals_I,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">R=</span>Totals_R,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">D=</span>Totals_D,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">source_file=</span>source_file)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(dftotal<span class="sc">$</span>Time)){</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  dftotal<span class="sc">$</span>dS[i] <span class="ot">&lt;-</span> dftotal<span class="sc">$</span>S[i]<span class="sc">-</span>dftotal<span class="sc">$</span>S[i<span class="sc">+</span><span class="dv">1</span>]</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  dftotal<span class="sc">$</span>dR[i] <span class="ot">&lt;-</span> dftotal<span class="sc">$</span>R[i<span class="sc">+</span><span class="dv">1</span>]<span class="sc">-</span>dftotal<span class="sc">$</span>R[i]</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  dftotal<span class="sc">$</span>dI[i] <span class="ot">&lt;-</span> dftotal<span class="sc">$</span>I[i<span class="sc">+</span><span class="dv">1</span>]<span class="sc">-</span>dftotal<span class="sc">$</span>I[i]</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  dftotal<span class="sc">$</span>dD[i] <span class="ot">&lt;-</span> dftotal<span class="sc">$</span>D[i<span class="sc">+</span><span class="dv">1</span>]<span class="sc">-</span>dftotal<span class="sc">$</span>D[i]</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Unknown or uninitialised column: `dS`.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Unknown or uninitialised column: `dR`.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Unknown or uninitialised column: `dI`.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Unknown or uninitialised column: `dD`.</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>dftotal<span class="ot">&lt;-</span> dftotal<span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">N=</span> S<span class="sc">+</span>E<span class="sc">+</span>I<span class="sc">+</span>V<span class="sc">+</span>R<span class="sc">+</span>D)<span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Beta =</span> dS<span class="sc">*</span>N<span class="sc">/</span>(S<span class="sc">*</span>I<span class="sc">+</span><span class="dv">1</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Gamma =</span> dD<span class="sc">/</span>(I<span class="sc">+</span><span class="dv">1</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">R0 =</span> Beta<span class="sc">/</span>Gamma)<span class="sc">%&gt;%</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Beta<span class="sc">&lt;</span><span class="dv">10</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(R0<span class="sc">&lt;</span><span class="dv">10</span><span class="sc">^</span><span class="dv">3</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>dflong<span class="ot">&lt;-</span>dftotal<span class="sc">%&gt;%</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"S"</span>, <span class="st">"E"</span>, <span class="st">"I"</span>,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"V"</span>, <span class="st">"R"</span>, <span class="st">"D"</span>),<span class="at">names_to =</span> <span class="st">"Compartment"</span>, <span class="at">values_to =</span> <span class="st">"Count"</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>dflong <span class="ot">&lt;-</span> dflong<span class="sc">%&gt;%</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Compartment =</span> <span class="fu">recode</span>(Compartment, </span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">S =</span> <span class="st">"Susceptible"</span>,</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>         <span class="at">E =</span> <span class="st">"Exposed"</span>,</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">I =</span> <span class="st">"Infected"</span>,</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>         <span class="at">V =</span> <span class="st">"Vaccinated"</span>,</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>         <span class="at">R =</span> <span class="st">"Recovered"</span>,</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>         <span class="at">D =</span> <span class="st">"Deceased"</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Compartment <span class="sc">!=</span> <span class="st">"Vaccinated"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Sus<span class="ot">&lt;-</span>dflong<span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Compartment <span class="sc">==</span> <span class="st">"Susceptible"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dflong, <span class="fu">aes</span>(<span class="at">x=</span>Time, <span class="at">y =</span> Count<span class="sc">/</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>,  <span class="at">color=</span><span class="fu">as.factor</span>(Compartment)))<span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()<span class="sc">+</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="fl">0.1</span>, <span class="at">alpha=</span><span class="fl">0.1</span>)<span class="sc">+</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>   <span class="fu">labs</span>(</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Epidemiological Curve"</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"H1N1 Influenza"</span>,</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Data from a single run of Outbreak Simulator."</span>,</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">tag =</span> <span class="st">"Figure 1"</span>,</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Time (h)"</span>,</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Number of Individuals (millions)"</span>,</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"Compartment"</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>   <span class="fu">scale_colour_brewer</span>(<span class="at">type =</span> <span class="st">"seq"</span>, <span class="at">palette =</span> <span class="st">"Spectral"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = "cs")'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="but-what-about..-states" class="level2">
+<h2 class="anchored" data-anchor-id="but-what-about..-states">But what about….. STATES????</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>stateslong <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">295</span>,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"State"</span>, <span class="st">"Compartment"</span>),</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">names_pattern =</span> <span class="st">"(.+?)_(.)"</span>,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">values_to =</span> <span class="st">"Count"</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>fewerstates<span class="ot">&lt;-</span>stateslong<span class="sc">%&gt;%</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(State <span class="sc">==</span> <span class="st">"New Mexico"</span> <span class="sc">|</span> State <span class="sc">==</span> <span class="st">"Idaho"</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>         <span class="sc">|</span> State <span class="sc">==</span><span class="st">"Nevada"</span> <span class="sc">|</span> State <span class="sc">==</span> <span class="st">"New York"</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>         )<span class="sc">%&gt;%</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Compartment =</span> <span class="fu">recode</span>(Compartment, </span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">S =</span> <span class="st">"Susceptible"</span>,</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">E =</span> <span class="st">"Exposed"</span>,</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">I =</span> <span class="st">"Infected"</span>,</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">V =</span> <span class="st">"Vaccinated"</span>,</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>         <span class="at">R =</span> <span class="st">"Recovered"</span>,</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">D =</span> <span class="st">"Deceased"</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Compartment <span class="sc">!=</span> <span class="st">"Vaccinated"</span>)</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fewerstates, <span class="fu">aes</span>(<span class="at">x=</span>Time, <span class="at">y =</span> Count<span class="sc">/</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>, <span class="at">color =</span> Compartment))<span class="sc">+</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="fl">0.1</span>, <span class="at">alpha=</span><span class="fl">0.1</span>)<span class="sc">+</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>State)<span class="sc">+</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>   <span class="fu">labs</span>(</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Epidemiological Curve"</span>,</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"H1N1 Influenza"</span>,</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Data from a single run of Outbreak Simulator."</span>,</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">tag =</span> <span class="st">"Figure 2"</span>,</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Time (h)"</span>,</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Number of Individuals (millions)"</span>,</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"Compartment"</span></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>   <span class="fu">scale_colour_brewer</span>(<span class="at">type =</span> <span class="st">"seq"</span>, <span class="at">palette =</span> <span class="st">"Spectral"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="super-advanced-epidemiology" class="level2">
+<h2 class="anchored" data-anchor-id="super-advanced-epidemiology">SUPER ADVANCED EPIDEMIOLOGY</h2>
+<p>Real time R0 calculations.</p>
+<p>R0, also known as the basic reproduction number, is a measure of the average number of secondary infections produced by a single infectious individual in a completely susceptible population. Calculating R0 from time series values of S (Susceptible), I (Infected), and R (Recovered) can be done using a mathematical model, such as the Susceptible-Infected-Recovered (SIR) model.</p>
+<p>The SIR model is a set of ordinary differential equations that describe the dynamics of infectious diseases. The equations are:</p>
+<p>dS/dt = -β * S * I / N dI/dt = β * S * I / N - γ * I dR/dt = γ * I where:</p>
+<p>S is the number of susceptible individuals I is the number of infected individuals R is the number of recovered individuals N is the total population (N = S + I + R) β (beta) is the transmission rate per contact γ (gamma) is the recovery rate The basic reproduction number R0 is given by the formula:</p>
+<p>R0 = β / γ</p>
+<p>In order to calculate R0 from time series data of S, I, and R, you’ll need to estimate the values of β and γ. One way to do this is to use curve-fitting techniques to fit the SIR model to your data. Once you have estimates for β and γ, you can calculate R0 using the formula above.</p>
+<p>Here’s an example using R and the deSolve package to fit the SIR model to sample data and estimate R0:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dflong, <span class="fu">aes</span>(<span class="at">x=</span>Time, <span class="at">y=</span> R0))<span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()<span class="sc">+</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Basic Reproduction Rate"</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"H1N1 Influenza"</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Data from a single run of Outbreak Simulator."</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">tag =</span> <span class="st">"Figure 3"</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Time (h)"</span>,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"R0"</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>   <span class="fu">scale_colour_brewer</span>(<span class="at">type =</span> <span class="st">"seq"</span>, <span class="at">palette =</span> <span class="st">"Spectral"</span>)<span class="sc">+</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = "cs")'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dflong, <span class="fu">aes</span>(<span class="at">x=</span>Time, <span class="at">y=</span> Beta))<span class="sc">+</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()<span class="sc">+</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"SIR parameters: Beta"</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"H1N1 Influenza"</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Data from a single run of Outbreak Simulator."</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">tag =</span> <span class="st">"Figure 4"</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Time (h)"</span>,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Parameter Estimate"</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>   <span class="fu">scale_colour_brewer</span>(<span class="at">type =</span> <span class="st">"seq"</span>, <span class="at">palette =</span> <span class="st">"Spectral"</span>)<span class="sc">+</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> .<span class="dv">5</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = "cs")'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dflong, <span class="fu">aes</span>(<span class="at">x=</span>Time, <span class="at">y=</span> Gamma))<span class="sc">+</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()<span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"SIR parameters: Gamma"</span>,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"H1N1 Influenza"</span>,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Data from a single run of Outbreak Simulator."</span>,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">tag =</span> <span class="st">"Figure 4"</span>,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Time (h)"</span>,</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Parameter Estimate"</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>   <span class="fu">scale_colour_brewer</span>(<span class="at">type =</span> <span class="st">"seq"</span>, <span class="at">palette =</span> <span class="st">"Spectral"</span>)<span class="sc">+</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = "cs")'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-3.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb18" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Outbreak Simulator on Falcon!"</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "Headless mode allows for many replicates!"</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="an">code-fold:</span><span class="co"> true  </span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="an">code-tools:</span><span class="co"> true</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## Welcome</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>This is a demo scenario for Outbreak Simulator.  A complete description of the project can be found <span class="co">[</span><span class="ot">here</span><span class="co">](https://professorpolymorphic.github.io/PolymorphicWeb/Games/OutbreakSimulator/)</span> </span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## GRAPH INTERPRETATION</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a><span class="fu">### Epicurve</span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>The following graph is an Epidemiological Curve using data from a single run of Outbreak Simulator.  It shows the number of people in the various categories of the epidemiological compartement model. </span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>file_list <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">pattern =</span> <span class="st">"*.csv"</span>) </span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> file_list <span class="sc">%&gt;%</span> </span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_df</span>(<span class="sc">~</span><span class="fu">read_csv</span>(.) <span class="sc">%&gt;%</span></span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a>           <span class="fu">mutate</span>(<span class="at">source_file =</span> .x)) </span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a>df<span class="ot">&lt;-</span>df<span class="sc">%&gt;%</span></span>
+<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">295</span>), as.numeric)</span>
+<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a>dftotal <span class="ot">&lt;-</span> df<span class="sc">%&gt;%</span></span>
+<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Time, source_file, <span class="fu">starts_with</span>(<span class="st">"Totals_"</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Time=</span>Time,</span>
+<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a>          <span class="at">S=</span>Totals_S,</span>
+<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a>         <span class="at">E=</span>Totals_E,</span>
+<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a>         <span class="at">V=</span>Totals_V,</span>
+<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a>         <span class="at">I=</span>Totals_I,</span>
+<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a>         <span class="at">R=</span>Totals_R,</span>
+<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a>         <span class="at">D=</span>Totals_D,</span>
+<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a>         <span class="at">source_file=</span>source_file)</span>
+<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(dftotal<span class="sc">$</span>Time)){</span>
+<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a>  dftotal<span class="sc">$</span>dS[i] <span class="ot">&lt;-</span> dftotal<span class="sc">$</span>S[i]<span class="sc">-</span>dftotal<span class="sc">$</span>S[i<span class="sc">+</span><span class="dv">1</span>]</span>
+<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a>  dftotal<span class="sc">$</span>dR[i] <span class="ot">&lt;-</span> dftotal<span class="sc">$</span>R[i<span class="sc">+</span><span class="dv">1</span>]<span class="sc">-</span>dftotal<span class="sc">$</span>R[i]</span>
+<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a>  dftotal<span class="sc">$</span>dI[i] <span class="ot">&lt;-</span> dftotal<span class="sc">$</span>I[i<span class="sc">+</span><span class="dv">1</span>]<span class="sc">-</span>dftotal<span class="sc">$</span>I[i]</span>
+<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a>  dftotal<span class="sc">$</span>dD[i] <span class="ot">&lt;-</span> dftotal<span class="sc">$</span>D[i<span class="sc">+</span><span class="dv">1</span>]<span class="sc">-</span>dftotal<span class="sc">$</span>D[i]</span>
+<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-64"><a href="#cb18-64" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-65"><a href="#cb18-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-66"><a href="#cb18-66" aria-hidden="true" tabindex="-1"></a>dftotal<span class="ot">&lt;-</span> dftotal<span class="sc">%&gt;%</span></span>
+<span id="cb18-67"><a href="#cb18-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">N=</span> S<span class="sc">+</span>E<span class="sc">+</span>I<span class="sc">+</span>V<span class="sc">+</span>R<span class="sc">+</span>D)<span class="sc">%&gt;%</span></span>
+<span id="cb18-68"><a href="#cb18-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Beta =</span> dS<span class="sc">*</span>N<span class="sc">/</span>(S<span class="sc">*</span>I<span class="sc">+</span><span class="dv">1</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb18-69"><a href="#cb18-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Gamma =</span> dD<span class="sc">/</span>(I<span class="sc">+</span><span class="dv">1</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb18-70"><a href="#cb18-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">R0 =</span> Beta<span class="sc">/</span>Gamma)<span class="sc">%&gt;%</span></span>
+<span id="cb18-71"><a href="#cb18-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Beta<span class="sc">&lt;</span><span class="dv">10</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb18-72"><a href="#cb18-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(R0<span class="sc">&lt;</span><span class="dv">10</span><span class="sc">^</span><span class="dv">3</span>)</span>
+<span id="cb18-73"><a href="#cb18-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-74"><a href="#cb18-74" aria-hidden="true" tabindex="-1"></a>dflong<span class="ot">&lt;-</span>dftotal<span class="sc">%&gt;%</span></span>
+<span id="cb18-75"><a href="#cb18-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"S"</span>, <span class="st">"E"</span>, <span class="st">"I"</span>,</span>
+<span id="cb18-76"><a href="#cb18-76" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"V"</span>, <span class="st">"R"</span>, <span class="st">"D"</span>),<span class="at">names_to =</span> <span class="st">"Compartment"</span>, <span class="at">values_to =</span> <span class="st">"Count"</span>)</span>
+<span id="cb18-77"><a href="#cb18-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-78"><a href="#cb18-78" aria-hidden="true" tabindex="-1"></a>dflong <span class="ot">&lt;-</span> dflong<span class="sc">%&gt;%</span></span>
+<span id="cb18-79"><a href="#cb18-79" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Compartment =</span> <span class="fu">recode</span>(Compartment, </span>
+<span id="cb18-80"><a href="#cb18-80" aria-hidden="true" tabindex="-1"></a>         <span class="at">S =</span> <span class="st">"Susceptible"</span>,</span>
+<span id="cb18-81"><a href="#cb18-81" aria-hidden="true" tabindex="-1"></a>         <span class="at">E =</span> <span class="st">"Exposed"</span>,</span>
+<span id="cb18-82"><a href="#cb18-82" aria-hidden="true" tabindex="-1"></a>         <span class="at">I =</span> <span class="st">"Infected"</span>,</span>
+<span id="cb18-83"><a href="#cb18-83" aria-hidden="true" tabindex="-1"></a>         <span class="at">V =</span> <span class="st">"Vaccinated"</span>,</span>
+<span id="cb18-84"><a href="#cb18-84" aria-hidden="true" tabindex="-1"></a>         <span class="at">R =</span> <span class="st">"Recovered"</span>,</span>
+<span id="cb18-85"><a href="#cb18-85" aria-hidden="true" tabindex="-1"></a>         <span class="at">D =</span> <span class="st">"Deceased"</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb18-86"><a href="#cb18-86" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Compartment <span class="sc">!=</span> <span class="st">"Vaccinated"</span>)</span>
+<span id="cb18-87"><a href="#cb18-87" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-88"><a href="#cb18-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-89"><a href="#cb18-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-92"><a href="#cb18-92" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-93"><a href="#cb18-93" aria-hidden="true" tabindex="-1"></a>Sus<span class="ot">&lt;-</span>dflong<span class="sc">%&gt;%</span></span>
+<span id="cb18-94"><a href="#cb18-94" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Compartment <span class="sc">==</span> <span class="st">"Susceptible"</span>)</span>
+<span id="cb18-95"><a href="#cb18-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-96"><a href="#cb18-96" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dflong, <span class="fu">aes</span>(<span class="at">x=</span>Time, <span class="at">y =</span> Count<span class="sc">/</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>,  <span class="at">color=</span><span class="fu">as.factor</span>(Compartment)))<span class="sc">+</span></span>
+<span id="cb18-97"><a href="#cb18-97" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()<span class="sc">+</span></span>
+<span id="cb18-98"><a href="#cb18-98" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="fl">0.1</span>, <span class="at">alpha=</span><span class="fl">0.1</span>)<span class="sc">+</span></span>
+<span id="cb18-99"><a href="#cb18-99" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb18-100"><a href="#cb18-100" aria-hidden="true" tabindex="-1"></a>   <span class="fu">labs</span>(</span>
+<span id="cb18-101"><a href="#cb18-101" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Epidemiological Curve"</span>,</span>
+<span id="cb18-102"><a href="#cb18-102" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"H1N1 Influenza"</span>,</span>
+<span id="cb18-103"><a href="#cb18-103" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Data from a single run of Outbreak Simulator."</span>,</span>
+<span id="cb18-104"><a href="#cb18-104" aria-hidden="true" tabindex="-1"></a>    <span class="at">tag =</span> <span class="st">"Figure 1"</span>,</span>
+<span id="cb18-105"><a href="#cb18-105" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Time (h)"</span>,</span>
+<span id="cb18-106"><a href="#cb18-106" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Number of Individuals (millions)"</span>,</span>
+<span id="cb18-107"><a href="#cb18-107" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"Compartment"</span></span>
+<span id="cb18-108"><a href="#cb18-108" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb18-109"><a href="#cb18-109" aria-hidden="true" tabindex="-1"></a>   <span class="fu">scale_colour_brewer</span>(<span class="at">type =</span> <span class="st">"seq"</span>, <span class="at">palette =</span> <span class="st">"Spectral"</span>)</span>
+<span id="cb18-110"><a href="#cb18-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-111"><a href="#cb18-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-112"><a href="#cb18-112" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-113"><a href="#cb18-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-114"><a href="#cb18-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-115"><a href="#cb18-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-116"><a href="#cb18-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-117"><a href="#cb18-117" aria-hidden="true" tabindex="-1"></a><span class="fu">## But what about..... STATES????</span></span>
+<span id="cb18-118"><a href="#cb18-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-121"><a href="#cb18-121" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-122"><a href="#cb18-122" aria-hidden="true" tabindex="-1"></a>stateslong <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb18-123"><a href="#cb18-123" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">295</span>,</span>
+<span id="cb18-124"><a href="#cb18-124" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"State"</span>, <span class="st">"Compartment"</span>),</span>
+<span id="cb18-125"><a href="#cb18-125" aria-hidden="true" tabindex="-1"></a>  <span class="at">names_pattern =</span> <span class="st">"(.+?)_(.)"</span>,</span>
+<span id="cb18-126"><a href="#cb18-126" aria-hidden="true" tabindex="-1"></a>  <span class="at">values_to =</span> <span class="st">"Count"</span>)</span>
+<span id="cb18-127"><a href="#cb18-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-128"><a href="#cb18-128" aria-hidden="true" tabindex="-1"></a>fewerstates<span class="ot">&lt;-</span>stateslong<span class="sc">%&gt;%</span></span>
+<span id="cb18-129"><a href="#cb18-129" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(State <span class="sc">==</span> <span class="st">"New Mexico"</span> <span class="sc">|</span> State <span class="sc">==</span> <span class="st">"Idaho"</span></span>
+<span id="cb18-130"><a href="#cb18-130" aria-hidden="true" tabindex="-1"></a>         <span class="sc">|</span> State <span class="sc">==</span><span class="st">"Nevada"</span> <span class="sc">|</span> State <span class="sc">==</span> <span class="st">"New York"</span></span>
+<span id="cb18-131"><a href="#cb18-131" aria-hidden="true" tabindex="-1"></a>         )<span class="sc">%&gt;%</span></span>
+<span id="cb18-132"><a href="#cb18-132" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Compartment =</span> <span class="fu">recode</span>(Compartment, </span>
+<span id="cb18-133"><a href="#cb18-133" aria-hidden="true" tabindex="-1"></a>         <span class="at">S =</span> <span class="st">"Susceptible"</span>,</span>
+<span id="cb18-134"><a href="#cb18-134" aria-hidden="true" tabindex="-1"></a>         <span class="at">E =</span> <span class="st">"Exposed"</span>,</span>
+<span id="cb18-135"><a href="#cb18-135" aria-hidden="true" tabindex="-1"></a>         <span class="at">I =</span> <span class="st">"Infected"</span>,</span>
+<span id="cb18-136"><a href="#cb18-136" aria-hidden="true" tabindex="-1"></a>         <span class="at">V =</span> <span class="st">"Vaccinated"</span>,</span>
+<span id="cb18-137"><a href="#cb18-137" aria-hidden="true" tabindex="-1"></a>         <span class="at">R =</span> <span class="st">"Recovered"</span>,</span>
+<span id="cb18-138"><a href="#cb18-138" aria-hidden="true" tabindex="-1"></a>         <span class="at">D =</span> <span class="st">"Deceased"</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb18-139"><a href="#cb18-139" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Compartment <span class="sc">!=</span> <span class="st">"Vaccinated"</span>)</span>
+<span id="cb18-140"><a href="#cb18-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-141"><a href="#cb18-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-142"><a href="#cb18-142" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fewerstates, <span class="fu">aes</span>(<span class="at">x=</span>Time, <span class="at">y =</span> Count<span class="sc">/</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>, <span class="at">color =</span> Compartment))<span class="sc">+</span></span>
+<span id="cb18-143"><a href="#cb18-143" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="fl">0.1</span>, <span class="at">alpha=</span><span class="fl">0.1</span>)<span class="sc">+</span></span>
+<span id="cb18-144"><a href="#cb18-144" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>State)<span class="sc">+</span></span>
+<span id="cb18-145"><a href="#cb18-145" aria-hidden="true" tabindex="-1"></a>   <span class="fu">labs</span>(</span>
+<span id="cb18-146"><a href="#cb18-146" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Epidemiological Curve"</span>,</span>
+<span id="cb18-147"><a href="#cb18-147" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"H1N1 Influenza"</span>,</span>
+<span id="cb18-148"><a href="#cb18-148" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Data from a single run of Outbreak Simulator."</span>,</span>
+<span id="cb18-149"><a href="#cb18-149" aria-hidden="true" tabindex="-1"></a>    <span class="at">tag =</span> <span class="st">"Figure 2"</span>,</span>
+<span id="cb18-150"><a href="#cb18-150" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Time (h)"</span>,</span>
+<span id="cb18-151"><a href="#cb18-151" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Number of Individuals (millions)"</span>,</span>
+<span id="cb18-152"><a href="#cb18-152" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"Compartment"</span></span>
+<span id="cb18-153"><a href="#cb18-153" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb18-154"><a href="#cb18-154" aria-hidden="true" tabindex="-1"></a>   <span class="fu">scale_colour_brewer</span>(<span class="at">type =</span> <span class="st">"seq"</span>, <span class="at">palette =</span> <span class="st">"Spectral"</span>)</span>
+<span id="cb18-155"><a href="#cb18-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-156"><a href="#cb18-156" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-157"><a href="#cb18-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-158"><a href="#cb18-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-159"><a href="#cb18-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-160"><a href="#cb18-160" aria-hidden="true" tabindex="-1"></a><span class="fu">## SUPER ADVANCED EPIDEMIOLOGY</span></span>
+<span id="cb18-161"><a href="#cb18-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-162"><a href="#cb18-162" aria-hidden="true" tabindex="-1"></a>Real time R0 calculations.</span>
+<span id="cb18-163"><a href="#cb18-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-164"><a href="#cb18-164" aria-hidden="true" tabindex="-1"></a>R0, also known as the basic reproduction number, is a measure of the average number of secondary infections produced by a single infectious individual in a completely susceptible population. Calculating R0 from time series values of S (Susceptible), I (Infected), and R (Recovered) can be done using a mathematical model, such as the Susceptible-Infected-Recovered (SIR) model.</span>
+<span id="cb18-165"><a href="#cb18-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-166"><a href="#cb18-166" aria-hidden="true" tabindex="-1"></a>The SIR model is a set of ordinary differential equations that describe the dynamics of infectious diseases. The equations are:</span>
+<span id="cb18-167"><a href="#cb18-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-168"><a href="#cb18-168" aria-hidden="true" tabindex="-1"></a>dS/dt = -β * S * I / N</span>
+<span id="cb18-169"><a href="#cb18-169" aria-hidden="true" tabindex="-1"></a>dI/dt = β * S * I / N - γ * I</span>
+<span id="cb18-170"><a href="#cb18-170" aria-hidden="true" tabindex="-1"></a>dR/dt = γ * I</span>
+<span id="cb18-171"><a href="#cb18-171" aria-hidden="true" tabindex="-1"></a>where:</span>
+<span id="cb18-172"><a href="#cb18-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-173"><a href="#cb18-173" aria-hidden="true" tabindex="-1"></a>S is the number of susceptible individuals</span>
+<span id="cb18-174"><a href="#cb18-174" aria-hidden="true" tabindex="-1"></a>I is the number of infected individuals</span>
+<span id="cb18-175"><a href="#cb18-175" aria-hidden="true" tabindex="-1"></a>R is the number of recovered individuals</span>
+<span id="cb18-176"><a href="#cb18-176" aria-hidden="true" tabindex="-1"></a>N is the total population (N = S + I + R)</span>
+<span id="cb18-177"><a href="#cb18-177" aria-hidden="true" tabindex="-1"></a>β (beta) is the transmission rate per contact</span>
+<span id="cb18-178"><a href="#cb18-178" aria-hidden="true" tabindex="-1"></a>γ (gamma) is the recovery rate</span>
+<span id="cb18-179"><a href="#cb18-179" aria-hidden="true" tabindex="-1"></a>The basic reproduction number R0 is given by the formula:</span>
+<span id="cb18-180"><a href="#cb18-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-181"><a href="#cb18-181" aria-hidden="true" tabindex="-1"></a>R0 = β / γ</span>
+<span id="cb18-182"><a href="#cb18-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-183"><a href="#cb18-183" aria-hidden="true" tabindex="-1"></a>In order to calculate R0 from time series data of S, I, and R, you'll need to estimate the values of β and γ. One way to do this is to use curve-fitting techniques to fit the SIR model to your data. Once you have estimates for β and γ, you can calculate R0 using the formula above.</span>
+<span id="cb18-184"><a href="#cb18-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-185"><a href="#cb18-185" aria-hidden="true" tabindex="-1"></a>Here's an example using R and the deSolve package to fit the SIR model to sample data and estimate R0:</span>
+<span id="cb18-186"><a href="#cb18-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-189"><a href="#cb18-189" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-190"><a href="#cb18-190" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dflong, <span class="fu">aes</span>(<span class="at">x=</span>Time, <span class="at">y=</span> R0))<span class="sc">+</span></span>
+<span id="cb18-191"><a href="#cb18-191" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()<span class="sc">+</span></span>
+<span id="cb18-192"><a href="#cb18-192" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb18-193"><a href="#cb18-193" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Basic Reproduction Rate"</span>,</span>
+<span id="cb18-194"><a href="#cb18-194" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"H1N1 Influenza"</span>,</span>
+<span id="cb18-195"><a href="#cb18-195" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Data from a single run of Outbreak Simulator."</span>,</span>
+<span id="cb18-196"><a href="#cb18-196" aria-hidden="true" tabindex="-1"></a>    <span class="at">tag =</span> <span class="st">"Figure 3"</span>,</span>
+<span id="cb18-197"><a href="#cb18-197" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Time (h)"</span>,</span>
+<span id="cb18-198"><a href="#cb18-198" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"R0"</span></span>
+<span id="cb18-199"><a href="#cb18-199" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb18-200"><a href="#cb18-200" aria-hidden="true" tabindex="-1"></a>   <span class="fu">scale_colour_brewer</span>(<span class="at">type =</span> <span class="st">"seq"</span>, <span class="at">palette =</span> <span class="st">"Spectral"</span>)<span class="sc">+</span></span>
+<span id="cb18-201"><a href="#cb18-201" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="dv">3</span>)</span>
+<span id="cb18-202"><a href="#cb18-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-203"><a href="#cb18-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-204"><a href="#cb18-204" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dflong, <span class="fu">aes</span>(<span class="at">x=</span>Time, <span class="at">y=</span> Beta))<span class="sc">+</span></span>
+<span id="cb18-205"><a href="#cb18-205" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()<span class="sc">+</span></span>
+<span id="cb18-206"><a href="#cb18-206" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb18-207"><a href="#cb18-207" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"SIR parameters: Beta"</span>,</span>
+<span id="cb18-208"><a href="#cb18-208" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"H1N1 Influenza"</span>,</span>
+<span id="cb18-209"><a href="#cb18-209" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Data from a single run of Outbreak Simulator."</span>,</span>
+<span id="cb18-210"><a href="#cb18-210" aria-hidden="true" tabindex="-1"></a>    <span class="at">tag =</span> <span class="st">"Figure 4"</span>,</span>
+<span id="cb18-211"><a href="#cb18-211" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Time (h)"</span>,</span>
+<span id="cb18-212"><a href="#cb18-212" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Parameter Estimate"</span></span>
+<span id="cb18-213"><a href="#cb18-213" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb18-214"><a href="#cb18-214" aria-hidden="true" tabindex="-1"></a>   <span class="fu">scale_colour_brewer</span>(<span class="at">type =</span> <span class="st">"seq"</span>, <span class="at">palette =</span> <span class="st">"Spectral"</span>)<span class="sc">+</span></span>
+<span id="cb18-215"><a href="#cb18-215" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> .<span class="dv">5</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="dv">3</span>)</span>
+<span id="cb18-216"><a href="#cb18-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-217"><a href="#cb18-217" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dflong, <span class="fu">aes</span>(<span class="at">x=</span>Time, <span class="at">y=</span> Gamma))<span class="sc">+</span></span>
+<span id="cb18-218"><a href="#cb18-218" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()<span class="sc">+</span></span>
+<span id="cb18-219"><a href="#cb18-219" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb18-220"><a href="#cb18-220" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"SIR parameters: Gamma"</span>,</span>
+<span id="cb18-221"><a href="#cb18-221" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"H1N1 Influenza"</span>,</span>
+<span id="cb18-222"><a href="#cb18-222" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Data from a single run of Outbreak Simulator."</span>,</span>
+<span id="cb18-223"><a href="#cb18-223" aria-hidden="true" tabindex="-1"></a>    <span class="at">tag =</span> <span class="st">"Figure 4"</span>,</span>
+<span id="cb18-224"><a href="#cb18-224" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Time (h)"</span>,</span>
+<span id="cb18-225"><a href="#cb18-225" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Parameter Estimate"</span></span>
+<span id="cb18-226"><a href="#cb18-226" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb18-227"><a href="#cb18-227" aria-hidden="true" tabindex="-1"></a>   <span class="fu">scale_colour_brewer</span>(<span class="at">type =</span> <span class="st">"seq"</span>, <span class="at">palette =</span> <span class="st">"Spectral"</span>)<span class="sc">+</span></span>
+<span id="cb18-228"><a href="#cb18-228" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="dv">3</span>)</span>
+<span id="cb18-229"><a href="#cb18-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-230"><a href="#cb18-230" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>
