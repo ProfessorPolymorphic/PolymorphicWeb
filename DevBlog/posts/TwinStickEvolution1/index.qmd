@@ -80,7 +80,8 @@ Genes <- c("Main.Resistance.Gene", "Secondary.Resistance.Gene", "Speed.Gene",
 
 allfiles<-allfiles%>%
   mutate(Generation=as.factor(Wave.Number))%>%
-  mutate(offspring.count.Fitness = offspring_count)
+  mutate(offspring.count.Fitness = offspring_count)%>%
+  mutate(reproduce = if_else(offspring_count == 0, "N", "Y"))
    
 
 TraitAvg <- allfiles %>%
@@ -126,7 +127,7 @@ Where Main.Type and Secondary.Type = 1 if they match the Damage Type and 0 if th
 
 Our hypothesis is that resistance of the population will adapt to the damage type of the defense used. If true, this hypothesis predicts that the mean resistance of the population will increase over time, primarily through the proliferation of slimes of a Type that matches the Damage Type.
 
-We constructed a simple defense in the center of the playing area, consisting of three towers. The only Fitness Function at this time is related to Path Distance to the Player (the closer they get to the player, the more fitness they acquire).
+We constructed a simple defense in the center of the playing area, consisting of three lightning towers. The only Fitness Function at this time is related to Path Distance to the Player (the closer they get to the player, the more fitness they acquire).
 
 ## RESULTS
 
@@ -162,22 +163,27 @@ ggplot(SecondaryTypecounts, aes(x = Generation, y = Secondary.count, fill = as.f
 
 ```
 
-These results do not align with the predictions of our hypothesis. There is a modest increase in the Lightning Secondary.Type.
+These results align with the predictions of our hypothesis. There is an obvious proliferation of Lightning type slimes (both Main and Secondary) in all 6 replicates.
 
 ## Slime Fitness
 
-In most cases, it is useful to summarize the behavior of the fitness function for each experiment. In this case, the fitness function calculates a value of 50,000/(distance to player +1). I will also reverse calculate that for visualization. We then use Roulette Wheel selection to determine the parents of the next generation.
+In most cases, it is useful to summarize the behavior of the fitness function for each experiment. In this case, the fitness function calculates a value of 50,000/(distance to player +1). I will also reverse calculate that for visualization, showing the actual distance to the player (`Path.Distance.To.Player`). We then use Roulette Wheel selection to determine the parents of the next generation.
 
 ```{r}
 
-
-         
 ggplot(allfiles, aes(x=Wave.Number, y= Path.Distance.To.Player))+
   geom_jitter(aes(x=Wave.Number, y= Path.Distance.To.Player, color = offspring_count, alpha = offspring_count))+
   geom_smooth()+
   facet_wrap(~file, ncol = 2)+
-  scale_color_continuous(low="blue", high = "red")
+  scale_color_continuous(low="blue", high = "red")+
+  ylim(0, 80)
+```
 
+This is a jitter plot, which helps prevent overplotting of all the points.  The Y axis appears to be messed up because there was one slime in one replicate that died very far away from the player (value of 300).  I've limited the axis to make the plots more readable.  There is also a bug that sets the path distance to 0 in generation 0, and Justin is working on that.
+
+In a plot like this, we expect to see that points closer to 0 on the y axis are more opaque and red, indicating that those individuals had more offspring.  Looks pretty good in that regard.  We also note that there are obviously two groups of slimes - one that dies far away and one that gets pretty close.
+
+```{r}
 
 ggplot(allfiles, aes(x=Wave.Number, y= log10(Player.Distance.Fitness)))+
   geom_jitter(aes(x=Wave.Number, y= log10(Player.Distance.Fitness), color = offspring_count, alpha = offspring_count))+
@@ -185,22 +191,43 @@ ggplot(allfiles, aes(x=Wave.Number, y= log10(Player.Distance.Fitness)))+
   facet_wrap(~file, ncol = 2)+
   scale_color_continuous(low="blue", high = "red")
 
+```
+
+This plot is the same general concept as the previous one, but I am using the transformed values for fitness.  I've log transformed because of the distribution created by the transformation (something we'll have to address in development I think).  In this case, points near the top should be more red if the fitness function is working.
+
+```{r}
+
 ggplot(allfiles, aes(x=Path.Distance.To.Player, y = Player.Distance.Fitness))+
-  geom_point(aes(x=Path.Distance.To.Player, y = Player.Distance.Fitness), alpha = 0.5)+
+  geom_point(aes(x=Path.Distance.To.Player, y = Player.Distance.Fitness, color = offspring_count),  alpha = 0.5)+
+  facet_wrap(~file, ncol = 2)+
+  scale_color_continuous(low="blue", high = "red")
+
+```
+
+This is the relationship between true path distance and transformed values.  I think this is going to be a problem.  The function creates a weird distribution for fitness values.
+
+
+```{r}
+ggplot(allfiles, aes(x=log10(Path.Distance.To.Player), y = log10(Player.Distance.Fitness)))+
+  geom_point(aes(x=log10(Path.Distance.To.Player), y = log10(Player.Distance.Fitness), color = offspring_count),  alpha = 0.5)+
   facet_wrap(~file, ncol = 2)+
   scale_color_continuous(low="blue", high = "red")
 
 
-ggplot(data = FitAvg, aes(x = as.numeric(Generation), y = var.offspring.count.Fitness))+
-    geom_point()+
-    geom_smooth(method = "loess") +
+```
+This is the log plot of the two variables, which suggests we might consider using log10(Fitness) during the selection step?
+
+```{r}
+
+ggplot(data = FitAvg, aes(x = Generation, y = var.offspring.count.Fitness))+
+    geom_col()+
     theme(legend.position = "none") +
     facet_wrap(~file, ncol = 2) 
 
 
 
 
-ggplot(allfiles, aes(x = as.factor(Wave.Number), y = log10(offspring_count))) + 
+ggplot(allfiles, aes(x = as.factor(Wave.Number), y = log10(offspring_count+1))) + 
   geom_boxplot(fill="lightblue") +
   theme(legend.position = "none")+
   facet_wrap(~file, ncol = 2)
@@ -208,19 +235,86 @@ ggplot(allfiles, aes(x = as.factor(Wave.Number), y = log10(offspring_count))) +
 
 ```
 
+These two plots help us understand the relationship between the fitness function and the TRUE measure of fitness - number of offpring.  The first plot shows us the variance in `offspring_count` for each Generation.  High variance indicates that not all individuals have an equal probability of mating, which is indicative that selection is acting on the population.
+
+The second plot is a box plot of `offspring_count` by Generation, which gives us an idea of what the distribution looks like.
+
+Overall, I'd say these game conditions create selection in the early game, between Generation 1 and 3.  The question is, what TRAITS are associated with this variation in Fitness?
+
 ## Evolutionary Responses
+
+To estimate what traits might be under selection, we can calculate selection gradients for each trait.  This is essentially the slope of the line between `offspring_count` and the Trait.
+
+For each Trait, we should also try to understand its individual evolutionary trajectory.  Is the population mean for the trait increasing or decreasing?
+
+Since the first thing we are interested in is Damage Resistance conferred by Type, we'll calculate Lightning resistance directly.
 
 ```{r}
 
+allfiles <- allfiles %>%
+  mutate(LResist.Trait = case_when(
+    Main.Type == "Lightning" & Secondary.Type == "Lightning" ~ 1.0,
+    Main.Type == "Lightning" & Secondary.Type != "Lightning" ~ 0.6,
+    Main.Type != "Lightning" & Secondary.Type == "Lightning" ~ 0.4,
+    TRUE ~ 0
+  ))
+
+traittemp <- allfiles %>%
+  select(Generation, offspring_count, file, LResist.Trait) %>%
+  group_by(Generation, file) %>%
+  mutate(scaleST0 = as.vector(scale(LResist.Trait, center = TRUE))) %>%
+  mutate(scaleST02 = scaleST0 * scaleST0) %>%
+  mutate(Generation = as.numeric(as.character(Generation)))
+
+
+
+
+Gradients <- traittemp %>%
+  group_by(Generation, file) %>%
+  do({
+    model <- lm(offspring_count ~ scaleST0 + scaleST02, data = .)
+    data.frame(
+      Beta = coefficients(model)[2],
+      PB = summary(model)$coef[2, 4],
+      Trait = "LResist.Trait"
+    )
+  })
+
+Gradients <- Gradients %>%
+  mutate(sig = if_else(PB < 0.05 , "Y", "N"))
+
+TraitAvg <- allfiles %>%
+  group_by(file, Generation) %>%
+  summarize(across(ends_with("Trait"), mean,  na.rm = TRUE))
+
+ggplot(data = TraitAvg, aes(x = as.numeric(Generation), y = LResist.Trait))+
+    geom_smooth(data = TraitAvg, aes(x = as.numeric(Generation), y = LResist.Trait), method = "loess") +
+    theme(legend.position = "none") +
+    facet_wrap(~file, ncol = 2) 
+
+ggplot(Gradients, aes(x=Generation, y = Beta))+
+  geom_point(aes(color = sig))+
+  geom_smooth(fill="blue")+
+  scale_color_manual(values = c("grey","red"))+
+  geom_hline(yintercept=0, linetype="dashed", color = "black")+
+  theme(legend.position = "none",
+        panel.background = element_blank())
+
+```
+
+
+Now we'll perform a similar analysis for the remaining traits.
+
+```{r}
 Gradientslong <- data.frame()
 for(i in seq_along(Traits)){
 
 traittemp<-allfiles%>%
   select(Generation, offspring_count, file, !!sym(Traits[i]))%>%
   group_by(Generation, file)%>%
-  mutate(scaleST0 = scale(!!sym(Traits[i]), center = TRUE))%>%
+  mutate(scaleST0 = as.vector(scale(!!sym(Traits[i]), center = TRUE)))%>%
   mutate(scaleST02 = scaleST0*scaleST0)%>%
-  mutate(Generation = as.numeric(Generation))
+  mutate(Generation = as.numeric(as.character(Generation)))
 
 Gradients <- traittemp %>%
   group_by(Generation, file) %>%
@@ -258,8 +352,7 @@ S <- ggplot(Gradients, aes(x=Generation, y = Beta))+
   scale_color_manual(values = c("grey","red"))+
   geom_hline(yintercept=0, linetype="dashed", color = "black")+
   theme(legend.position = "none",
-        panel.background = element_blank())+
-  facet_wrap(~file)
+        panel.background = element_blank())
 
 print(G)
 
@@ -297,11 +390,11 @@ Heatmap <- GradMatrix %>%
 
 
 
-Heatmap2 <- scale(Heatmap)
 
 
 
-Heatmatrix2 <- as.matrix(Heatmap2)
+
+Heatmatrix2 <- as.matrix(Heatmap)
 
 myBreaks2 <- c(seq(min(Heatmatrix2), 0, length.out=ceiling(paletteLength/2) + 1), seq(max(Heatmatrix2)/paletteLength, max(Heatmatrix2), 
                                                                                       length.out=floor(paletteLength/2)))
@@ -315,4 +408,31 @@ heatmap2 = pheatmap(Heatmatrix2,
          clustering_method = "complete",
          color = myColor,
          breaks = myBreaks2)
+```
+
+## SINGLE GENERATION PLOTS
+
+```{r}
+
+singlegen <- allfiles %>%
+  filter(Generation == 5)
+
+singlegrad <- Gradientslong %>%
+  filter(Generation == 3)
+
+
+ggplot(singlegen, aes(x=Speed.Trait) )+
+  geom_histogram()+
+  facet_grid(reproduce~file)
+
+ggplot(singlegen, aes(x=Turn.Rate.Trait) )+
+  geom_histogram()+
+  facet_grid(reproduce~file)
+
+ggplot(singlegen, aes(x=Turn.Rate.Trait, y = Speed.Trait, color = reproduce))+
+  geom_point()+
+  facet_wrap(~file)
+
+
+
 ```
